@@ -5,11 +5,23 @@ angular.module('formerFunApp', [
   'ngResource',
   'ngSanitize',
   'btford.socket-io',
-  'ui.router'
+  'ui.router',
+  'formly',
+  'ngMaterial',
+  'ngMessages'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-    $urlRouterProvider
-      .otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode(true);
+  });
+
+
+
+angular.module('formerFunApp')
+  .run(function($log, formlyConfig, $http){
+
+
+
+
   });
