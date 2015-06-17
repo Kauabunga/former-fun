@@ -1,4 +1,4 @@
-Based on angular-fullstack template 
+# Based on angular-fullstack template #
 [https://github.com/DaftMonk/generator-angular-fullstack](https://github.com/DaftMonk/generator-angular-fullstack)
 
 0. Install node, npm, grunt, bower, mongodb
