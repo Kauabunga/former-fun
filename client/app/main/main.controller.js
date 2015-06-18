@@ -1,14 +1,12 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .controller('MainCtrl', function ($log, $scope, $http, socket, formlyConfig) {
-
+  .controller('MainCtrl', function ($log, $scope, $http, formlyConfig) {
 
     $scope.formDefinition = undefined;
     $scope.formControls = undefined;
 
-
-    fetchTemplates()
+    return fetchTemplates()
       .then(configTemplates)
       .then(fetchForm)
       .then(configForm)
@@ -22,10 +20,22 @@ angular.module('formerFunApp')
      * @param form
      */
     function configForm(form) {
-      $log.debug('form response', form);
+      $log.debug('configForm response', form);
+
+      //TODO transformation function (optionally) from module?
+
       $scope.formDefinition = form;
     }
 
+    /**
+     *
+     * @param templates
+     * @returns {*}
+     */
+    function configTemplates(templates) {
+      $log.debug('templates response', templates);
+      return formlyConfig.setType(templates);
+    }
 
     /**
      *
@@ -49,15 +59,6 @@ angular.module('formerFunApp')
         });
     }
 
-    /**
-     *
-     * @param templates
-     * @returns {*}
-     */
-    function configTemplates(templates) {
-      $log.debug('templates response', templates);
-      return formlyConfig.setType(templates);
-    }
 
 
 
