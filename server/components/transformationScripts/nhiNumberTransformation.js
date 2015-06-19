@@ -31,6 +31,7 @@ console.log('I AM COMING FROM THE SERVER!!!');
 
     nhiField.validators = nhiField.validators || {};
     nhiField.validators.nhiExists = function($modelValue, $viewValue, $scope){
+      //TODO get http service from injector and validate model value against endpoint
       return $modelValue === '1111111';
     };
 
