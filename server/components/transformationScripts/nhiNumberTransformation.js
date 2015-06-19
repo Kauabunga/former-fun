@@ -30,10 +30,13 @@ console.log('I AM COMING FROM THE SERVER!!!');
     console.log('transforming nhiNumber', nhiField);
 
     nhiField.validators = nhiField.validators || {};
-
     nhiField.validators.nhiExists = function($modelValue, $viewValue, $scope){
-      return false;
-    }
+      return $modelValue === '1111111';
+    };
+
+    nhiField.templateOptions = nhiField.templateOptions || {};
+    nhiField.templateOptions.messages = nhiField.templateOptions.messages || {};
+    nhiField.templateOptions.messages.nhiExists = 'Validating number to equal 1111111 from server transformation';
 
   }
 
