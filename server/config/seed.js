@@ -24,6 +24,7 @@ Transformation.find({}).remove(function() {
 Form.find({}).remove(function() {
   Form.create(
     {
+      name: 'acc45',
       defaultSection: 'who-one',
       transformationModules: {
         baseurl: '/api/transformations',

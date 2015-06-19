@@ -3,6 +3,45 @@
 var _ = require('lodash');
 var Form = require('./form.model');
 
+
+/**
+ * EXPORTS
+ */
+exports.show = show;
+
+
+/**
+ *
+ * @param req
+ * @param res
+ * @returns {*}
+ */
+function show(req, res) {
+  var name = req.params.name;
+
+  if( ! name){
+    console.log('No name passed to form.show');
+    return res.status(400).send();
+  }
+
+  return Form.findOneAsync({ name: name }, {_id: 0, __v: 0})
+    .then(function(form){
+      if( ! form) {
+        console.log('form not found', name);
+        return res.send(404);
+      }
+      else {
+        res.status(200).json(form)
+      }
+    })
+    .catch(function(error){
+      console.log('get form error', error);
+      return res.send(500, error);
+    });
+}
+
+
+/*
 // Get list of forms
 exports.index = function(req, res) {
   Form.find({}, {_id: 0, __v: 0}, function (err, forms) {
@@ -57,3 +96,4 @@ exports.destroy = function(req, res) {
 function handleError(res, err) {
   return res.status(500).send(err);
 }
+*/

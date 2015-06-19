@@ -18,6 +18,7 @@ var TransformationSchema = new Schema({
     required: true
   }
 });
+
 var TransformationModel = mongoose.model('Transformation', TransformationSchema);
 
 Promise.promisifyAll(TransformationModel);
