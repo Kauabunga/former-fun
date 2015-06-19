@@ -50,7 +50,7 @@ angular.module('formerFunApp')
         function init(){
           var currentSection = $stateParams[scope.formSectionStateParam];
           if(currentSection){
-            loadSection(scope.formDefinition.sections[currentSection])
+            loadSection(scope.formDefinition.sections[currentSection]);
           }
           else {
             transitionTo(scope.formDefinition.defaultSection, true);

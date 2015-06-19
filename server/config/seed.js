@@ -235,15 +235,15 @@ Template.find({}).remove(function() {
   Template.create(
     {
       name: 'input',
-      template: '<md-input-container class="appointment-input"> \
-                            <label>{{::to.label}}</label> \
-                            <input type="{{::to.type}}" placeholder="{{::to.placeholder}}" ng-model="model[options.key]"/> \
-                            <div class="error-message" ng-messages="options.formControl.$error" ng-show="options.formControl.$touched || options.formControl.$submitted"> \
-                              <div ng-message="{{::name}}" ng-repeat="(name, message) in ::to.messages track by $index"> \
-                                {{::message}} \
-                              </div> \
-                            </div> \
-                         </md-input-container>',
+      template: '<md-input-container class="appointment-input">' +
+                    '<label>{{::to.label}}</label>' +
+                    '<input type="{{::to.type}}" placeholder="{{::to.placeholder}}" ng-model="model[options.key]"/>' +
+                    '<div class="error-message" ng-messages="options.formControl.$error" ng-show="options.formControl.$touched || options.formControl.$submitted">' +
+                      '<div ng-message="{{::name}}" ng-repeat="(name, message) in ::to.messages track by $index">' +
+                        '{{::message}}' +
+                      '</div>' +
+                    '</div>' +
+                 '</md-input-container>',
       defaultOptions: {
         templateOptions: {
           type: 'text',
@@ -256,12 +256,12 @@ Template.find({}).remove(function() {
     },
     {
       name: 'select',
-      template: '<md-icon md-svg-src="{{::to.icon}}"></md-icon> \
-                         <md-select ng-model="model[options.key]" placeholder="{{::to.placeholder}}"> \
-                            <md-option ng-repeat="option in ::to.options track by $index" value="{{::option.value}}">{{::option.name}}</md-option> \
-                         </md-select> \
-                         <p ng-show="model[options.key]" class="md-caption ng-hide"><span>{{::to.placeholder}}</span></p> \
-                         <p ng-hide="model[options.key]" class="md-caption ng-hide location-select-message"><span ng-show="options.formControl.$submitted">{{::to.messages.required}}</span></p>',
+      template: '<md-icon md-svg-src="{{::to.icon}}"></md-icon>' +
+                 '<md-select ng-model="model[options.key]" placeholder="{{::to.placeholder}}">' +
+                    '<md-option ng-repeat="option in ::to.options track by $index" value="{{::option.value}}">{{::option.name}}</md-option>' +
+                 '</md-select>' +
+                 '<p ng-show="model[options.key]" class="md-caption ng-hide"><span>{{::to.placeholder}}</span></p>' +
+                 '<p ng-hide="model[options.key]" class="md-caption ng-hide location-select-message"><span ng-show="options.formControl.$submitted">{{::to.messages.required}}</span></p>',
       defaultOptions: {
         templateOptions: {
           optionsFromContent: false,
@@ -274,9 +274,9 @@ Template.find({}).remove(function() {
     },
     {
       name: 'radio',
-      template: '<md-radio-group ng-model="model[options.key]"> \
-                            <md-radio-button ng-repeat="option in ::to.options track by $index" value="{{::option.value}}">{{::option.name}}</md-radio-button> \
-                         </md-radio-group>',
+      template: '<md-radio-group ng-model="model[options.key]">' +
+                            '<md-radio-button ng-repeat="option in ::to.options track by $index" value="{{::option.value}}">{{::option.name}}</md-radio-button>' +
+                         '</md-radio-group>',
       defaultOptions: {
         templateOptions: {
           optionsFromContent: false

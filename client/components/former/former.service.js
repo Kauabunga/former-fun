@@ -17,10 +17,9 @@ angular.module('formerFunApp')
     function loadForm(formname){
       if(formCache[formname]){
         $log.debug('form from cache', formCache[formname]);
-        return formCache[formname];
       }
-      else{
-        return formCache[formname] = fetchTemplates()
+      else {
+        formCache[formname] = fetchTemplates()
           .then(loadTemplates)
           .then(function(){
             return fetchForm(formname);
@@ -30,6 +29,8 @@ angular.module('formerFunApp')
             $log.error('Error getting form data', arguments);
           });
       }
+
+      return formCache[formname];
 
     }
 
