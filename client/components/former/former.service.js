@@ -4,6 +4,8 @@ angular.module('formerFunApp')
   .factory('former', function(formlyConfig, $log, $http, $window, $q) {
 
     var formCache = {};
+    var formBaseurl = '/api/forms/';
+    var templatesBaseurl = '/api/templates/';
 
     return {
       loadForm: loadForm
@@ -136,7 +138,7 @@ angular.module('formerFunApp')
      * @returns {*}
      */
     function fetchForm(formname) {
-      return $http.get('/api/forms/' + formname)
+      return $http.get(formBaseurl + formname)
         .then(function(response){
           return response.data;
         });
@@ -147,7 +149,7 @@ angular.module('formerFunApp')
      * @returns {*}
      */
     function fetchTemplates() {
-      return $http.get('/api/templates')
+      return $http.get(templatesBaseurl)
         .then(function(response){
           return response.data;
         });
