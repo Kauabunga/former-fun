@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
 var FormSchema = new Schema({
 
   defaultSection: String,
+  transformationModules: {},
   sections: {}
 
 });

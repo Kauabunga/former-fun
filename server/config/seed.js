@@ -6,15 +6,29 @@
 'use strict';
 
 var Template = require('../api/template/template.model');
+var Transformation = require('../api/transformation/transformation.model');
 var Form = require('../api/form/form.model');
 
+
+
+Transformation.find({}).remove(function() {
+  Transformation.create(
+    {
+      name: 'nhiNumber',
+      scriptFilePath: './server/components/transformationScripts/nhiNumberTransformation.js'
+    }
+  );
+});
 
 
 Form.find({}).remove(function() {
   Form.create(
     {
       defaultSection: 'who-one',
-      transformModule: ['/server/api/form/form.transform'],
+      transformationModules: {
+        baseurl: '/api/transformations',
+        modules: ['nhiNumber']
+      },
       sections: {
         'who-one': {
           fields: [
