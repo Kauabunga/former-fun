@@ -530,7 +530,7 @@ Template.find({}).remove(function() {
                     '<md-option ng-repeat="option in ::to.options track by $index" value="{{::option.value}}">{{::option.name}}</md-option>' +
                  '</md-select>' +
                  '<p ng-show="model[options.key]" class="md-caption ng-hide"><span>{{::to.placeholder}}</span></p>' +
-                 '<p ng-hide="model[options.key]" class="md-caption ng-hide location-select-message"><span ng-show="options.formControl.$submitted">{{::to.messages.required}}</span></p>',
+                 '<p ng-hide="model[options.key]" class="md-caption error-message ng-hide"><span ng-show="options.formControl.$submitted">{{::to.messages.required}}</span></p>',
       defaultOptions: {
         templateOptions: {
           required: false,
