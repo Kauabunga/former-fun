@@ -49,15 +49,7 @@
 
 
     addressFields.map(function(addressField){
-      addressField.validators = addressField.validators || {};
       addressField.templateOptions = addressField.templateOptions || {};
-
-
-
-      addressField.validators.address = validateAddress;
-      addressField.templateOptions.messages = addressField.templateOptions.messages || {};
-      addressField.templateOptions.messages.address = 'Need an address';
-
 
       addressField.templateOptions.noCache = false;
       addressField.templateOptions.searchTextChange = function(){
@@ -72,21 +64,6 @@
     });
 
     $log.debug('addressFields', addressFields);
-
-    /**
-     *
-     * @param $modelValue
-     * @param $viewValue
-     * @param $scope
-     * @returns {*|boolean}
-     */
-    function validateAddress($modelValue, $viewValue, $scope){
-      $log.debug('validateAddress', $modelValue);
-      $log.debug('validateAddress', $modelValue);
-      $log.debug('validateAddress', $modelValue);
-      $log.debug('validateAddress', $modelValue);
-      return $modelValue && $modelValue.length > 0;
-    }
 
     /**
      *

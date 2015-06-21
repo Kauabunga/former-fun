@@ -549,6 +549,7 @@ Template.find({}).remove(function() {
                         'No matches found for "{{to.searchText}}".' +
                       '</md-not-found>' +
                   '</md-autocomplete>' +
+                  '<input style="display: none;" ng-model="model[options.key]" ng-required="to.required" />' +
                   '<div class="error-message" ng-messages="options.formControl.$error" ng-show="options.formControl.$touched || options.formControl.$submitted">' +
                     '<div ng-message="{{::name}}" ng-repeat="(name, message) in to.messages track by $index">' +
                       '{{::message}}' +
@@ -607,7 +608,10 @@ Template.find({}).remove(function() {
       extends: 'autocomplete',
       defaultOptions: {
         templateOptions: {
-          label: 'Address'
+          label: 'Address',
+          messages: {
+            required: 'Need to enter an address'
+          }
         }
       }
     },
