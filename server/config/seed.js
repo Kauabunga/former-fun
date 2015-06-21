@@ -421,7 +421,7 @@ Form.find({}).remove(function() {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Previous',
-                flow: 'who-two',
+                flow: 'where-one',
                 validate: false
               }
             },
