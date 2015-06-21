@@ -7,6 +7,7 @@ angular.module('formerFunApp', [
   'btford.socket-io',
   'ui.router',
   'formly',
+  'ngStorage',
   'ngMaterial',
   'ngMessages'
 ])

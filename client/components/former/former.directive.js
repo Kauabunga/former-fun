@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .directive('former', function ($log, $state, $stateParams, $rootScope) {
-
-    var ROOTSCOPE_FORMKEY = Symbol('formkey');
+  .directive('former', function ($log, $state, $stateParams, $rootScope, $localStorage) {
 
     return {
       templateUrl: 'components/former/former.html',
@@ -13,25 +11,20 @@ angular.module('formerFunApp')
         formModel: '=',
         formControls: '=?',
         formSectionStateParam: '@',
+        formIdStateParam: '@',
         buttonActionEvent: '@?'
       },
       link: function (scope, element, attrs) {
 
-        //TODO storing in rootScope - controllers responsibility to store in localStorage? Option?
-        scope.formModel = scope.formModel || {};
-        scope.formModel = _.merge(scope.formModel, $rootScope[ROOTSCOPE_FORMKEY]);
-        $rootScope[ROOTSCOPE_FORMKEY] = scope.formModel;
-
-
-
+        scope.formId = $stateParams[scope.formIdStateParam];
+        scope.formSection = $stateParams[scope.formSectionStateParam];
         scope.formFields = undefined;
+
 
         //TODO link this event up correctly with button template - may be better to decorate buttons with js functions
         scope.buttonActionEvent = scope.buttonActionEvent || 'formerButtonAction';
-
         //TODO need to pull this out into a separate pluggable module
         scope.flowButtonAction = flowButtonAction;
-
         scope.$on(scope.buttonActionEvent, handleButtonEvent);
 
 
@@ -48,12 +41,16 @@ angular.module('formerFunApp')
          *
          */
         function init(){
-          var currentSection = $stateParams[scope.formSectionStateParam];
-          if(currentSection){
-            loadSection(scope.formDefinition.sections[currentSection]);
+
+          if( ! scope.formSection || ! scope.formId){
+            scope.formId = scope.formId || getNewFormLocalStorageId();
+            scope.formSection = scope.formSection || scope.formDefinition.defaultSection;
+            transitionTo(scope.formSection, scope.formId, true);
           }
           else {
-            transitionTo(scope.formDefinition.defaultSection, true);
+            //bind form model to local scope with formId
+            scope.formModel = $localStorage[scope.formModel.name + scope.formId] = $localStorage[scope.formModel.name + scope.formId] || {};
+            loadSection(scope.formDefinition.sections[scope.formSection]);
           }
         }
 
@@ -69,11 +66,24 @@ angular.module('formerFunApp')
 
         /**
          *
+         */
+        function getNewFormLocalStorageId(){
+          //TODO push number to localStorage list
+          return _.random(10000001, 99999999);
+        }
+
+        /**
+         *
          * @param targetSection
          * @param replace
          */
-        function transitionTo(targetSection, replace){
-          $stateParams[scope.formSectionStateParam] = targetSection;
+        function transitionTo(targetSection, targetId, replace){
+          if(targetSection){
+            $stateParams[scope.formSectionStateParam] = targetSection;
+          }
+          if(targetId){
+            $stateParams[scope.formIdStateParam] = targetId;
+          }
           var options = replace ? { location: 'replace' } : {};
           $state.transitionTo(
             $state.current.name,
