@@ -21,18 +21,33 @@ console.log('I AM COMING FROM THE SERVER!!!');
    *
    * @param form
    */
-  function nhiNumberTransformation(form){
-    console.log('transforming nhiNumber', form);
+  function nhiNumberTransformation(form, angularName){
+    console.log('transforming nhiNumber', form, angularName);
 
-    var $injector = angular.injector();
+
+    var $injector = angular.injector([angularName]);
+    var $http = $injector.get('$http');
+
 
     var nhiField = getField(form, 'who-one', 'nhiNumber');
     console.log('transforming nhiNumber', nhiField);
 
     nhiField.validators = nhiField.validators || {};
-    nhiField.validators.nhiExists = function($modelValue, $viewValue, $scope){
-      //TODO get http service from injector and validate model value against endpoint
-      return $modelValue === '1111111';
+    nhiField.validators.nhiExists =  function checkNhiExists($modelValue, $viewValue, $scope){
+      return $http.get('/api/mocks/nhi/' + $modelValue)
+        .then(function(response){
+          return response.data;
+        })
+        .then(function(nhiResult){
+          console.log('successful response', form, nhiResult);
+
+          _.merge($scope.model, nhiResult);
+          if(nhiResult.dob){
+            $scope.model.dob = new Date(nhiResult.dob);
+          }
+
+          return true;
+        });
     };
 
     nhiField.templateOptions = nhiField.templateOptions || {};
@@ -40,6 +55,7 @@ console.log('I AM COMING FROM THE SERVER!!!');
     nhiField.templateOptions.messages.nhiExists = 'Validating number to equal 1111111 from server transformation';
 
   }
+
 
   /**
    *

@@ -17,6 +17,9 @@ exports.index = function(req, res) {
   });
 };
 
+
+
+/*
 // Get a single template
 exports.show = function(req, res) {
   Template.findById(req.params.id, function (err, template) {
@@ -63,3 +66,4 @@ exports.destroy = function(req, res) {
 function handleError(res, err) {
   return res.status(500).send(err);
 }
+*/

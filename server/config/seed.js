@@ -16,6 +16,10 @@ Transformation.find({}).remove(function() {
     {
       name: 'nhiNumber',
       scriptFilePath: './server/components/transformationScripts/nhiNumberTransformation.js'
+    },
+    {
+      name: 'address',
+      scriptFilePath: './server/components/transformationScripts/addressTransformation.js'
     }
   );
 });
@@ -28,7 +32,7 @@ Form.find({}).remove(function() {
       defaultSection: 'who-one',
       transformationModules: {
         baseurl: '/api/transformations',
-        modules: ['nhiNumber']
+        modules: ['nhiNumber', 'address']
       },
       sections: {
         'who-one': {
@@ -133,13 +137,143 @@ Form.find({}).remove(function() {
               }
             },
             {
-              key: 'nhiNumber',
+              key: 'firstname',
               type: 'input',
               templateOptions: {
-                placeholder: 'NHI Number',
+                label: 'First Name',
                 required: true,
                 messages: {
-                  required: 'We need your NHI number'
+                  required: 'We need the clients First name'
+                }
+              }
+            },
+            {
+              key: 'familyname',
+              type: 'input',
+              templateOptions: {
+                label: 'Family Name',
+                required: true,
+                messages: {
+                  required: 'We need the clients Family name'
+                }
+              }
+            },
+            {
+              key: 'dob',
+              type: 'input',
+              templateOptions: {
+                label: 'Date of Birth',
+                required: true,
+                type: 'date',
+                messages: {
+                  required: 'We need the clients dob'
+                }
+              }
+            },
+            {
+              key: 'address',
+              type: 'address',
+              templateOptions: {
+                label: 'Address',
+                required: true,
+                messages: {
+                  required: 'We need the clients Address'
+                }
+              }
+            },
+            {
+              key: 'gender',
+              type: 'select',
+              templateOptions: {
+                placeholder: 'Gender',
+                required: true,
+                options: [
+                  {
+                    name: 'Male',
+                    value: 'male'
+                  },
+                  {
+                    name: 'Female',
+                    value: 'female'
+                  },
+                  {
+                    name: 'Unknown',
+                    value: 'unknown'
+                  },
+                  {
+                    name: 'Indeterminate',
+                    value: 'indeterminate'
+                  }
+                ],
+                messages: {
+                  required: 'We need the clients Gender'
+                }
+              }
+            },
+            {
+              key: 'ethnicity',
+              type: 'select',
+              templateOptions: {
+                placeholder: 'Ethnicity',
+                required: true,
+                options: [
+                  {
+                    name: 'NZ',
+                    value: 'nz'
+                  }
+
+                ],
+                messages: {
+                  required: 'We need the clients Ethnicity'
+                }
+              }
+            },
+            {
+              key: 'residencestatus',
+              type: 'select',
+              templateOptions: {
+                placeholder: 'Residence Status',
+                required: true,
+                options: [
+                  {
+                    name: 'Citizen',
+                    value: 'citizen'
+                  }
+                ],
+                messages: {
+                  required: 'We need the clients Residence Status'
+                }
+              }
+            },
+            {
+              key: 'medicalwarning',
+              type: 'textarea',
+              templateOptions: {
+                label: 'Medical warning',
+                required: false,
+                messages: {
+                  required: 'We need the clients Family name'
+                }
+              }
+            },
+            {
+              key: 'donor',
+              type: 'select',
+              templateOptions: {
+                placeholder: 'Donor',
+                required: true,
+                options: [
+                  {
+                    name: 'Yes',
+                    value: 'yes'
+                  },
+                  {
+                    name: 'No',
+                    value: 'no'
+                  }
+                ],
+                messages: {
+                  required: 'We need to know if the client is a donor'
                 }
               }
             },
@@ -194,14 +328,15 @@ Form.find({}).remove(function() {
             },
             {
               key: 'isAtWorkEmployer',
-              //TODO should be autocomplete
-              type: 'input',
+              type: 'address',
               templateOptions: {
-                placeholder: 'Please add the employer'
+                required: true,
+                label: 'Please add the employer'
               },
               expressionProperties: {
                 hide: 'model.isAtWork !== "yes"'
-              }
+              },
+              hideExpression: 'model.isAtWork !== "yes"'
             },
             {
               type: 'flowbutton',
@@ -217,6 +352,16 @@ Form.find({}).remove(function() {
                 label: 'Next step',
                 flow: 'where-two',
                 validate: true
+              }
+            }
+          ]
+        },
+        'where-two': {
+          fields: [
+            {
+              type: 'heading-1',
+              templateOptions: {
+                heading: 'Where did the injury happen?'
               }
             }
           ]
@@ -247,7 +392,27 @@ Template.find({}).remove(function() {
       defaultOptions: {
         templateOptions: {
           type: 'text',
-          icon: '/assets/images/ic_blank_24px.svg',
+          required: false,
+          messages: {
+            required: 'This field is required'
+          }
+        }
+      }
+    },
+    {
+      name: 'textarea',
+      template: '<md-input-container class="appointment-input">' +
+                  '<label>{{::to.label}}</label>' +
+                  '<textarea placeholder="{{::to.placeholder}}" ng-model="model[options.key]"/>' +
+                  '<div class="error-message" ng-messages="options.formControl.$error" ng-show="options.formControl.$touched || options.formControl.$submitted">' +
+                    '<div ng-message="{{::name}}" ng-repeat="(name, message) in ::to.messages track by $index">' +
+                      '{{::message}}' +
+                    '</div>' +
+                  '</div>' +
+                '</md-input-container>',
+      defaultOptions: {
+        templateOptions: {
+          required: false,
           messages: {
             required: 'This field is required'
           }
@@ -256,16 +421,43 @@ Template.find({}).remove(function() {
     },
     {
       name: 'select',
-      template: '<md-icon md-svg-src="{{::to.icon}}"></md-icon>' +
-                 '<md-select ng-model="model[options.key]" placeholder="{{::to.placeholder}}">' +
+      template: '<md-select ng-model="model[options.key]" placeholder="{{::to.placeholder}}">' +
                     '<md-option ng-repeat="option in ::to.options track by $index" value="{{::option.value}}">{{::option.name}}</md-option>' +
                  '</md-select>' +
                  '<p ng-show="model[options.key]" class="md-caption ng-hide"><span>{{::to.placeholder}}</span></p>' +
                  '<p ng-hide="model[options.key]" class="md-caption ng-hide location-select-message"><span ng-show="options.formControl.$submitted">{{::to.messages.required}}</span></p>',
       defaultOptions: {
         templateOptions: {
-          optionsFromContent: false,
-          icon: '/assets/images/ic_blank_24px.svg',
+          required: false,
+          messages: {
+            required: 'This field is required'
+          }
+        }
+      }
+    },
+    {
+      name: 'autocomplete',
+      template: '<md-autocomplete ' +
+                    ' ng-required="to.required"' +
+                    ' md-no-cache="to.noCache"' +
+                    ' md-selected-item="to.selectedItem"' +
+                    ' md-search-text-change="to.searchTextChange(to.searchText)"' +
+                    ' md-search-text="to.searchText"' +
+                    ' md-selected-item-change="to.selectedItemChange(item)"' +
+                    ' md-items="item in to.querySearch(to.searchText)"' +
+                    ' md-item-text="item.display"' +
+                    ' md-min-length="0"' +
+                    ' placeholder="Start typing to search for the address">' +
+                      '<md-item-template>' +
+                        '<span md-highlight-text="to.searchText" md-highlight-flags="^i">{{item.display}}</span>' +
+                      '</md-item-template>' +
+                      '<md-not-found>' +
+                        'No matches found for "{{to.searchText}}".' +
+                      '</md-not-found>' +
+                  '</md-autocomplete>',
+      defaultOptions: {
+        templateOptions: {
+          required: false,
           messages: {
             required: 'This field is required'
           }
@@ -279,7 +471,7 @@ Template.find({}).remove(function() {
                          '</md-radio-group>',
       defaultOptions: {
         templateOptions: {
-          optionsFromContent: false
+          required: false
         }
       }
     },
@@ -288,7 +480,7 @@ Template.find({}).remove(function() {
       template: '<md-checkbox ng-model="model[options.key]" aria-label="Finished?">{{::to.placeholder}}</md-checkbox>',
       defaultOptions: {
         templateOptions: {
-
+          required: false
         }
       }
     },
@@ -305,9 +497,14 @@ Template.find({}).remove(function() {
       template: '<md-button class="md-raised" ng-click="$emit(\'formerButtonAction\', $event, to)" type="{{::to.type}}">{{::to.label || options.key}}</md-button>',
       defaultOptions: {
         templateOptions: {
+          required: false,
           type: 'button'
         }
       }
+    },
+    {
+      name: 'address',
+      extends: 'autocomplete'
     },
     {
       name: 'flowbutton',

@@ -60,10 +60,11 @@ angular.module('formerFunApp')
      */
     function transformForm(form, transformationModules){
 
-      $log.debug('transforming form', transformationModules);
+      $log.debug('transforming form', transformationModules, transformationModules.isArray);
 
-      if(transformationModules && transformationModules.isArray) {
-        let resolveModules = [];
+
+      if(transformationModules && transformationModules.constructor === Array) {
+        var resolveModules = [];
 
         transformationModules.map(function(module) {
           resolveModules.push(applyTransformation(form, module));
@@ -93,7 +94,7 @@ angular.module('formerFunApp')
 
       $window[module + 'Callback'] = function(transformationFunction){
         try {
-          transformationFunction(form);
+          transformationFunction(form, 'formerFunApp');
           $log.debug('Successfully applied transformation', module);
           transformationDeferred.resolve(form);
         }
@@ -116,6 +117,7 @@ angular.module('formerFunApp')
      *
      */
     function getTransformationScriptUrl(form, module){
+      $log.debug('getTransformationScriptUrl module', module);
       var url = form.transformationModules.baseurl + '/' + module;
       $log.debug('getTransformationScriptUrl', url);
       return url;
@@ -129,7 +131,13 @@ angular.module('formerFunApp')
      */
     function loadTemplates(templates) {
       $log.debug('templates response', templates);
+
+      templates = templates.sort(function(a, b){
+        return ! b.extends ;
+      });
+
       return formlyConfig.setType(templates);
+
     }
 
 

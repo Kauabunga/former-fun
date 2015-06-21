@@ -105,6 +105,10 @@ angular.module('formerFunApp')
          * @param templateOptions
          */
         function flowButtonAction($event, templateOptions){
+
+          //TODO should be able to decorate this action with transformation components
+          // decorate all buttons?
+
           var shouldValidate = getValidateOption(templateOptions);
           var targetFlow = getTargetFlowOption(templateOptions);
 
