@@ -366,6 +366,95 @@ Form.find({}).remove(function() {
               templateOptions: {
                 heading: 'Where did the injury happen?'
               }
+            },
+            {
+              type: 'label',
+              templateOptions: {
+                label: 'Did the accident or injury happen in New Zealand?'
+              }
+            },
+            {
+              key: 'isInNewZealand',
+              type: 'radio',
+              templateOptions: {
+                required: true,
+                options: [
+                  {
+                    name: 'Yes, it did',
+                    value: 'yes'
+                  },
+                  {
+                    name: 'No, it didn\'t',
+                    value: 'no'
+                  }
+                ]
+              }
+            },
+            {
+              key: 'injuryLocation',
+              type: 'address',
+              templateOptions: {
+                required: true,
+                label: 'What was the location?'
+              },
+              expressionProperties: {
+                hide: '! model.isInNewZealand'
+              },
+              hideExpression: '! model.isInNewZealand'
+            },
+            {
+              key: 'scene',
+              type: 'input',
+              templateOptions: {
+                label: 'What was the scene?',
+                required: true,
+                messages: {
+                  required: 'We need to know the scene of the accident'
+                }
+              },
+              expressionProperties: {
+                hide: '! model.isInNewZealand'
+              },
+              hideExpression: '! model.isInNewZealand'
+            },
+            {
+              type: 'flowbutton',
+              templateOptions: {
+                label: 'Previous',
+                flow: 'who-two',
+                validate: false
+              }
+            },
+            {
+              type: 'flowbutton',
+              templateOptions: {
+                label: 'Next step',
+                className: 'md-primary',
+                flow: 'when-one',
+                validate: true
+              }
+            }
+          ]
+        },
+        'when-one': {
+          fields: [
+            {
+              type: 'heading-1',
+              templateOptions: {
+                heading: 'When did the injury happen?'
+              }
+            },
+            {
+              key: 'injurydate',
+              type: 'input',
+              templateOptions: {
+                label: 'What was the date?',
+                required: true,
+                type: 'date',
+                messages: {
+                  required: 'Please enter the date the injury occurred'
+                }
+              }
             }
           ]
         }
@@ -440,24 +529,32 @@ Template.find({}).remove(function() {
     },
     {
       name: 'autocomplete',
-      template: '<md-autocomplete ' +
-                    ' ng-required="to.required"' +
+      template: '<div>' +
+                    '<md-autocomplete ' +
+                    ' md-autofocus="false"' +
                     ' md-no-cache="to.noCache"' +
                     ' md-selected-item="model[options.key]"' +
                     ' md-search-text-change="to.searchTextChange(to.searchText)"' +
                     ' md-search-text="to.searchText"' +
                     ' md-selected-item-change="to.selectedItemChange(item)"' +
                     ' md-items="item in to.querySearch(to.searchText)"' +
-                    ' md-item-text="item.display"' +
-                    ' md-min-length="0"' +
+                    ' md-item-text="item"' +
+                    ' md-min-length="3"' +
+                    ' md-floating-label="{{::to.label}}"' +
                     ' placeholder="Start typing to search for the address">' +
                       '<md-item-template>' +
-                        '<span md-highlight-text="to.searchText" md-highlight-flags="^i">{{item.display}}</span>' +
+                        '<span md-highlight-text="to.searchText" md-highlight-flags="^i">{{item}}</span>' +
                       '</md-item-template>' +
                       '<md-not-found>' +
                         'No matches found for "{{to.searchText}}".' +
                       '</md-not-found>' +
-                  '</md-autocomplete>',
+                  '</md-autocomplete>' +
+                  '<div class="error-message" ng-messages="options.formControl.$error" ng-show="options.formControl.$touched || options.formControl.$submitted">' +
+                    '<div ng-message="{{::name}}" ng-repeat="(name, message) in to.messages track by $index">' +
+                      '{{::message}}' +
+                    '</div>' +
+                  '</div>' +
+                '</div>',
       defaultOptions: {
         templateOptions: {
           required: false,
@@ -507,7 +604,12 @@ Template.find({}).remove(function() {
     },
     {
       name: 'address',
-      extends: 'autocomplete'
+      extends: 'autocomplete',
+      defaultOptions: {
+        templateOptions: {
+          label: 'Address'
+        }
+      }
     },
     {
       name: 'flowbutton',

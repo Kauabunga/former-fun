@@ -120,6 +120,8 @@ angular.module('formerFunApp')
             $log.error('No target flow passed to flow button action');
           }
 
+          $log.debug('flowButtonAction', scope);
+
           if (shouldValidate) {
             updateSubmittedState(scope.formControls, scope.formFields);
 

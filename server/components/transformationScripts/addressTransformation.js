@@ -45,20 +45,48 @@
 
     var addressFields = getAddressFields(form);
 
-    $log.debug('addressFields', addressFields);
+    //TODO need validator to ensure value is there otherwise give message
+
 
     addressFields.map(function(addressField){
+      addressField.validators = addressField.validators || {};
       addressField.templateOptions = addressField.templateOptions || {};
+
+
+
+      addressField.validators.address = validateAddress;
+      addressField.templateOptions.messages = addressField.templateOptions.messages || {};
+      addressField.templateOptions.messages.address = 'Need an address';
+
+
       addressField.templateOptions.noCache = false;
       addressField.templateOptions.searchTextChange = function(){
-        $log.debug('address searchTextChange');
+        $log.debug('address searchTextChange', arguments);
       };
       addressField.templateOptions.selectedItemChange = function(){
-        $log.debug('address selectedItemChange');
+        $log.debug('address selectedItemChange', arguments);
       };
       addressField.templateOptions.querySearch = handleQuerySearch;
 
+      return addressFields;
     });
+
+    $log.debug('addressFields', addressFields);
+
+    /**
+     *
+     * @param $modelValue
+     * @param $viewValue
+     * @param $scope
+     * @returns {*|boolean}
+     */
+    function validateAddress($modelValue, $viewValue, $scope){
+      $log.debug('validateAddress', $modelValue);
+      $log.debug('validateAddress', $modelValue);
+      $log.debug('validateAddress', $modelValue);
+      $log.debug('validateAddress', $modelValue);
+      return $modelValue && $modelValue.length > 0;
+    }
 
     /**
      *
@@ -97,8 +125,7 @@
         $log.debug('address query result and status', results, status);
         if( status === 'OK'){
           deferred.resolve(results.map(function(result){
-            var display = result.display || result.description || 'Not found';
-            return { display: display };
+            return result.display || result.description || 'Not found';
           }));
         }
         else {
@@ -126,7 +153,6 @@
       var i;
       for(i = 0; i < form.sections[section].fields.length; i++){
         var field = form.sections[section].fields[i];
-        console.log(field);
         if(field.type === 'address'){
           addressFields.push(field);
         }

@@ -33,7 +33,14 @@ console.log('I AM COMING FROM THE SERVER!!!');
     console.log('transforming nhiNumber', nhiField);
 
     nhiField.validators = nhiField.validators || {};
-    nhiField.validators.nhiExists =  function checkNhiExists($modelValue, $viewValue, $scope){
+    nhiField.validators.nhiExists = checkNhiExists;
+
+    nhiField.templateOptions = nhiField.templateOptions || {};
+    nhiField.templateOptions.messages = nhiField.templateOptions.messages || {};
+    nhiField.templateOptions.messages.nhiExists = 'Validating number to equal 1111111 from server transformation';
+
+
+    function checkNhiExists($modelValue, $viewValue, $scope){
       return $http.get('/api/mocks/nhi/' + $modelValue)
         .then(function(response){
           return response.data;
@@ -48,11 +55,7 @@ console.log('I AM COMING FROM THE SERVER!!!');
 
           return true;
         });
-    };
-
-    nhiField.templateOptions = nhiField.templateOptions || {};
-    nhiField.templateOptions.messages = nhiField.templateOptions.messages || {};
-    nhiField.templateOptions.messages.nhiExists = 'Validating number to equal 1111111 from server transformation';
+    }
 
   }
 
