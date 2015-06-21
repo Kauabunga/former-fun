@@ -47,7 +47,7 @@ Form.find({}).remove(function() {
               key: 'nhiNumber',
               type: 'input',
               templateOptions: {
-                label: 'NHI Number',
+                label: 'NHI Code',
                 required: true,
                 maxlength: 7,
                 minlength: 7,
@@ -66,7 +66,7 @@ Form.find({}).remove(function() {
               type: 'checkbox',
               defaultValue: false,
               templateOptions: {
-                placeholder: 'I don\'t know the clients NHI code'
+                placeholder: 'I don\'t know an NHI code'
               }
             },
             {
@@ -115,14 +115,15 @@ Form.find({}).remove(function() {
             {
               type: 'button',
               templateOptions: {
-                label: 'Cancel'
+                label: 'Cancel',
+                className: 'cancel-button'
               }
             },
             {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Next step',
-                className: 'md-primary',
+                className: 'md-primary next-button',
                 flow: 'who-two',
                 validate: true
               }
@@ -282,6 +283,7 @@ Form.find({}).remove(function() {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Previous',
+                className: 'cancel-button',
                 flow: 'who-one',
                 validate: false
               }
@@ -290,7 +292,7 @@ Form.find({}).remove(function() {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Next step',
-                className: 'md-primary',
+                className: 'md-primary next-button',
                 flow: 'where-one',
                 validate: true
               }
@@ -344,6 +346,7 @@ Form.find({}).remove(function() {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Previous',
+                className: 'cancel-button',
                 flow: 'who-two',
                 validate: false
               }
@@ -352,7 +355,7 @@ Form.find({}).remove(function() {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Next step',
-                className: 'md-primary',
+                className: 'md-primary next-button',
                 flow: 'where-two',
                 validate: true
               }
@@ -421,6 +424,7 @@ Form.find({}).remove(function() {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Previous',
+                className: 'cancel-button',
                 flow: 'where-one',
                 validate: false
               }
@@ -429,7 +433,7 @@ Form.find({}).remove(function() {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Next step',
-                className: 'md-primary',
+                className: 'md-primary next-button',
                 flow: 'when-one',
                 validate: true
               }
@@ -454,6 +458,15 @@ Form.find({}).remove(function() {
                 messages: {
                   required: 'Please enter the date the injury occurred'
                 }
+              }
+            },
+            {
+              type: 'flowbutton',
+              templateOptions: {
+                label: 'Previous',
+                className: 'cancel-button',
+                flow: 'where-two',
+                validate: false
               }
             }
           ]
@@ -598,6 +611,7 @@ Template.find({}).remove(function() {
       template: '<md-button class="md-raised {{::to.className}}" ng-click="$emit(\'formerButtonAction\', $event, to)" type="{{::to.type}}">{{::to.label || options.key}}</md-button>',
       defaultOptions: {
         templateOptions: {
+          className: 'button',
           required: false,
           type: 'button'
         }

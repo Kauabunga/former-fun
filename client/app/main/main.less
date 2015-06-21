@@ -1,34 +1,54 @@
-.thing-form {
-  margin: 20px 0;
+
+h1 {
+  margin-bottom: 30px;
 }
 
-#banner {
-    border-bottom: none;
-    margin-top: -20px;
+.former-container {
+  display: block;
+  @media(min-width: @screen-sm){
+    width: 60%;
+    margin-left: 20%;
+  }
+  width: 90%;
+  margin-left: 5%;
+
 }
 
-#banner h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+.next-button, .cancel-button {
+  width: 40%;
+
+  @media(min-width: @screen-lg){
+    width: 20%;
+  }
+  @media(min-width: @screen-md){
+    width: 30%;
+  }
+  margin-top: 60px;
+  margin-bottom: 80px;
+
+
+  text-transform: none;
+  font-weight: bold;
+
 }
 
-.hero-unit {
-    position: relative;
-    padding: 30px 15px;
-    color: #F5F5F5;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+.cancel-button {
+  color: @gray !important;
+  float: left;
+  @media(min-width: @screen-md){
+    margin-left: 10%;
+  }
+  @media(min-width: @screen-sm){
+    margin-left: 5%;
+  }
 }
 
-.footer {
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 70px;
-    border-top: 1px solid #E5E5E5;
-}
-
-.navbar-text {
-    margin-left: 15px;
+.next-button {
+  float: right;
+  @media(min-width: @screen-md){
+    margin-right: 10%;
+  }
+  @media(min-width: @screen-sm){
+    margin-right: 5%;
+  }
 }
