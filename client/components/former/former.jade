@@ -1,5 +1,5 @@
 
 
 
-form(ng-submit='', name='formControls', novalidate='true')
+form(ng-submit='submitFormer(formModel, formControls, formFields)', name='formControls', novalidate='true')
   formly-form(model='formModel' fields='formFields' form='formControls')

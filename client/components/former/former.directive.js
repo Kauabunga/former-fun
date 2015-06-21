@@ -20,6 +20,7 @@ angular.module('formerFunApp')
         scope.formSection = $stateParams[scope.formSectionStateParam];
         scope.formFields = undefined;
 
+        scope.submitFormer = submitFormer;
 
         //TODO link this event up correctly with button template - may be better to decorate buttons with js functions
         scope.buttonActionEvent = scope.buttonActionEvent || 'formerButtonAction';
@@ -70,6 +71,13 @@ angular.module('formerFunApp')
         function getNewFormLocalStorageId(){
           //TODO push number to localStorage list
           return _.random(10000001, 99999999);
+        }
+
+        /**
+         *
+         */
+        function submitFormer(formModel, formControls, formFields){
+          $log.debug('submitFormer -- formModel, formControls, formFields', formModel, formControls, formFields)
         }
 
         /**

@@ -3,7 +3,7 @@
 angular.module('formerFunApp')
   .config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.when('/', '/main/');
+    $urlRouterProvider.when('/', '/main//');
     $urlRouterProvider.when('/main/', '/main//');
     $urlRouterProvider.when('/main', '/main//');
 

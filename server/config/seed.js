@@ -120,12 +120,9 @@ Form.find({}).remove(function() {
               }
             },
             {
-              type: 'flowbutton',
+              type: 'nextflowbutton',
               templateOptions: {
-                label: 'Next step',
-                className: 'md-primary next-button',
-                flow: 'who-two',
-                validate: true
+                flow: 'who-two'
               }
             }
           ]
@@ -280,21 +277,15 @@ Form.find({}).remove(function() {
               }
             },
             {
-              type: 'flowbutton',
+              type: 'previousflowbutton',
               templateOptions: {
-                label: 'Previous',
-                className: 'cancel-button',
-                flow: 'who-one',
-                validate: false
+                flow: 'who-one'
               }
             },
             {
-              type: 'flowbutton',
+              type: 'nextflowbutton',
               templateOptions: {
-                label: 'Next step',
-                className: 'md-primary next-button',
-                flow: 'where-one',
-                validate: true
+                flow: 'where-one'
               }
             }
           ]
@@ -343,21 +334,15 @@ Form.find({}).remove(function() {
               hideExpression: 'model.isAtWork !== "yes"'
             },
             {
-              type: 'flowbutton',
+              type: 'previousflowbutton',
               templateOptions: {
-                label: 'Previous',
-                className: 'cancel-button',
-                flow: 'who-two',
-                validate: false
+                flow: 'who-two'
               }
             },
             {
-              type: 'flowbutton',
+              type: 'nextflowbutton',
               templateOptions: {
-                label: 'Next step',
-                className: 'md-primary next-button',
-                flow: 'where-two',
-                validate: true
+                flow: 'where-two'
               }
             }
           ]
@@ -421,21 +406,15 @@ Form.find({}).remove(function() {
               hideExpression: '! model.isInNewZealand'
             },
             {
-              type: 'flowbutton',
+              type: 'previousflowbutton',
               templateOptions: {
-                label: 'Previous',
-                className: 'cancel-button',
-                flow: 'where-one',
-                validate: false
+                flow: 'where-one'
               }
             },
             {
-              type: 'flowbutton',
+              type: 'nextflowbutton',
               templateOptions: {
-                label: 'Next step',
-                className: 'md-primary next-button',
-                flow: 'when-one',
-                validate: true
+                flow: 'when-one'
               }
             }
           ]
@@ -461,12 +440,9 @@ Form.find({}).remove(function() {
               }
             },
             {
-              type: 'flowbutton',
+              type: 'previousflowbutton',
               templateOptions: {
-                label: 'Previous',
-                className: 'cancel-button',
-                flow: 'where-two',
-                validate: false
+                flow: 'where-two'
               }
             }
           ]
@@ -635,6 +611,29 @@ Template.find({}).remove(function() {
       defaultOptions: {
         templateOptions: {
           action: 'flowButtonAction'
+        }
+      }
+    },
+    {
+      name: 'previousflowbutton',
+      extends: 'flowbutton',
+      defaultOptions: {
+        templateOptions: {
+          label: 'Previous',
+          className: 'cancel-button',
+          validate: false
+        }
+      }
+    },
+    {
+      name: 'nextflowbutton',
+      extends: 'flowbutton',
+      defaultOptions: {
+        templateOptions: {
+          label: 'Next step',
+          type: 'submit',
+          className: 'md-primary next-button',
+          validate: true
         }
       }
     }

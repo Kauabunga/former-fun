@@ -4,37 +4,58 @@ angular.module('formerFunApp')
   .factory('former', function(formlyConfig, $log, $http, $window, $q) {
 
     var formCache = {};
-    var formBaseurl = '/api/forms/';
-    var templatesBaseurl = '/api/templates/';
+    var templateCache = {};
+    var transformationCache = {};
+
 
     return {
-      loadForm: loadForm
+      loadForm: loadForm,
+      loadTemplates: loadTemplates
     };
+
 
     /**
      *
      * @param formname
      * @returns {*}
      */
-    function loadForm(formname){
-      if(formCache[formname]){
-        $log.debug('form from cache', formCache[formname]);
+    function loadForm(form){
+      if(formCache[form.name]){
+        $log.debug('form from cache', formCache[form.name]);
       }
       else {
-        formCache[formname] = fetchTemplates()
-          .then(loadTemplates)
-          .then(function(){
-            return fetchForm(formname);
-          })
-          .then(configForm)
+        formCache[form.name] = configForm(form)
           .catch(function(){
             $log.error('Error getting form data', arguments);
           });
       }
 
-      return formCache[formname];
-
+      return formCache[form.name];
     }
+
+
+    /**
+     *
+     * @param templates
+     * @returns {*}
+     */
+    function loadTemplates(templates) {
+      $log.debug('templates response', templates);
+
+      templates = templates.sort(function(a, b){
+        return ! b.extends ;
+      });
+
+      templates.map(function(template){
+        if( ! templateCache[template.name]){
+          templateCache[template.name] = template;
+          formlyConfig.setType(template);
+        }
+      });
+
+      return $q.when();
+    }
+
 
 
 
@@ -44,8 +65,7 @@ angular.module('formerFunApp')
      */
     function configForm(form) {
       $log.debug('configForm response', form);
-      //TODO transformation function (optionally) from module?
-      //TODO    Better exposed as config service
+
       if(form.transformationModules && form.transformationModules.modules){
         return transformForm(form, form.transformationModules.modules);
       }
@@ -61,7 +81,6 @@ angular.module('formerFunApp')
     function transformForm(form, transformationModules){
 
       $log.debug('transforming form', transformationModules, transformationModules.isArray);
-
 
       if(transformationModules && transformationModules.constructor === Array) {
         var resolveModules = [];
@@ -86,30 +105,48 @@ angular.module('formerFunApp')
      * @param module
      */
     function applyTransformation(form, module){
+
       //append script to body with callback
 
       var transformationDeferred = $q.defer();
       $log.debug('Loading and Appling transformation', module);
 
+      if(typeof transformationCache[module] === 'function'){
+        transformationCache[module](form, 'formerFunApp');
+        transformationDeferred.resolve(form);
+      }
+      else {
+        $window[module + 'Callback'] = function(transformationFunction){
+          try {
+            transformationCache[module] = transformationFunction;
+            transformationFunction(form, 'formerFunApp');
+            $log.debug('Successfully applied transformation', module);
+            transformationDeferred.resolve(form);
+          }
+          catch(error){
+            $log.debug('Error applying transformation', error);
+            transformationCache[module] = undefined;
+            transformationDeferred.reject(error);
+          }
+        };
 
-      $window[module + 'Callback'] = function(transformationFunction){
-        try {
-          transformationFunction(form, 'formerFunApp');
-          $log.debug('Successfully applied transformation', module);
-          transformationDeferred.resolve(form);
-        }
-        catch(error){
-          $log.debug('Error applying transformation', error);
-          transformationDeferred.reject(error);
-        }
-      };
+        $('body').append( getTransformationScriptElement(form, module) );
 
+      }
+
+      return transformationDeferred.promise;
+    }
+
+    /**
+     *
+     * @param form
+     * @param module
+     */
+    function getTransformationScriptElement(form, module){
       var transformationScript = document.createElement( 'script' );
       transformationScript.type = 'text/javascript';
       transformationScript.src = getTransformationScriptUrl(form, module);
-      $('body').append( transformationScript );
-
-      return transformationDeferred.promise;
+      return transformationScript;
     }
 
 
@@ -124,44 +161,6 @@ angular.module('formerFunApp')
     }
 
 
-    /**
-     *
-     * @param templates
-     * @returns {*}
-     */
-    function loadTemplates(templates) {
-      $log.debug('templates response', templates);
-
-      templates = templates.sort(function(a, b){
-        return ! b.extends ;
-      });
-
-      return formlyConfig.setType(templates);
-
-    }
-
-
-    /**
-     *
-     * @returns {*}
-     */
-    function fetchForm(formname) {
-      return $http.get(formBaseurl + formname)
-        .then(function(response){
-          return response.data;
-        });
-    }
-
-    /**
-     *
-     * @returns {*}
-     */
-    function fetchTemplates() {
-      return $http.get(templatesBaseurl)
-        .then(function(response){
-          return response.data;
-        });
-    }
 
 
   });
