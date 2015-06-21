@@ -62,7 +62,7 @@ function createTransformationResponse(transformation){
 
   return fs.readFileAsync(transformation.scriptFilePath, { encoding: 'utf-8' })
     .then(function(transformationScriptFile){
-      console.log('found transformation script', transformationScriptFile);
+      console.log('found transformation script -- transformationScriptFile.length', transformationScriptFile.length);
       return transformationScriptFile;
     });
 }

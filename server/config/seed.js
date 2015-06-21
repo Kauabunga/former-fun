@@ -122,6 +122,7 @@ Form.find({}).remove(function() {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Next step',
+                className: 'md-primary',
                 flow: 'who-two',
                 validate: true
               }
@@ -289,6 +290,7 @@ Form.find({}).remove(function() {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Next step',
+                className: 'md-primary',
                 flow: 'where-one',
                 validate: true
               }
@@ -350,6 +352,7 @@ Form.find({}).remove(function() {
               type: 'flowbutton',
               templateOptions: {
                 label: 'Next step',
+                className: 'md-primary',
                 flow: 'where-two',
                 validate: true
               }
@@ -440,7 +443,7 @@ Template.find({}).remove(function() {
       template: '<md-autocomplete ' +
                     ' ng-required="to.required"' +
                     ' md-no-cache="to.noCache"' +
-                    ' md-selected-item="to.selectedItem"' +
+                    ' md-selected-item="model[options.key]"' +
                     ' md-search-text-change="to.searchTextChange(to.searchText)"' +
                     ' md-search-text="to.searchText"' +
                     ' md-selected-item-change="to.selectedItemChange(item)"' +
@@ -494,7 +497,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'button',
-      template: '<md-button class="md-raised" ng-click="$emit(\'formerButtonAction\', $event, to)" type="{{::to.type}}">{{::to.label || options.key}}</md-button>',
+      template: '<md-button class="md-raised {{::to.className}}" ng-click="$emit(\'formerButtonAction\', $event, to)" type="{{::to.type}}">{{::to.label || options.key}}</md-button>',
       defaultOptions: {
         templateOptions: {
           required: false,

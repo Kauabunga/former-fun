@@ -3,12 +3,32 @@
 
 (function(window){
 
+  var autoCompleteService;
+
+
   //TODO do we need to use a templating tool to dynamically inject into these? callback name + injected services etc
   try {
     window.addressCallback(addressTransformation);
+
+    if(! window.google || ! google.maps || ! google.maps.places){
+      loadGooglePlaces();
+    }
+    else {
+      console.log('found google library');
+      autoCompleteService = new google.maps.places.AutocompleteService();
+    }
+
+
   }
   catch(error){
     console.log('Error calling back address transformation', error);
+  }
+
+  /**
+   *
+   */
+  function loadGooglePlaces(){
+    console.log('TODO');
   }
 
   /**
@@ -21,6 +41,7 @@
     var $injector = angular.injector([angularName]);
     var $http = $injector.get('$http');
     var $log = $injector.get('$log');
+    var $q = $injector.get('$q');
 
     var addressFields = getAddressFields(form);
 
@@ -35,16 +56,61 @@
       addressField.templateOptions.selectedItemChange = function(){
         $log.debug('address selectedItemChange');
       };
-      addressField.templateOptions.querySearch = function(){
-        $log.debug('address querySearch');
-        return [
-          {
-            display: 'mooo'
-          }
-        ]
-      };
+      addressField.templateOptions.querySearch = handleQuerySearch;
 
     });
+
+    /**
+     *
+     * @param query
+     * @returns {*}
+     */
+    function handleQuerySearch(query){
+
+      if(! query ){
+        return $q.when([]);
+      }
+
+      $log.debug('address querySearch', arguments);
+
+      var deferred = $q.defer();
+
+      var options = {
+        input: query,
+        types: ['(cities)']
+      };
+
+      //new zealand bounds?
+      if (true) {
+        options.bounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng({
+            lat: -47,
+            lng: 162
+          }),
+          new google.maps.LatLng({
+            lat: -34,
+            lng: 179
+          }));
+      }
+
+      autoCompleteService.getQueryPredictions(options, function (results, status) {
+        $log.debug('address query result and status', results, status);
+        if( status === 'OK'){
+          deferred.resolve(results.map(function(result){
+            var display = result.display || result.description || 'Not found';
+            return { display: display };
+          }));
+        }
+        else {
+          deferred.reject(status);
+        }
+
+      });
+
+      return deferred.promise;
+
+    }
+
   }
 
 
