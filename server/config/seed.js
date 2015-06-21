@@ -29,6 +29,15 @@ Transformation.find({}).remove(function() {
 });
 
 
+
+//////////////////////////////////////////////////////////////////////////////////
+//                                     ///////////////////////////////////////////
+//              FORM                   ///////////////////////////////////////////
+//                                     ///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
 Form.find({}).remove(function() {
   Form.create(
     {
@@ -218,11 +227,22 @@ Form.find({}).remove(function() {
                 placeholder: 'Ethnicity',
                 required: true,
                 options: [
-                  {
-                    name: 'NZ',
-                    value: 'nz'
-                  }
-
+                  { value: '11', name: 'NZ European/Paheka'},
+                  { value: '12', name: 'Other European'},
+                  { value: '21', name: 'NZ Maori'},
+                  { value: '32', name: 'Cook Island Maori'},
+                  { value: '33', name: 'Tongan'},
+                  { value: '34', name: 'Niuean'},
+                  { value: '36', name: 'Fijian'},
+                  { value: '37', name: 'Other Pacific'},
+                  { value: '41', name: 'South East Asian'},
+                  { value: '43', name: 'Indian'},
+                  { value: '44', name: 'Other Asian'},
+                  { value: '42', name: 'Chinese'},
+                  { value: '31', name: 'Samoan'},
+                  { value: '35', name: 'Tokelauan'},
+                  { value: '61', name: 'Other ethnicity'},
+                  { value: '95', name: 'I\'d prefer not to say'}
                 ],
                 messages: {
                   required: 'We need the clients Ethnicity'
@@ -251,10 +271,7 @@ Form.find({}).remove(function() {
               type: 'textarea',
               templateOptions: {
                 label: 'Medical warning',
-                required: false,
-                messages: {
-                  required: 'We need the clients Family name'
-                }
+                required: false
               }
             },
             {
@@ -377,7 +394,10 @@ Form.find({}).remove(function() {
                     name: 'No, it didn\'t',
                     value: 'no'
                   }
-                ]
+                ],
+                messages: {
+                  required: 'We need to know if the injury happened in New Zealand'
+                }
               }
             },
             {
@@ -446,6 +466,260 @@ Form.find({}).remove(function() {
               templateOptions: {
                 flow: 'where-two'
               }
+            },
+            {
+              type: 'nextflowbutton',
+              templateOptions: {
+                flow: 'what-one'
+              }
+            }
+          ]
+        },
+        'what-one': {
+          fields: [
+            {
+              type: 'heading-1',
+              templateOptions: {
+                heading: 'What happened?'
+              }
+            },
+            {
+              type: 'label',
+              templateOptions: {
+                label: 'Did the accident or injury involve a moving vehicle on a public road?'
+              }
+            },
+            {
+              key: 'isMovingVehicle',
+              type: 'radio',
+              templateOptions: {
+                required: true,
+                options: [
+                  {
+                    name: 'Yes, it did',
+                    value: 'yes'
+                  },
+                  {
+                    name: 'No, it didn\'t',
+                    value: 'no'
+                  }
+                ],
+                messages: {
+                  required: 'We need to know if the injury involved a moving vehicle'
+                }
+              }
+            },
+            {
+              type: 'label',
+              templateOptions: {
+                label: 'How was the injury caused? (e.g. cleaning kitchen, slipped on wet floor and hit head on table)'
+              }
+            },
+            {
+              key: 'injuryCause',
+              type: 'textarea',
+              templateOptions: {
+                label: 'Add description',
+                required: true,
+                messages: {
+                  required: 'We need to know how the injury was caused'
+                }
+              }
+            },
+            {
+              type: 'previousflowbutton',
+              templateOptions: {
+                flow: 'when-one'
+              }
+            },
+            {
+              type: 'nextflowbutton',
+              templateOptions: {
+                flow: 'what-two'
+              }
+            }
+          ]
+        },
+        'what-two': {
+          fields: [
+            {
+              type: 'heading-1',
+              templateOptions: {
+                heading: 'What is your diagnosis?'
+              }
+            },
+            {
+              key: 'diagnosis',
+              type: 'icd10',
+              templateOptions: {
+                required: true,
+                label: 'What was the location?'
+              }
+            },
+            {
+              type: 'previousflowbutton',
+              templateOptions: {
+                flow: 'what-one'
+              }
+            },
+            {
+              type: 'nextflowbutton',
+              templateOptions: {
+                flow: 'consult-one'
+              }
+            }
+          ]
+        },
+        'consult-one': {
+          fields: [
+            {
+              type: 'heading-1',
+              templateOptions: {
+                heading: 'Does the client need to be referred?'
+              }
+            },
+            {
+              key: 'needsReferral',
+              type: 'radio',
+              templateOptions: {
+                required: true,
+                options: [
+                  {
+                    name: 'Yes, they do',
+                    value: 'yes'
+                  },
+                  {
+                    name: 'No, they don\'t',
+                    value: 'no'
+                  }
+                ],
+                messages: {
+                  required: 'We need to know if the client needs referring'
+                }
+              }
+            },
+            {
+              type: 'previousflowbutton',
+              templateOptions: {
+                flow: 'what-two'
+              }
+            },
+            {
+              type: 'nextflowbutton',
+              templateOptions: {
+                flow: 'consult-two'
+              }
+            }
+          ]
+        },
+        'consult-two': {
+          fields: [
+            {
+              type: 'heading-1',
+              templateOptions: {
+                heading: 'Does the client require further assistance?'
+              }
+            },
+            {
+              key: 'notifyClient',
+              type: 'checkbox',
+              defaultValue: false,
+              templateOptions: {
+                placeholder: 'ACC should notify the client'
+              }
+            },
+            {
+              key: 'notifyMyself',
+              type: 'checkbox',
+              defaultValue: false,
+              templateOptions: {
+                placeholder: 'ACC should call me'
+              }
+            },
+            {
+              type: 'previousflowbutton',
+              templateOptions: {
+                flow: 'consult-one'
+              }
+            },
+            {
+              type: 'nextflowbutton',
+              templateOptions: {
+                flow: 'consult-three'
+              }
+            }
+          ]
+        },
+        'consult-three': {
+          fields: [
+            {
+              type: 'heading-1',
+              templateOptions: {
+                heading: 'How is the client\'s work capacity?'
+              }
+            },
+            {
+              type: 'label',
+              templateOptions: {
+                label: 'Is the client able to continue normal work?'
+              }
+            },
+            {
+              key: 'continueWork',
+              type: 'radio',
+              templateOptions: {
+                required: true,
+                options: [
+                  {
+                    name: 'Yes, they can',
+                    value: 'yes'
+                  },
+                  {
+                    name: 'No, they can\'t',
+                    value: 'no'
+                  }
+                ],
+                messages: {
+                  required: 'We need to know if the client can continue work'
+                }
+              }
+            },
+            {
+              type: 'previousflowbutton',
+              templateOptions: {
+                flow: 'consult-two'
+              }
+            },
+            {
+              type: 'nextflowbutton',
+              templateOptions: {
+                flow: 'confirm'
+              }
+            }
+          ]
+        },
+        'confirm': {
+          fields: [
+            {
+              type: 'heading-1',
+              templateOptions: {
+                heading: 'Please confirm the information is correct and submit the claim.'
+              }
+            },
+            {
+              type: 'previousflowbutton',
+              templateOptions: {
+                flow: 'consult-three'
+              }
+            },
+            {
+              type: 'button',
+              templateOptions: {
+                label: 'Submit ACC45',
+                type: 'submit',
+                className: 'md-primary next-button',
+                validate: true
+              }
             }
           ]
         }
@@ -456,9 +730,17 @@ Form.find({}).remove(function() {
 
 
 
+//////////////////////////////////////////////////////////////////////////////////
+//                                     ///////////////////////////////////////////
+//              TEMPLATES              ///////////////////////////////////////////
+//                                     ///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
 
 
 Template.find({}).remove(function() {
+
+  //TODO need to transform these templates to validate their api with apiCheck
 
   Template.create(
     {
@@ -486,7 +768,7 @@ Template.find({}).remove(function() {
       name: 'textarea',
       template: '<md-input-container class="appointment-input">' +
                   '<label>{{::to.label}}</label>' +
-                  '<textarea placeholder="{{::to.placeholder}}" ng-model="model[options.key]"/>' +
+                  '<textarea placeholder="{{::to.placeholder}}" ng-model="model[options.key]"></textarea>' +
                   '<div class="error-message" ng-messages="options.formControl.$error" ng-show="options.formControl.$touched || options.formControl.$submitted">' +
                     '<div ng-message="{{::name}}" ng-repeat="(name, message) in ::to.messages track by $index">' +
                       '{{::message}}' +
@@ -557,13 +839,40 @@ Template.find({}).remove(function() {
       }
     },
     {
-      name: 'radio',
-      template: '<md-radio-group ng-model="model[options.key]">' +
-                            '<md-radio-button ng-repeat="option in ::to.options track by $index" value="{{::option.value}}">{{::option.name}}</md-radio-button>' +
-                         '</md-radio-group>',
+      name: 'chips',
+      template: '<div>' +
+                  '<h4>TODO CHIPS</h4>' +
+                  '<div class="error-message" ng-messages="options.formControl.$error" ng-show="options.formControl.$touched || options.formControl.$submitted">' +
+                    '<div ng-message="{{::name}}" ng-repeat="(name, message) in to.messages track by $index">' +
+                      '{{::message}}' +
+                    '</div>' +
+                  '</div>' +
+                '</div>',
       defaultOptions: {
         templateOptions: {
-          required: false
+          required: false,
+          messages: {
+            required: 'This field is required'
+          }
+        }
+      }
+    },
+    {
+      name: 'radio',
+      template: '<md-radio-group ng-model="model[options.key]">' +
+                    '<md-radio-button ng-repeat="option in ::to.options track by $index" value="{{::option.value}}">{{::option.name}}</md-radio-button>' +
+                 '</md-radio-group>' +
+                 '<div class="error-message" ng-messages="options.formControl.$error" ng-show="options.formControl.$touched || options.formControl.$submitted">' +
+                   '<div ng-message="{{::name}}" ng-repeat="(name, message) in to.messages track by $index">' +
+                      '{{::message}}' +
+                   '</div>' +
+                 '</div>',
+      defaultOptions: {
+        templateOptions: {
+          required: false,
+          messages: {
+            required: 'This field is required'
+          }
         }
       }
     },
@@ -603,6 +912,30 @@ Template.find({}).remove(function() {
           label: 'Address',
           messages: {
             required: 'Need to enter an address'
+          }
+        }
+      }
+    },
+    {
+      name: 'businessname',
+      extends: 'autocomplete',
+      defaultOptions: {
+        templateOptions: {
+          label: 'Business name',
+          messages: {
+            required: 'Need to enter a business name'
+          }
+        }
+      }
+    },
+    {
+      name: 'icd10',
+      extends: 'chips',
+      defaultOptions: {
+        templateOptions: {
+          label: 'ICD 10',
+          messages: {
+            required: 'Need to enter an icd 10'
           }
         }
       }

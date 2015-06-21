@@ -1,34 +1,14 @@
 
-
-
 (function(window){
 
-  var autoCompleteService;
-
+  'use strict';
 
   //TODO do we need to use a templating tool to dynamically inject into these? callback name + injected services etc
   try {
     window.dateCallback(dateTransformation);
-
-    if(! window.google || ! google.maps || ! google.maps.places){
-      loadGooglePlaces();
-    }
-    else {
-      console.log('found google library');
-      autoCompleteService = new google.maps.places.AutocompleteService();
-    }
-
-
   }
   catch(error){
     console.log('Error calling back date transformation', error);
-  }
-
-  /**
-   *
-   */
-  function loadGooglePlaces(){
-    console.log('TODO');
   }
 
   /**
@@ -45,17 +25,31 @@
 
     var dateFields = getDateFields(form);
 
-
-
     dateFields.map(function(dateField){
       dateField.templateOptions = dateField.templateOptions || {};
 
+      dateField.link = link;
 
+      /**
+       *
+       * @param scope
+       * @param el
+       * @param attrs
+       * @param ctrl
+       */
+      function link(scope, el, attrs, ctrl) {
+        if(scope.model[dateField.key]){
+          scope.model[dateField.key] = new Date(scope.model[dateField.key]);
+        }
+      }
 
       return dateField;
     });
 
     $log.debug('dateFields', dateFields);
+
+
+
 
   }
 

@@ -15,7 +15,7 @@ exports.nhiStub = function(req, res) {
         dob: '1111-11-10T11:00:00.000Z',
         address: '70 The Terrace, Wellington, New Zealand',
         gender: 'male',
-        ethnicity: 'nz',
+        ethnicity: '11',
         residencestatus: 'citizen',
         medicalwarning: '',
         donor: 'yes'

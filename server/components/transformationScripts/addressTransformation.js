@@ -3,10 +3,12 @@
 
 (function(window){
 
+  'use strict';
+
   var autoCompleteService;
 
 
-  //TODO do we need to use a templating tool to dynamically inject into these? callback name + injected services etc
+  //TODO do we need to use a templating tool to dynamically inject into these? callback name
   try {
     window.addressCallback(addressTransformation);
 
@@ -17,8 +19,6 @@
       console.log('found google library');
       autoCompleteService = new google.maps.places.AutocompleteService();
     }
-
-
   }
   catch(error){
     console.log('Error calling back address transformation', error);
@@ -29,6 +29,7 @@
    */
   function loadGooglePlaces(){
     console.log('TODO');
+    throw new Error('Load google places library injecting script into dom');
   }
 
   /**

@@ -1,13 +1,7 @@
 
-
-console.log('I AM COMING FROM THE SERVER!!!');
-console.log('I AM COMING FROM THE SERVER!!!');
-console.log('I AM COMING FROM THE SERVER!!!');
-console.log('I AM COMING FROM THE SERVER!!!');
-console.log('I AM COMING FROM THE SERVER!!!');
-
-
 (function(window){
+
+  'use strict';
 
   //TODO do we need to use a templating tool to dynamically inject into these? callback name + injected services etc
   try {
