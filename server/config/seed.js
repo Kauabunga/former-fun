@@ -20,6 +20,10 @@ Transformation.find({}).remove(function() {
     {
       name: 'address',
       scriptFilePath: './server/components/transformationScripts/addressTransformation.js'
+    },
+    {
+      name: 'date',
+      scriptFilePath: './server/components/transformationScripts/dateTransformation.js'
     }
   );
 });
@@ -32,7 +36,7 @@ Form.find({}).remove(function() {
       defaultSection: 'who-one',
       transformationModules: {
         baseurl: '/api/transformations',
-        modules: ['nhiNumber', 'address']
+        modules: ['nhiNumber', 'address', 'date']
       },
       sections: {
         'who-one': {
@@ -99,11 +103,10 @@ Form.find({}).remove(function() {
             },
             {
               key: 'dob',
-              type: 'input',
+              type: 'date',
               templateOptions: {
                 label: 'Date of Birth',
                 required: true,
-                type: 'date',
                 messages: {
                   required: 'We need the clients dob'
                 }
@@ -159,11 +162,10 @@ Form.find({}).remove(function() {
             },
             {
               key: 'dob',
-              type: 'input',
+              type: 'date',
               templateOptions: {
                 label: 'Date of Birth',
                 required: true,
-                type: 'date',
                 messages: {
                   required: 'We need the clients dob'
                 }
@@ -429,7 +431,7 @@ Form.find({}).remove(function() {
             },
             {
               key: 'injurydate',
-              type: 'input',
+              type: 'date',
               templateOptions: {
                 label: 'What was the date?',
                 required: true,
@@ -602,6 +604,15 @@ Template.find({}).remove(function() {
           messages: {
             required: 'Need to enter an address'
           }
+        }
+      }
+    },
+    {
+      name: 'date',
+      extends: 'input',
+      defaultOptions: {
+        templateOptions: {
+          type: 'date'
         }
       }
     },

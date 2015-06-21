@@ -45,9 +45,6 @@
 
     var addressFields = getAddressFields(form);
 
-    //TODO need validator to ensure value is there otherwise give message
-
-
     addressFields.map(function(addressField){
       addressField.templateOptions = addressField.templateOptions || {};
 

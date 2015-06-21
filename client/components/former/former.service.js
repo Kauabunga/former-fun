@@ -42,6 +42,24 @@ angular.module('formerFunApp')
     function loadTemplates(templates) {
       $log.debug('templates response', templates);
 
+
+      _(templates).sort(function(a, b){
+          if( !!a.extends === !!b.extends){
+            return 0;
+          }
+          return !! a.extends ? 1 : -1;
+        })
+        .map(function(template){
+          if(! template.name){
+            throw new Error('Template without a name', template);
+          }
+
+          if( ! templateCache[template.name]){
+            templateCache[template.name] = template;
+            formlyConfig.setType(template);
+          }
+        });
+
       templates = templates.sort(function(a, b){
         return ! b.extends ;
       });
