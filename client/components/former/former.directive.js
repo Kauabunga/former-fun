@@ -125,13 +125,25 @@ angular.module('formerFunApp')
           if (shouldValidate) {
             updateSubmittedState(scope.formControls, scope.formFields);
 
-            $log.debug('Form valid state', scope.formControls.$valid);
-            if(scope.formControls.$invalid){
+            if( ! isFormValid(scope.formControls)){
               return false;
             }
           }
 
           return transitionTo(targetFlow);
+        }
+
+        /**
+         *
+         * @param form
+         */
+        function isFormValid(form){
+
+          //TODO need to double check model / required states for all fields
+
+          $log.debug('is form valid', form, form.$valid);
+
+          return form.$valid;
         }
 
         /**
