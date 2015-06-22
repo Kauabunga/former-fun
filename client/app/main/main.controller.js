@@ -11,6 +11,7 @@ angular.module('formerFunApp')
     $scope.formControls = undefined;
     $scope.previousForms = undefined;
 
+    $scope.submitForm = submitForm;
     $scope.selectPreviousForm = selectPreviousForm;
 
 
@@ -41,6 +42,16 @@ angular.module('formerFunApp')
         .then(function(formDefinition){
           $scope.formDefinition = formDefinition;
         });
+    }
+
+
+    /**
+     *
+     * @param data
+     */
+    function submitForm(data){
+      $log.debug('submitForm in main controller', data);
+
     }
 
 

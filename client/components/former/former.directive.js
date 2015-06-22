@@ -12,6 +12,7 @@ angular.module('formerFunApp')
         formDefinition: '=',
         formModel: '=',
         formControls: '=?',
+        formSubmit: '&',
         formSectionStateParam: '@',
         formIdStateParam: '@',
         buttonActionEvent: '@?'
@@ -22,7 +23,7 @@ angular.module('formerFunApp')
         scope.formSection = $stateParams[scope.formSectionStateParam];
         scope.formFields = undefined;
 
-        //TODO this submit action should come from main.ctrl?
+        //TODO this submit action should come from scope main.ctrl?
         scope.submitFormer = submitFormer;
 
         //TODO link this event up correctly with button template - may be better to decorate buttons with js functions
@@ -113,7 +114,11 @@ angular.module('formerFunApp')
         function submitFormer(formModel, formControls, formFields){
           $log.debug('submitFormer -- formModel, formControls, formFields', formModel, formControls, formFields);
 
-
+          return scope.formSubmit({
+            formModel: formModel,
+            formControls: formControls,
+            formFields: formFields
+          });
         }
 
         /**
