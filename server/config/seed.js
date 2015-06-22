@@ -72,7 +72,8 @@ Form.find({}).remove(function() {
               },
               expressionProperties: {
                 hide: 'model.unknownNhi'
-              }
+              },
+              hideExpression: 'model.unknownNhi'
             },
             {
               key: 'unknownNhi',
@@ -94,7 +95,8 @@ Form.find({}).remove(function() {
               },
               expressionProperties: {
                 hide: '! model.unknownNhi'
-              }
+              },
+              hideExpression: '! model.unknownNhi'
             },
             {
               key: 'familyname',
@@ -108,7 +110,8 @@ Form.find({}).remove(function() {
               },
               expressionProperties: {
                 hide: '! model.unknownNhi'
-              }
+              },
+              hideExpression: '! model.unknownNhi'
             },
             {
               key: 'dob',
@@ -122,7 +125,8 @@ Form.find({}).remove(function() {
               },
               expressionProperties: {
                 hide: '! model.unknownNhi'
-              }
+              },
+              hideExpression: '! model.unknownNhi'
             },
             {
               type: 'button',
@@ -812,7 +816,7 @@ Template.find({}).remove(function() {
                     ' md-selected-item-change="to.selectedItemChange(item)"' +
                     ' md-items="item in to.querySearch(to.searchText)"' +
                     ' md-item-text="item"' +
-                    ' md-min-length="3"' +
+                    ' md-min-length="2"' +
                     ' md-floating-label="{{::to.label}}"' +
                     ' placeholder="Start typing to search for the address">' +
                       '<md-item-template>' +
