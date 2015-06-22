@@ -74,6 +74,23 @@ angular.module('formerFunApp')
          *
          */
         function getNewFormLocalStorageId(){
+
+          //ensure id is unique to local storage
+          var newId = createNewId();
+          var localStorageKey = former.getLocalFormIdsKey(scope.formDefinition.name);
+          $localStorage[localStorageKey] = $localStorage[localStorageKey] || [];
+
+          while($localStorage[localStorageKey].indexOf(newId) !== -1){
+            newId = createNewId();
+          }
+          return newId;
+        }
+
+        /**
+         *
+         * @returns {string}
+         */
+        function createNewId(){
           return scope.formDefinition.name + '_' + _.random(100000000001, 999999999999);
         }
 
