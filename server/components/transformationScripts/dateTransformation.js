@@ -38,6 +38,7 @@
        * @param ctrl
        */
       function link(scope, el, attrs, ctrl) {
+
         if(scope.model[dateField.key]){
           scope.model[dateField.key] = new Date(scope.model[dateField.key]);
         }

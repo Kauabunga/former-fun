@@ -40,6 +40,10 @@ Transformation.find({}).remove(function() {
     {
       name: 'injuryDate',
       scriptFilePath: './server/components/transformationScripts/injuryDateTransformation.js'
+    },
+    {
+      name: 'icd10',
+      scriptFilePath: './server/components/transformationScripts/icd10Transformation.js'
     }
   ).then(function(transformations){
 
@@ -77,7 +81,7 @@ Form.find({}).remove(function() {
       defaultSection: 'who-one',
       transformationModules: {
         baseurl: '/api/transformations',
-        modules: ['nhiNumber', 'address', 'date', 'injuryDate']
+        modules: ['nhiNumber', 'address', 'date', 'injuryDate', 'icd10']
       },
       sections: {
         'who-one': {
@@ -612,8 +616,7 @@ Form.find({}).remove(function() {
               key: 'diagnosis',
               type: 'icd10',
               templateOptions: {
-                required: true,
-                label: 'Diagnosis?'
+                required: true
               }
             },
             {
@@ -923,17 +926,17 @@ Template.find({}).remove(function() {
       name: 'autocomplete',
       template: '<div>' +
                     '<md-autocomplete ' +
-                    ' md-autofocus="false"' +
-                    ' md-no-cache="to.noCache"' +
-                    ' md-selected-item="model[options.key]"' +
-                    ' md-search-text-change="to.searchTextChange(to.searchText)"' +
-                    ' md-search-text="to.searchText"' +
-                    ' md-selected-item-change="to.selectedItemChange(item)"' +
-                    ' md-items="item in to.querySearch(to.searchText)"' +
-                    ' md-item-text="item"' +
-                    ' md-min-length="2"' +
-                    ' md-floating-label="{{::to.label}}"' +
-                    ' placeholder="Start typing to search for the address">' +
+                      ' md-autofocus="false"' +
+                      ' md-no-cache="to.noCache"' +
+                      ' md-selected-item="model[options.key]"' +
+                      ' md-search-text-change="to.searchTextChange(to.searchText)"' +
+                      ' md-search-text="to.searchText"' +
+                      ' md-selected-item-change="to.selectedItemChange(item)"' +
+                      ' md-items="item in to.querySearch(to.searchText)"' +
+                      ' md-item-text="item"' +
+                      ' md-min-length="2"' +
+                      ' md-floating-label="{{::to.label}}"' +
+                      ' placeholder="{{::to.placeholder}}">' +
                       '<md-item-template>' +
                         '<span md-highlight-text="to.searchText" md-highlight-flags="^i">{{item}}</span>' +
                       '</md-item-template>' +
@@ -960,7 +963,25 @@ Template.find({}).remove(function() {
     {
       name: 'chips',
       template: '<div>' +
-                  '<h4>TODO CHIPS</h4>' +
+                  '<md-chips ng-model="model[options.key]" md-autocomplete-snap md-require-match>' +
+                    '<md-autocomplete ' +
+                          ' md-autofocus="false"' +
+                          ' md-selected-item="to.currentSelected"' +
+                          ' md-search-text-change="to.searchTextChange(to.searchText)"' +
+                          ' md-search-text="to.searchText"' +
+                          ' md-selected-item-change="to.selectedItemChange(item)"' +
+                          ' md-items="item in to.querySearch(to.searchText)"' +
+                          ' md-item-text="item"' +
+                          ' placeholder="{{::to.placeholder}}">' +
+                      '<span md-highlight-text="to.searchText">{{item}}</span>' +
+                    '</md-autocomplete>' +
+                    '<md-chip-template>' +
+                      '<span>' +
+                        '<strong>{{$chip}}</strong>' +
+                      '</span>' +
+                    '</md-chip-template>' +
+                  '</md-chips>' +
+                  '<input style="display: none;" ng-model="model[options.key][0]" ng-required="to.required" />' +
                   '<div class="error-message" ng-messages="options.formControl.$error" ng-show="options.formControl.$touched || options.formControl.$submitted">' +
                     '<div ng-message="{{::name}}" ng-repeat="(name, message) in to.messages track by $index">' +
                       '{{::message}}' +
@@ -1041,6 +1062,7 @@ Template.find({}).remove(function() {
       defaultOptions: {
         templateOptions: {
           label: 'Address',
+          placeholder: 'Start typing to search for the address',
           messages: {
             required: 'Need to enter an address'
           }
@@ -1064,7 +1086,7 @@ Template.find({}).remove(function() {
       extends: 'chips',
       defaultOptions: {
         templateOptions: {
-          label: 'ICD 10',
+          placeholder: 'ICD 10',
           messages: {
             required: 'Need to enter an icd 10'
           }

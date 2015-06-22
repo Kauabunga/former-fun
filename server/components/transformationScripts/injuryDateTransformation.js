@@ -60,7 +60,6 @@
     var i;
     for(i = 0; i < form.sections[section].fields.length; i++){
       var field = form.sections[section].fields[i];
-      console.log(field);
       if(field.key === key){
         return field;
       }
