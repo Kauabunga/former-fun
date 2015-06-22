@@ -171,7 +171,8 @@ angular.module('formerFunApp')
             scope[action]($event, templateOptions);
           }
           else{
-            $log.warn('No button action resolved');
+            //TODO run formerButtonAction here?
+            $log.warn('No button action resolved', templateOptions);
           }
         }
 
