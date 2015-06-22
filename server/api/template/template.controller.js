@@ -5,10 +5,13 @@ var Template = require('./template.model');
 
 // Get list of templates
 exports.index = function(req, res) {
-  Template.find({}, {_id: 0, __v: 0}, function (err, templates) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(templates);
-  });
+  Template.findAsync({}, {_id: 0, __v: 0})
+    .then(function(templates){
+      return res.status(200).json(templates);
+    })
+    .catch(function(err){
+      return res.status(500).send(err);
+    });
 };
 
 

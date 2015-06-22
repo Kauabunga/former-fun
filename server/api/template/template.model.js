@@ -3,6 +3,11 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
+/* global -Promise */
+var Promise = require('bluebird');
+
+
+
 var TemplateSchema = new Schema({
   name: String,
   extends: String,
@@ -10,4 +15,9 @@ var TemplateSchema = new Schema({
   defaultOptions: {}
 });
 
-module.exports = mongoose.model('Template', TemplateSchema);
+var TemplateModel = mongoose.model('Template', TemplateSchema);
+
+Promise.promisifyAll(TemplateModel);
+Promise.promisifyAll(TemplateModel.prototype);
+
+module.exports = TemplateModel;

@@ -1,3 +1,5 @@
+
+
 'use strict';
 
 angular.module('formerFunApp')
@@ -92,7 +94,9 @@ angular.module('formerFunApp')
          *
          */
         function submitFormer(formModel, formControls, formFields){
-          $log.debug('submitFormer -- formModel, formControls, formFields', formModel, formControls, formFields)
+          $log.debug('submitFormer -- formModel, formControls, formFields', formModel, formControls, formFields);
+
+
         }
 
         /**

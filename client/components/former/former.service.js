@@ -60,11 +60,16 @@ angular.module('formerFunApp')
     function loadTemplates(templates) {
       $log.debug('templates response', templates);
 
+
+
       _(templates).sort(function(a, b){
-          if( !!a.extends === !!b.extends){
+          var aExtends = a.extends !== undefined;
+          var bExtends = b.extends !== undefined;
+
+          if( aExtends === bExtends ){
             return 0;
           }
-          return !! a.extends ? 1 : -1;
+          return aExtends ? 1 : -1;
         })
         .map(function(template){
           if(! template.name){

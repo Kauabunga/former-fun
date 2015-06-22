@@ -1,6 +1,5 @@
 
 
-
 (function(window){
 
   'use strict';
@@ -12,12 +11,12 @@
   try {
     window.addressCallback(addressTransformation);
 
-    if(! window.google || ! google.maps || ! google.maps.places){
+    if(! window.google || ! window.google.maps || ! window.google.maps.places){
       loadGooglePlaces();
     }
     else {
       console.log('found google library');
-      autoCompleteService = new google.maps.places.AutocompleteService();
+      autoCompleteService = new window.google.maps.places.AutocompleteService();
     }
   }
   catch(error){
@@ -85,12 +84,12 @@
 
       //new zealand bounds?
       if (true) {
-        options.bounds = new google.maps.LatLngBounds(
-          new google.maps.LatLng({
+        options.bounds = new window.google.maps.LatLngBounds(
+          new window.google.maps.LatLng({
             lat: -47,
             lng: 162
           }),
-          new google.maps.LatLng({
+          new window.google.maps.LatLng({
             lat: -34,
             lng: 179
           }));

@@ -1,4 +1,6 @@
 
+/* global _ */
+
 (function(window){
 
   'use strict';
