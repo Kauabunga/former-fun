@@ -16,8 +16,7 @@ var TemplateSchema = new Schema({
   },
   version: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   extends: String,
   template: {},

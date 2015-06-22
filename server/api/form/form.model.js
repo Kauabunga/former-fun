@@ -16,8 +16,7 @@ var FormSchema = new Schema({
   },
   version: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   defaultSection: String,
   transformationModules: {},
