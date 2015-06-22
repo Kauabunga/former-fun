@@ -14,8 +14,11 @@ var TransformationSchema = new Schema({
     unique: true
   },
   scriptFilePath: {
-    type:String,
+    type: String,
     required: true
+  },
+  scriptFileContent: {
+    type: String
   }
 });
 

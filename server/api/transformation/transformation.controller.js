@@ -29,41 +29,17 @@ function show(req, res) {
 
   return Transformation.findOneAsync({ name: name }, {_id: 0, __v: 0})
     .then(function(transformation){
-      if( ! transformation) {
+      if( ! transformation || ! transformation.scriptFileContent) {
         console.log('transformation not found', name);
         return res.send(404);
       }
       else {
-        return createTransformationResponse(transformation)
-          .then(function(transformationResponse){
-            res.status(200).type('application/javascript').send(transformationResponse);
-          })
-          .catch(function(error){
-            console.log('error finding transformation script', error);
-            return res.send(500);
-          });
+        res.status(200).type('application/javascript').send(transformation.scriptFileContent);
       }
     })
     .catch(function(error){
       console.log('get transformation error', error);
       return res.send(500, error);
-    });
-}
-
-/**
- *
- * @param transformation
- * @returns {*}
- */
-function createTransformationResponse(transformation){
-
-  //TODO we might want to template parts of the scripts - e.g. customise namespace/callback etc
-  console.log('found transformation', transformation);
-
-  return fs.readFileAsync(transformation.scriptFilePath, { encoding: 'utf-8' })
-    .then(function(transformationScriptFile){
-      console.log('found transformation script -- transformationScriptFile.length', transformationScriptFile.length);
-      return transformationScriptFile;
     });
 }
 

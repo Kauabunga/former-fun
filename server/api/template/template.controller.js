@@ -7,12 +7,6 @@ var Template = require('./template.model');
 exports.index = function(req, res) {
   Template.find({}, {_id: 0, __v: 0}, function (err, templates) {
     if(err) { return handleError(res, err); }
-
-    //Need to ensure that templates that are extending others are ordered last
-    templates.sort(function(a, b){
-      return a.extends;
-    });
-
     return res.status(200).json(templates);
   });
 };

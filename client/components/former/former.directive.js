@@ -20,6 +20,7 @@ angular.module('formerFunApp')
         scope.formSection = $stateParams[scope.formSectionStateParam];
         scope.formFields = undefined;
 
+        //TODO this submit action should come from main.ctrl?
         scope.submitFormer = submitFormer;
 
         //TODO link this event up correctly with button template - may be better to decorate buttons with js functions
@@ -43,7 +44,7 @@ angular.module('formerFunApp')
          */
         function init(){
 
-          var validFormId = isValidFormId(scope.formId)
+          var validFormId = isValidFormId(scope.formId);
 
           if( ! scope.formSection || ! validFormId){
             scope.formId = validFormId ? scope.formId : getNewFormLocalStorageId();
@@ -158,6 +159,9 @@ angular.module('formerFunApp')
           //TODO should be able to decorate this action with transformation components
           // decorate all buttons?
 
+          //TODO check to see if there is a formerButtonAction function attached to the button
+          //    call that - if returns promise etc...
+          
           var shouldValidate = getValidateOption(templateOptions);
           var targetFlow = getTargetFlowOption(templateOptions);
 

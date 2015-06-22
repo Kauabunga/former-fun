@@ -9,10 +9,22 @@ var Template = require('../api/template/template.model');
 var Transformation = require('../api/transformation/transformation.model');
 var Form = require('../api/form/form.model');
 
+/* global -Promise */
+var Promise = require('bluebird');
+var fs = require('fs');
+Promise.promisifyAll(fs);
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+//                                     ///////////////////////////////////////////
+//         TRANSFORMATION              ///////////////////////////////////////////
+//                                     ///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 
 Transformation.find({}).remove(function() {
-  Transformation.create(
+  Transformation.createAsync(
     {
       name: 'nhiNumber',
       scriptFilePath: './server/components/transformationScripts/nhiNumberTransformation.js'
@@ -24,9 +36,31 @@ Transformation.find({}).remove(function() {
     {
       name: 'date',
       scriptFilePath: './server/components/transformationScripts/dateTransformation.js'
+    },
+    {
+      name: 'injuryDate',
+      scriptFilePath: './server/components/transformationScripts/injuryDateTransformation.js'
     }
-  );
+  ).then(function(transformations){
+
+      //Load script files into data base
+      transformations.map(function(transformation){
+        fs.readFileAsync(transformation.scriptFilePath, { encoding: 'utf-8' })
+          .then(function(transformationScriptFile){
+            console.log('found transformation script -- transformationScriptFile.length', transformationScriptFile.length);
+
+            //TODO should minify scripts
+            transformation.scriptFileContent = transformationScriptFile;
+            transformation.save();
+          })
+          .catch(function(error){
+            console.log('error fetching transformation script', error);
+          });
+      });
+  });
+
 });
+
 
 
 
@@ -36,8 +70,6 @@ Transformation.find({}).remove(function() {
 //                                     ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
-
-
 Form.find({}).remove(function() {
   Form.create(
     {
@@ -45,7 +77,7 @@ Form.find({}).remove(function() {
       defaultSection: 'who-one',
       transformationModules: {
         baseurl: '/api/transformations',
-        modules: ['nhiNumber', 'address', 'date']
+        modules: ['nhiNumber', 'address', 'date', 'injuryDate']
       },
       sections: {
         'who-one': {
@@ -454,7 +486,23 @@ Form.find({}).remove(function() {
               }
             },
             {
-              key: 'injurydate',
+              key: 'setInjuryDateToToday',
+              type: 'button',
+              templateOptions: {
+                action: 'setInjuryDateToToday',
+                label: 'Today'
+              }
+            },
+            {
+              key: 'setInjuryDateToYesterday',
+              type: 'button',
+              templateOptions: {
+                action: 'setInjuryDateToYesterday',
+                label: 'Yesterday'
+              }
+            },
+            {
+              key: 'injuryDate',
               type: 'date',
               templateOptions: {
                 label: 'What was the date?',
@@ -517,7 +565,11 @@ Form.find({}).remove(function() {
               type: 'label',
               templateOptions: {
                 label: 'How was the injury caused? (e.g. cleaning kitchen, slipped on wet floor and hit head on table)'
-              }
+              },
+              expressionProperties: {
+                hide: '! model.isMovingVehicle'
+              },
+              hideExpression: '! model.isMovingVehicle'
             },
             {
               key: 'injuryCause',
@@ -528,7 +580,11 @@ Form.find({}).remove(function() {
                 messages: {
                   required: 'We need to know how the injury was caused'
                 }
-              }
+              },
+              expressionProperties: {
+                hide: '! model.isMovingVehicle'
+              },
+              hideExpression: '! model.isMovingVehicle'
             },
             {
               type: 'previousflowbutton',
@@ -557,7 +613,7 @@ Form.find({}).remove(function() {
               type: 'icd10',
               templateOptions: {
                 required: true,
-                label: 'What was the location?'
+                label: 'Diagnosis?'
               }
             },
             {
@@ -734,13 +790,13 @@ Form.find({}).remove(function() {
 
 
 
+
+
 //////////////////////////////////////////////////////////////////////////////////
 //                                     ///////////////////////////////////////////
 //              TEMPLATES              ///////////////////////////////////////////
 //                                     ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-
-
 
 Template.find({}).remove(function() {
 
@@ -899,9 +955,21 @@ Template.find({}).remove(function() {
     },
     {
       name: 'button',
+      template: '<md-button class="md-raised {{::to.className}}" ng-click="to.formerActionButton($event, this, to)" type="{{::to.type}}">{{::to.label || options.key}}</md-button>',
+      defaultOptions: {
+        templateOptions: {
+          className: 'button',
+          required: false,
+          type: 'button'
+        }
+      }
+    },
+    {
+      name: 'flowbutton',
       template: '<md-button class="md-raised {{::to.className}}" ng-click="$emit(\'formerButtonAction\', $event, to)" type="{{::to.type}}">{{::to.label || options.key}}</md-button>',
       defaultOptions: {
         templateOptions: {
+          action: 'flowButtonAction',
           className: 'button',
           required: false,
           type: 'button'
@@ -950,15 +1018,6 @@ Template.find({}).remove(function() {
       defaultOptions: {
         templateOptions: {
           type: 'date'
-        }
-      }
-    },
-    {
-      name: 'flowbutton',
-      extends: 'button',
-      defaultOptions: {
-        templateOptions: {
-          action: 'flowButtonAction'
         }
       }
     },
