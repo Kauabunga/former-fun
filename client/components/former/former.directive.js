@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .directive('former', function ($log, $state, $stateParams, $rootScope, $localStorage) {
+  .directive('former', function ($log, $state, $stateParams, $rootScope, $localStorage, former) {
 
     return {
       templateUrl: 'components/former/former.html',
@@ -43,14 +43,16 @@ angular.module('formerFunApp')
          */
         function init(){
 
-          if( ! scope.formSection || ! scope.formId){
-            scope.formId = scope.formId || getNewFormLocalStorageId();
+          var validFormId = isValidFormId(scope.formId)
+
+          if( ! scope.formSection || ! validFormId){
+            scope.formId = validFormId ? scope.formId : getNewFormLocalStorageId();
             scope.formSection = scope.formSection || scope.formDefinition.defaultSection;
             transitionTo(scope.formSection, scope.formId, true);
           }
           else {
             //bind form model to local scope with formId
-            scope.formModel = $localStorage[scope.formModel.name + scope.formId] = $localStorage[scope.formModel.name + scope.formId] || {};
+            scope.formModel = $localStorage[scope.formDefinition.name + scope.formId] = $localStorage[scope.formDefinition.name + scope.formId] || {};
             loadSection(scope.formDefinition.sections[scope.formSection]);
           }
         }
@@ -69,8 +71,20 @@ angular.module('formerFunApp')
          *
          */
         function getNewFormLocalStorageId(){
-          //TODO push number to localStorage list
-          return _.random(10000001, 99999999);
+          return scope.formDefinition.name + '_' + _.random(100000000001, 999999999999);
+        }
+
+
+        /**
+         *
+         * @param formId
+         */
+        function isValidFormId(formId){
+
+          var formName = getFormName();
+          var formRegex = new RegExp('\\b' + formName + '_\\d{12}\\b');
+
+          return formId && formRegex.test(formId);
         }
 
         /**
@@ -92,6 +106,9 @@ angular.module('formerFunApp')
           if(targetId){
             $stateParams[scope.formIdStateParam] = targetId;
           }
+
+          trackFormId($stateParams[scope.formIdStateParam]);
+
           var options = replace ? { location: 'replace' } : {};
           $state.transitionTo(
             $state.current.name,
@@ -99,6 +116,20 @@ angular.module('formerFunApp')
             options
           );
         }
+
+
+        /**
+         *
+         * @param id
+         */
+        function trackFormId(id){
+          var localStorageKey = former.getLocalFormIdsKey(scope.formDefinition.name);
+          $localStorage[localStorageKey] = $localStorage[localStorageKey] || [];
+          if($localStorage[localStorageKey].indexOf(id) === -1){
+            $localStorage[localStorageKey].push(id);
+          }
+        }
+
 
         /**
          *
@@ -156,11 +187,7 @@ angular.module('formerFunApp')
          * @param form
          */
         function isFormValid(form){
-
-          //TODO need to double check model / required states for all fields
-
           $log.debug('is form valid', form, form.$valid);
-
           return form.$valid;
         }
 
@@ -193,6 +220,14 @@ angular.module('formerFunApp')
          */
         function getTargetFlowOption(templateOptions){
           return templateOptions.flow;
+        }
+
+        /**
+         *
+         * @returns {*}
+         */
+        function getFormName(){
+          return scope.formDefinition.name;
         }
 
       }

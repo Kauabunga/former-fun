@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .controller('MainCtrl', function ($log, $scope, $http, $q, $window, former) {
+  .controller('MainCtrl', function ($log, $scope, $http, $q, $window, former, $state, $stateParams) {
 
     var formName = 'acc45';
     var formBaseurl = '/api/forms/';
@@ -9,6 +9,9 @@ angular.module('formerFunApp')
 
     $scope.formDefinition = undefined;
     $scope.formControls = undefined;
+    $scope.previousForms = undefined;
+
+    $scope.selectPreviousForm = selectPreviousForm;
 
 
     return init();
@@ -19,6 +22,11 @@ angular.module('formerFunApp')
      * @returns {*}
      */
     function init(){
+
+      former.fetchLocalFormIds(formName)
+        .then(function(forms){
+          $scope.previousForms = forms;
+        });
 
       return fetchTemplates()
         .then(function(templates){
@@ -64,6 +72,16 @@ angular.module('formerFunApp')
         .then(function(response){
           return response.data;
         });
+    }
+
+
+    /**
+     *
+     * @param previousForm
+     */
+    function selectPreviousForm(previousForm){
+      $stateParams.currentId = previousForm;
+      $state.go($state.current.name, $stateParams, { reload: true });
     }
 
 

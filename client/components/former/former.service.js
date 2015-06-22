@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .factory('former', function(formlyConfig, $log, $http, $window, $q) {
+  .factory('former', function(formlyConfig, $log, $http, $window, $q, $localStorage) {
 
     var formCache = {};
     var templateCache = {};
@@ -9,10 +9,28 @@ angular.module('formerFunApp')
 
 
     return {
+      fetchLocalFormIds: fetchLocalFormIds,
+      getLocalFormIdsKey: getLocalFormIdsKey,
       loadForm: loadForm,
       loadTemplates: loadTemplates
     };
 
+
+    /**
+     *
+     * @param formName
+     */
+    function fetchLocalFormIds(formName){
+      return $q.when($localStorage[getLocalFormIdsKey(formName)] || []);
+    }
+
+    /**
+     *
+     * @param formName
+     */
+    function getLocalFormIdsKey(formName){
+      return 'localFormIds_' + formName;
+    }
 
     /**
      *
