@@ -9,7 +9,16 @@ var Promise = require('bluebird');
 
 
 var TemplateSchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  version: {
+    type: String,
+    required: true,
+    unique: true
+  },
   extends: String,
   template: {},
   defaultOptions: {}

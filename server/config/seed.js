@@ -27,23 +27,28 @@ Transformation.find({}).remove(function() {
   Transformation.createAsync(
     {
       name: 'nhiNumber',
-      scriptFilePath: './server/components/transformationScripts/nhiNumberTransformation.js'
+      version: '1.0',
+      scriptFilePath: './server/components/acc45TransformationScripts/nhiNumberV1Transformation.js'
     },
     {
       name: 'address',
-      scriptFilePath: './server/components/transformationScripts/addressTransformation.js'
+      version: '1.0',
+      scriptFilePath: './server/components/acc45TransformationScripts/addressV1Transformation.js'
     },
     {
       name: 'date',
-      scriptFilePath: './server/components/transformationScripts/dateTransformation.js'
+      version: '1.0',
+      scriptFilePath: './server/components/acc45TransformationScripts/dateV1Transformation.js'
     },
     {
       name: 'injuryDate',
-      scriptFilePath: './server/components/transformationScripts/injuryDateTransformation.js'
+      version: '1.0',
+      scriptFilePath: './server/components/acc45TransformationScripts/injuryDateV1Transformation.js'
     },
     {
       name: 'icd10',
-      scriptFilePath: './server/components/transformationScripts/icd10Transformation.js'
+      version: '1.0',
+      scriptFilePath: './server/components/acc45TransformationScripts/icd10V1Transformation.js'
     }
   ).then(function(transformations){
 
@@ -78,10 +83,11 @@ Form.find({}).remove(function() {
   Form.create(
     {
       name: 'acc45',
+      version: '1.0',
       defaultSection: 'who-one',
       transformationModules: {
         baseurl: '/api/transformations',
-        modules: ['nhiNumber', 'address', 'date', 'injuryDate', 'icd10']
+        modules: ['nhiNumberV1', 'addressV1', 'dateV1', 'injuryDateV1', 'icd10V1']
       },
       sections: {
         'who-one': {
@@ -867,6 +873,7 @@ Template.find({}).remove(function() {
   Template.create(
     {
       name: 'input',
+      version: '1.0',
       template: '<md-input-container class="appointment-input">' +
                     '<label>{{::to.label}}</label>' +
                     '<input type="{{::to.type}}" placeholder="{{::to.placeholder}}" ng-model="model[options.key]"/>' +
@@ -888,6 +895,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'textarea',
+      version: '1.0',
       template: '<md-input-container class="appointment-input">' +
                   '<label>{{::to.label}}</label>' +
                   '<textarea placeholder="{{::to.placeholder}}" ng-model="model[options.key]"></textarea>' +
@@ -908,6 +916,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'select',
+      version: '1.0',
       template: '<md-select ng-model="model[options.key]" placeholder="{{::to.placeholder}}">' +
                     '<md-option ng-repeat="option in ::to.options track by $index" value="{{::option.value}}">{{::option.name}}</md-option>' +
                  '</md-select>' +
@@ -924,6 +933,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'autocomplete',
+      version: '1.0',
       template: '<div>' +
                     '<md-autocomplete ' +
                       ' md-autofocus="false"' +
@@ -962,6 +972,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'chips',
+      version: '1.0',
       template: '<div>' +
                   '<md-chips ng-model="model[options.key]" md-autocomplete-snap md-require-match>' +
                     '<md-autocomplete ' +
@@ -999,6 +1010,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'radio',
+      version: '1.0',
       template: '<md-radio-group ng-model="model[options.key]">' +
                     '<md-radio-button ng-repeat="option in ::to.options track by $index" value="{{::option.value}}">{{::option.name}}</md-radio-button>' +
                  '</md-radio-group>' +
@@ -1018,6 +1030,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'checkbox',
+      version: '1.0',
       template: '<md-checkbox ng-model="model[options.key]" aria-label="Finished?">{{::to.placeholder}}</md-checkbox>',
       defaultOptions: {
         templateOptions: {
@@ -1027,14 +1040,17 @@ Template.find({}).remove(function() {
     },
     {
       name: 'heading-1',
+      version: '1.0',
       template: '<h1>{{::to.heading}}</h1>'
     },
     {
       name: 'label',
+      version: '1.0',
       template: '<label>{{::to.label}}</label>'
     },
     {
       name: 'button',
+      version: '1.0',
       template: '<md-button class="md-raised {{::to.className}}" ng-click="to.formerActionButton($event, this, to)" type="{{::to.type}}">{{::to.label || options.key}}</md-button>',
       defaultOptions: {
         templateOptions: {
@@ -1046,6 +1062,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'flowbutton',
+      version: '1.0',
       template: '<md-button class="md-raised {{::to.className}}" ng-click="$emit(\'formerButtonAction\', $event, to)" type="{{::to.type}}">{{::to.label || options.key}}</md-button>',
       defaultOptions: {
         templateOptions: {
@@ -1058,6 +1075,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'address',
+      version: '1.0',
       extends: 'autocomplete',
       defaultOptions: {
         templateOptions: {
@@ -1071,6 +1089,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'businessname',
+      version: '1.0',
       extends: 'autocomplete',
       defaultOptions: {
         templateOptions: {
@@ -1083,6 +1102,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'icd10',
+      version: '1.0',
       extends: 'chips',
       defaultOptions: {
         templateOptions: {
@@ -1095,6 +1115,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'date',
+      version: '1.0',
       extends: 'input',
       defaultOptions: {
         templateOptions: {
@@ -1104,6 +1125,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'previousflowbutton',
+      version: '1.0',
       extends: 'flowbutton',
       defaultOptions: {
         templateOptions: {
@@ -1115,6 +1137,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'nextflowbutton',
+      version: '1.0',
       extends: 'flowbutton',
       defaultOptions: {
         templateOptions: {

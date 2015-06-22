@@ -13,6 +13,11 @@ var TransformationSchema = new Schema({
     required: true,
     unique: true
   },
+  version: {
+    type: String,
+    required: true,
+    unique: true
+  },
   scriptFilePath: {
     type: String,
     required: true

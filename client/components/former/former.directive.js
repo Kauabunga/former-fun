@@ -24,6 +24,7 @@ angular.module('formerFunApp')
         scope.formFields = undefined;
 
         //TODO this submit action should come from scope main.ctrl?
+        // optional?
         scope.submitFormer = submitFormer;
 
         //TODO link this event up correctly with button template - may be better to decorate buttons with js functions

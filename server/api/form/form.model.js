@@ -9,7 +9,16 @@ var Promise = require('bluebird');
 
 var FormSchema = new Schema({
 
-  name: String,
+  name: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  version: {
+    type: String,
+    required: true,
+    unique: true
+  },
   defaultSection: String,
   transformationModules: {},
   sections: {}
