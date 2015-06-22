@@ -5,32 +5,42 @@ var Chance = require('chance');
 var chance = new Chance();
 
 
+var nhiRandomCache = {};
+
 
 exports.nhiStub = function(req, res) {
 
-  if(req.params.id === '1111111'){
+  var id = req.params.id;
 
-    var gender = chance.gender().toLowerCase();
-    var firstname = chance.first({ gender: gender });
-    var lastname = chance.last();
-    var dob = chance.birthday();
+  if(id === '00000000'){
+    res.status(404).send();
+  }
+  else {
 
+    if( ! nhiRandomCache[id]){
 
-    res.status(200)
-      .json({
+      var gender = chance.gender().toLowerCase();
+      var firstname = chance.first({ gender: gender });
+      var lastname = chance.last();
+      var dob = chance.birthday();
+      var address = chance.address();
+
+      nhiRandomCache[id] = {
         firstname: firstname,
         familyname: lastname,
         dob: dob,
-        address: '70 The Terrace, Wellington, New Zealand',
+        address: address,
         gender: gender,
         ethnicity: '11',
         residencestatus: 'citizen',
         medicalwarning: '',
         donor: 'yes'
-      });
-  }
-  else{
-    res.status(404).send();
+      }
+
+    }
+
+    res.status(200).json(nhiRandomCache[id]);
+
   }
 
 

@@ -7,9 +7,15 @@ md-content
              form-id-state-param='currentId')
 
 
-  pre {{acc45 | json}}
+  .container
+    .row
+      .col-sm-4.col-md-3
+        h3 Previous local forms
+        md-list
+          md-list-item(ng-repeat='previousForm in previousForms track by $index')
+            md-button.md-raised(ng-click='selectPreviousForm(previousForm)', type='button') {{previousForm}}
 
-  h3 Previous local forms
-  md-list
-    md-list-item(ng-repeat='previousForm in previousForms track by $index')
-      md-button.md-raised(ng-click='selectPreviousForm(previousForm)', type='button') {{previousForm}}
+      .col-sm-8.col-md-9
+        h3 Current form data
+        pre {{acc45 | json}}
+

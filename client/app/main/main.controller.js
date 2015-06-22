@@ -81,8 +81,15 @@ angular.module('formerFunApp')
      */
     function selectPreviousForm(previousForm){
       $stateParams.currentId = previousForm;
-      $state.go($state.current.name, $stateParams, { reload: true });
+      reloadPage();
     }
 
+
+    /**
+     *
+     */
+    function reloadPage(){
+      $state.go($state.current.name, $stateParams, { reload: true });
+    }
 
   });
