@@ -689,6 +689,65 @@ Form.find({}).remove(function() {
               }
             },
             {
+              type: 'label',
+              templateOptions: {
+                label: 'How should ACC notify the client?'
+              },
+              expressionProperties: {
+                hide: '! model.notifyClient'
+              },
+              hideExpression: '! model.notifyClient'
+            },
+            {
+              key: 'contactByText',
+              type: 'checkbox',
+              templateOptions: {
+                defaultValue: false,
+                placeholder: 'Text Message'
+              },
+              expressionProperties: {
+                hide: '! model.notifyClient'
+              },
+              hideExpression: '! model.notifyClient'
+            },
+            {
+              key: 'contactByTextNumber',
+              type: 'input',
+              templateOptions: {
+                required: true,
+                label: 'Cell phone number'
+              },
+              expressionProperties: {
+                hide: '! model.contactByText || ! model.notifyClient'
+              },
+              hideExpression: '! model.contactByText || ! model.notifyClient'
+            },
+            {
+              key: 'contactByEmail',
+              type: 'checkbox',
+              templateOptions: {
+                defaultValue: false,
+                placeholder: 'Email'
+              },
+              expressionProperties: {
+                hide: '! model.notifyClient'
+              },
+              hideExpression: '! model.notifyClient'
+            },
+            {
+              key: 'contactByEmailAddress',
+              type: 'input',
+              templateOptions: {
+                required: true,
+                type: 'email',
+                label: 'Email address'
+              },
+              expressionProperties: {
+                hide: '! model.contactByEmail || ! model.notifyClient'
+              },
+              hideExpression: '! model.contactByEmail || ! model.notifyClient'
+            },
+            {
               key: 'notifyMyself',
               type: 'checkbox',
               defaultValue: false,

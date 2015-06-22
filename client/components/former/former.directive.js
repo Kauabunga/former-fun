@@ -161,7 +161,7 @@ angular.module('formerFunApp')
 
           //TODO check to see if there is a formerButtonAction function attached to the button
           //    call that - if returns promise etc...
-          
+
           var shouldValidate = getValidateOption(templateOptions);
           var targetFlow = getTargetFlowOption(templateOptions);
 

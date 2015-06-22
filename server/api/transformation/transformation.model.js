@@ -22,6 +22,10 @@ var TransformationSchema = new Schema({
   }
 });
 
+
+//TODO on new -> add skeleton scriptFileContent
+
+
 var TransformationModel = mongoose.model('Transformation', TransformationSchema);
 
 Promise.promisifyAll(TransformationModel);
