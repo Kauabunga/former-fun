@@ -982,7 +982,7 @@ Template.find({}).remove(function() {
                     '</md-chip-template>' +
                   '</md-chips>' +
                   '<input style="display: none;" ng-model="model[options.key][0]" ng-required="to.required" />' +
-                  '<div class="error-message" ng-messages="options.formControl.$error" ng-show="options.formControl.$touched || options.formControl.$submitted">' +
+                  '<div class="error-message" ng-messages="options.formControl[0].$error" ng-show="options.formControl[0].$touched || options.formControl[0].$submitted">' +
                     '<div ng-message="{{::name}}" ng-repeat="(name, message) in to.messages track by $index">' +
                       '{{::message}}' +
                     '</div>' +

@@ -5,11 +5,12 @@ var Chance = require('chance');
 var chance = new Chance();
 
 
+/**
+ *
+ */
 exports.icd10Stub = (function() {
 
   return function(req, res){
-
-    var query = req.params.query || '';
 
     res.status(200).json([
       'Example code 1',

@@ -209,7 +209,14 @@ angular.module('formerFunApp')
 
           fields.map(function(field){
             if(field && field.formControl){
-              field.formControl.$submitted = true;
+              if(field.formControl.constructor === Array){
+                field.formControl.map(function(formControl){
+                  formControl.$submitted = true;
+                });
+              }
+              else{
+                field.formControl.$submitted = true;
+              }
             }
           });
         }
