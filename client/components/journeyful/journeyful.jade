@@ -3,8 +3,9 @@ h1 {{journeyDefinition.journeyTitle}}
 
 div(ng-repeat='step in journeyDefinition.steps' class="step-container")
 
-  h3 # {{$index + 1}} {{step.stepTitle}}
-  img(ng-src='{{step.stepImage}}')
+  .img-mask
+    img(ng-src='{{step.stepImage}}')
+  h3 {{$index + 1}} {{step.stepTitle}}
 
   .panel
     h5 Thinking
