@@ -25,33 +25,36 @@ angular.module('formerFunApp')
 
 
 
+    var formIdsKey = 'localFormIds_journey';
+    var formDataKey = 'journeyjourney_502004385926';
+
     //defaulting template for wake up journey
 
-    $localStorage['localFormIds_journey'] = $localStorage['localFormIds_journey'] || [];
+    $localStorage[formIdsKey] = $localStorage[formIdsKey] || [];
 
-    if($localStorage['localFormIds_journey'].indexOf('journey_502004385926') === -1){
+    if($localStorage[formIdsKey].indexOf('journey_502004385926') === -1){
 
-      $localStorage['localFormIds_journey'].push('journey_502004385926');
-      $localStorage['journeyjourney_502004385926'] = _.merge({
-        "_formId": "journey_502004385926",
-        "steps": [
+      $localStorage[formIdsKey].push('journey_502004385926');
+      $localStorage[formDataKey] = _.merge({
+        '_formId': 'journey_502004385926',
+        'steps': [
           {
-            "stepTitle": "Alarm goes off",
-            "stepImage": "http://thumbs.dreamstime.com/x/blue-alarm-clock-17117626.jpg",
-            "stepThinking": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepFeeling": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepDoing": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero."
+            'stepTitle': 'Alarm goes off',
+            'stepImage': 'http://thumbs.dreamstime.com/x/blue-alarm-clock-17117626.jpg',
+            'stepThinking': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepFeeling': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepDoing': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.'
           },
           {
-            "stepTitle": "open eyes",
-            "stepImage": "http://img4.wikia.nocookie.net/__cb20140309032630/creepypasta/images/a/af/Wake_up.jpg",
-            "stepThinking": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepFeeling": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepDoing": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero."
+            'stepTitle': 'open eyes',
+            'stepImage': 'http://img4.wikia.nocookie.net/__cb20140309032630/creepypasta/images/a/af/Wake_up.jpg',
+            'stepThinking': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepFeeling': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepDoing': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.'
           }
         ],
-        "journeyTitle": "Wake up"
-      }, $localStorage['journeyjourney_502004385926']);
+        'journeyTitle': 'Wake up'
+      }, $localStorage[formDataKey]);
 
     }
 
@@ -66,10 +69,12 @@ angular.module('formerFunApp')
     // TODO move this into a template transformer
     // TODO move this into a template transformer :: NOTE template is in index.html
     // TODO move this into a template transformer
+
+    //
+
     formlyConfig.setType({
       name: 'repeatSection',
-      template: '<div class="{{hideRepeat}}">' +
-                  '<md-tabs>' +
+      template: '<md-tabs class="{{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="">' +
                     '<md-tab label="{{element.stepTitle || name}}" class="repeatsection" ng-repeat="(name, element) in model[options.key]" ng-init="fields = copyFields(to.fields)">' +
                       '<md-content class="md-padding">' +
                         '<formly-form fields="fields" model="element" bind-name="\'formly_ng_repeat\' + index + $parent.$index"></formly-form> ' +
@@ -82,11 +87,9 @@ angular.module('formerFunApp')
                       '</md-content>' +
                     '</md-tab>' +
                   '</md-tabs>' +
-
                   '<p class="AddNewButton"> ' +
                     '<md-button type="button" class="md-primary md-raised" ng-click="addNew()" >{{to.btnText}}</md-button>' +
-                  '</p>' +
-                '</div>',
+                  '</p>',
 
       controller: function($scope) {
         $scope.formOptions = { formState: $scope.formState };
@@ -119,10 +122,11 @@ angular.module('formerFunApp')
 
         function addNew() {
           $scope.model[$scope.options.key] = $scope.model[$scope.options.key] || [];
-          var repeatsection = $scope.model[$scope.options.key];
-          var lastSection = repeatsection[repeatsection.length - 1];
-          var newsection = {};
 
+          var newsection = {};
+          var repeatsection = $scope.model[$scope.options.key];
+
+          //var lastSection = repeatsection[repeatsection.length - 1];
           //if (lastSection) {
           //  newsection = angular.copy(lastSection);
           //}
