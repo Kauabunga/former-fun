@@ -97,7 +97,7 @@ angular.module('formerFunApp')
 
     formlyConfig.setType({
       name: 'repeatSection',
-      template: '<md-tabs class="{{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="false">' +
+      template: '<md-tabs class="{{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="true">' +
                     '<md-tab label="{{element.stepTitle || name}}" class="repeatsection" ng-repeat="(name, element) in model[options.key]" ng-init="fields = copyFields(to.fields)">' +
                       '<md-content class="md-padding">' +
                         '<div style="margin-bottom:20px;">' +
