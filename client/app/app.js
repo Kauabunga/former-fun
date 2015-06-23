@@ -20,7 +20,45 @@ angular.module('formerFunApp', [
 
 
 angular.module('formerFunApp')
-  .run(function($log, formlyConfig, $http){
+  .run(function($log, formlyConfig, $http, $localStorage){
+
+
+
+
+    //defaulting template for wake up journey
+
+    $localStorage['localFormIds_journey'] = $localStorage['localFormIds_journey'] || [];
+
+    if($localStorage['localFormIds_journey'].indexOf('journey_502004385926') === -1){
+
+      $localStorage['localFormIds_journey'].push('journey_502004385926');
+      $localStorage['journeyjourney_502004385926'] = _.merge({
+        "_formId": "journey_502004385926",
+        "steps": [
+          {
+            "stepTitle": "Alarm goes off",
+            "stepImage": "http://thumbs.dreamstime.com/x/blue-alarm-clock-17117626.jpg",
+            "stepThinking": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
+            "stepFeeling": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
+            "stepDoing": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero."
+          },
+          {
+            "stepTitle": "open eyes",
+            "stepImage": "http://img4.wikia.nocookie.net/__cb20140309032630/creepypasta/images/a/af/Wake_up.jpg",
+            "stepThinking": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
+            "stepFeeling": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
+            "stepDoing": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero."
+          }
+        ],
+        "journeyTitle": "Wake up"
+      }, $localStorage['journeyjourney_502004385926']);
+
+    }
+
+
+
+
+
 
 
 
