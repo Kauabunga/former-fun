@@ -1,0 +1,16 @@
+md-content
+
+  .container
+    .col-sm-8
+      h4 Journey Select
+
+    .col-sm-4
+      a(href='/journeyedit')
+        md-button.md-raised.md-primary(type='button') Create
+
+
+  md-list
+    md-list-item(ng-repeat='journey in journeys track by $index')
+      a(href='journeyedit//{{journey._formId}}')
+        md-button.md-raised(type='button') {{journey.journeyTitle || journey._formId}}
+

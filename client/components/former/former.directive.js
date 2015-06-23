@@ -62,6 +62,10 @@ angular.module('formerFunApp')
             //bind form model to local scope with formId
             //TODO this model should come from the former service????
             scope.formModel = $localStorage[scope.formDefinition.name + scope.formId] = $localStorage[scope.formDefinition.name + scope.formId] || {};
+
+            //write formId to model
+            scope.formModel._formId = scope.formId;
+
             loadSection(scope.formDefinition.sections[scope.formSection]);
           }
         }

@@ -23,13 +23,28 @@ angular.module('formerFunApp')
      */
     function fetchLocalFormData(formName, formId){
 
-      var formData = $localStorage[formName + formId];
+      if(formName && formId){
+        var formData = $localStorage[formName + formId];
 
-      if(formData){
-        return $q.when(formData);
+        if(formData){
+          return $q.when(formData);
+        }
+        else{
+          return $q.reject('Not found');
+        }
+      }
+      else if(formName){
+        return fetchLocalFormIds(formName)
+          .then(function(ids){
+            return $q.when(_.map(ids, function(id){
+              return $localStorage[formName + id];
+            }));
+          });
+
       }
       else{
-        return $q.reject('Not found');
+        $log.error('incorrect params passed', formName, formId);
+        return $q.reject();
       }
 
     }

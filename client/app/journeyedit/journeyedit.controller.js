@@ -24,7 +24,7 @@ angular.module('formerFunApp')
      */
     function init(){
 
-      fetchExistingForms();
+      fetchExistingFormIds();
 
       return fetchTemplates()
         .then(function(templates){
@@ -55,7 +55,7 @@ angular.module('formerFunApp')
     /**
      *
      */
-    function fetchExistingForms(){
+    function fetchExistingFormIds(){
       former.fetchLocalFormIds(formName)
         .then(function(forms){
           $scope.previousForms = forms;
