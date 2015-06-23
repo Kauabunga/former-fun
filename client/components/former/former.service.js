@@ -10,10 +10,29 @@ angular.module('formerFunApp')
 
     return {
       fetchLocalFormIds: fetchLocalFormIds,
+      fetchLocalFormData: fetchLocalFormData,
       getLocalFormIdsKey: getLocalFormIdsKey,
       loadForm: loadForm,
       loadTemplates: loadTemplates
     };
+
+
+    /**
+     *
+     * @param formName
+     */
+    function fetchLocalFormData(formName, formId){
+
+      var formData = $localStorage[formName + formId];
+
+      if(formData){
+        return $q.when(formData);
+      }
+      else{
+        return $q.reject('Not found');
+      }
+
+    }
 
 
     /**

@@ -33,6 +33,8 @@ angular.module('formerFunApp')
         scope.flowButtonAction = flowButtonAction;
         scope.$on(scope.buttonActionEvent, handleButtonEvent);
 
+        scope.$on('go', stateGoFromEvent);
+
 
         var formDefinitionWatcherDestroy = scope.$watch('formDefinition', function() {
           $log.debug('formDefinition watcher', scope.formDefinition, scope.formModel);
@@ -49,14 +51,16 @@ angular.module('formerFunApp')
         function init(){
 
           var validFormId = isValidFormId(scope.formId);
+          var validFormSection = isValidFormSection(scope.formSection);
 
-          if( ! scope.formSection || ! validFormId){
+          if( ! validFormSection || ! validFormId){
             scope.formId = validFormId ? scope.formId : getNewFormLocalStorageId();
-            scope.formSection = scope.formSection || scope.formDefinition.defaultSection;
+            scope.formSection = validFormSection ? scope.formSection : scope.formDefinition.defaultSection;
             transitionTo(scope.formSection, scope.formId, true);
           }
           else {
             //bind form model to local scope with formId
+            //TODO this model should come from the former service????
             scope.formModel = $localStorage[scope.formDefinition.name + scope.formId] = $localStorage[scope.formDefinition.name + scope.formId] || {};
             loadSection(scope.formDefinition.sections[scope.formSection]);
           }
@@ -70,6 +74,14 @@ angular.module('formerFunApp')
         function loadSection(formSection){
           $log.debug('Loading form section', formSection);
           scope.formFields = formSection.fields;
+        }
+
+        /**
+         *
+         * @param formSection
+         */
+        function isValidFormSection(formSection){
+          return formSection && scope.formDefinition.sections[formSection] !== undefined;
         }
 
         /**
@@ -128,6 +140,7 @@ angular.module('formerFunApp')
          * @param replace
          */
         function transitionTo(targetSection, targetId, replace){
+
           if(targetSection){
             $stateParams[scope.formSectionStateParam] = targetSection;
           }
@@ -243,6 +256,14 @@ angular.module('formerFunApp')
               }
             }
           });
+        }
+
+        /**
+         *
+         */
+        function stateGoFromEvent($event, stateName, stateParams, stateOptions){
+          $log.debug('stateGoFromEvent', stateName, stateParams, stateOptions);
+          $state.go(stateName, stateParams, stateOptions);
         }
 
         /**

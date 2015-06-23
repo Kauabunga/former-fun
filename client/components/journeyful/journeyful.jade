@@ -1,0 +1,21 @@
+
+h1 {{journeyDefinition.journeyTitle}}
+
+div(ng-repeat='step in journeyDefinition.steps')
+
+  h3 # {{$index + 1}} {{step.stepTitle}}
+  img(ng-src='{{step.stepImage}}')
+
+  h5 Thinking
+  p {{step.stepThinking}}
+
+  h5 Feeling
+  p {{step.stepFeeling}}
+
+  h5 Doing
+  p {{step.stepDoing}}
+
+  hr
+
+
+

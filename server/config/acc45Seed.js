@@ -13,7 +13,7 @@ var Form = require('../api/form/form.model');
 var Promise = require('bluebird');
 var fs = require('fs');
 Promise.promisifyAll(fs);
-
+var _ = require('lodash');
 
 
 
@@ -53,7 +53,7 @@ Transformation.find({}).remove(function() {
   ).then(function(transformations){
 
       //Load script files into data base
-      transformations.map(function(transformation){
+      _.map(transformations, function(transformation){
         fs.readFileAsync(transformation.scriptFilePath, { encoding: 'utf-8' })
           .then(function(transformationScriptFile){
             console.log('found transformation script -- transformationScriptFile.length', transformationScriptFile.length);

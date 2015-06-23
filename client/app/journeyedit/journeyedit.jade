@@ -1,9 +1,8 @@
-
 md-content
 
   former.former-container(form-controls='formControls', form-definition='formDefinition',
-             form-model='acc45', form-section-state-param='currentSection',
-             form-id-state-param='currentId', form-submit='submitForm')
+                              form-model='journey', form-section-state-param='currentSection',
+                              form-id-state-param='currentId', form-submit='submitForm')
 
 
   .container
@@ -14,7 +13,7 @@ md-content
           md-list-item(ng-repeat='previousForm in previousForms track by $index')
             md-button.md-raised(ng-click='selectPreviousForm(previousForm)', type='button') {{previousForm}}
 
+
       .col-sm-8.col-md-9
         h3 Current form data
-        pre {{acc45 | json}}
-
+        pre {{journey | json}}
