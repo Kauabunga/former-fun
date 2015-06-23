@@ -8,6 +8,8 @@ angular.module('formerFunApp')
 
     $scope.journeys = undefined;
 
+    $scope.clearLocalStorage = clearLocalStorage;
+
 
     return init();
 
@@ -21,6 +23,13 @@ angular.module('formerFunApp')
     }
 
 
+    /**
+     *
+     */
+    function clearLocalStorage(){
+      $window.localStorage.clear();
+      $window.location.reload();
+    }
 
 
     /**
