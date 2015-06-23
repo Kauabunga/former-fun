@@ -46,32 +46,32 @@ angular.module('formerFunApp')
             'stepDoing': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.'
           },
           {
-            "stepTitle": "open eyes",
-            "stepImage": "http://img4.wikia.nocookie.net/__cb20140309032630/creepypasta/images/a/af/Wake_up.jpg",
-            "stepThinking": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepFeeling": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepDoing": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero."
+            'stepTitle': 'open eyes',
+            'stepImage': 'http://img4.wikia.nocookie.net/__cb20140309032630/creepypasta/images/a/af/Wake_up.jpg',
+            'stepThinking': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepFeeling': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepDoing': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.'
           },
           {
-            "stepTitle": "Yawn",
-            "stepImage": "http://img4.wikia.nocookie.net/__cb20140309032630/creepypasta/images/a/af/Wake_up.jpg",
-            "stepThinking": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepFeeling": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepDoing": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero."
+            'stepTitle': 'Yawn',
+            'stepImage': 'http://img4.wikia.nocookie.net/__cb20140309032630/creepypasta/images/a/af/Wake_up.jpg',
+            'stepThinking': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepFeeling': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepDoing': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.'
           },
           {
-            "stepTitle": "Get dressed",
-            "stepImage": "http://24.media.tumblr.com/tumblr_ls5cayTKJY1qebqlto1_500.jpg",
-            "stepThinking": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepFeeling": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepDoing": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero."
+            'stepTitle': 'Get dressed',
+            'stepImage': 'http://24.media.tumblr.com/tumblr_ls5cayTKJY1qebqlto1_500.jpg',
+            'stepThinking': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepFeeling': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepDoing': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.'
           },
           {
-            "stepTitle": "Walk into wall",
-            "stepImage": "http://blog.contagiouscompanies.com/wp-content/uploads/2014/09/Banging-your-head-against-a-wall.jpg",
-            "stepThinking": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepFeeling": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepDoing": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero."
+            'stepTitle': 'Walk into wall',
+            'stepImage': 'http://blog.contagiouscompanies.com/wp-content/uploads/2014/09/Banging-your-head-against-a-wall.jpg',
+            'stepThinking': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepFeeling': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
+            'stepDoing': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.'
           }
         ],
         'journeyTitle': 'Wake up'
