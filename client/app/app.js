@@ -74,7 +74,9 @@ angular.module('formerFunApp')
                       '<md-content class="md-padding">' +
                         '<formly-form fields="fields" model="element" bind-name="\'formly_ng_repeat\' + index + $parent.$index"></formly-form> ' +
                         '<div style="margin-bottom:20px;">' +
-                          '<md-button type="button" class="md-accent md-raised" ng-click="model[options.key].splice($index, 1)"> Remove </md-button>' +
+                          '<md-button type="button" ng-show="!$first" class="md-primary md-raised" ng-click="moveLeft(model[options.key], $index)"> Move Left </md-button>' +
+                          '<md-button type="button" ng-show="!$last"  class="md-primary md-raised" ng-click="moveRight(model[options.key], $index)"> Move Right </md-button>' +
+                          '<md-button type="button" class="md-accent md-raised" ng-click="remove(model[options.key], $index)"> Remove </md-button>' +
                         '</div>' +
                         '<hr>' +
                       '</md-content>' +
@@ -89,11 +91,30 @@ angular.module('formerFunApp')
       controller: function($scope) {
         $scope.formOptions = { formState: $scope.formState };
         $scope.addNew = addNew;
+        $scope.remove = remove;
+        $scope.moveLeft = moveLeft;
+        $scope.moveRight = moveRight;
 
         $scope.copyFields = copyFields;
 
         function copyFields(fields) {
           return angular.copy(fields);
+        }
+
+        function moveLeft(model, index){
+          var temp = model[index];
+          model[index] = model[index - 1];
+          model[index - 1] = temp;
+        }
+
+        function moveRight(model, index){
+          var temp = model[index];
+          model[index] = model[index + 1];
+          model[index + 1] = temp;
+        }
+
+        function remove(model, $index){
+          model.splice($index, 1);
         }
 
         function addNew() {
