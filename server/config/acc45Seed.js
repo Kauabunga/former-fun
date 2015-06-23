@@ -103,7 +103,7 @@ Form.find({name: 'acc45'}).remove(function() {
             },
             {
               key: 'nhiNumber',
-              type: 'input',
+              type: 'materialinput',
               templateOptions: {
                 label: 'NHI Code',
                 required: true,
@@ -130,7 +130,7 @@ Form.find({name: 'acc45'}).remove(function() {
             },
             {
               key: 'firstname',
-              type: 'input',
+              type: 'materialinput',
               templateOptions: {
                 label: 'First Name',
                 required: true,
@@ -145,7 +145,7 @@ Form.find({name: 'acc45'}).remove(function() {
             },
             {
               key: 'familyname',
-              type: 'input',
+              type: 'materialinput',
               templateOptions: {
                 label: 'Family Name',
                 required: true,
@@ -198,7 +198,7 @@ Form.find({name: 'acc45'}).remove(function() {
             },
             {
               key: 'firstname',
-              type: 'input',
+              type: 'materialinput',
               templateOptions: {
                 label: 'First Name',
                 required: true,
@@ -209,7 +209,7 @@ Form.find({name: 'acc45'}).remove(function() {
             },
             {
               key: 'familyname',
-              type: 'input',
+              type: 'materialinput',
               templateOptions: {
                 label: 'Family Name',
                 required: true,
@@ -463,7 +463,7 @@ Form.find({name: 'acc45'}).remove(function() {
             },
             {
               key: 'scene',
-              type: 'input',
+              type: 'materialinput',
               templateOptions: {
                 label: 'What was the scene?',
                 required: true,
@@ -724,7 +724,7 @@ Form.find({name: 'acc45'}).remove(function() {
             },
             {
               key: 'contactByTextNumber',
-              type: 'input',
+              type: 'materialinput',
               templateOptions: {
                 required: true,
                 label: 'Cell phone number'
@@ -748,7 +748,7 @@ Form.find({name: 'acc45'}).remove(function() {
             },
             {
               key: 'contactByEmailAddress',
-              type: 'input',
+              type: 'materialinput',
               templateOptions: {
                 required: true,
                 type: 'email',
@@ -875,7 +875,7 @@ Template.find({}).remove(function() {
 
   Template.create(
     {
-      name: 'input',
+      name: 'materialinput',
       template: '<md-input-container class="appointment-input">' +
                     '<label>{{::to.label}}</label>' +
                     '<input type="{{::to.type}}" placeholder="{{::to.placeholder}}" ng-model="model[options.key]"/>' +
@@ -1104,7 +1104,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'date',
-      extends: 'input',
+      extends: 'materialinput',
       defaultOptions: {
         templateOptions: {
           type: 'date'

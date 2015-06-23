@@ -52,9 +52,9 @@ var _ = require('lodash');
           });
       });
   })
-  .catch(function(error){
-    console.log('Error creating transformations - probably duplicate?');
-  });
+    .catch(function(error){
+      console.log('Error creating transformations - probably duplicate?');
+    });
 
 //});
 
@@ -98,7 +98,7 @@ Form.find({name: 'journey'}).remove(function() {
             },
             {
               key: 'journeyTitle',
-              type: 'input',
+              type: 'materialinput',
               templateOptions: {
                 label: 'Journey Title',
                 required: true
@@ -119,7 +119,7 @@ Form.find({name: 'journey'}).remove(function() {
                   },
                   {
                     key: 'stepTitle',
-                    type: 'input',
+                    type: 'materialinput',
                     templateOptions: {
                       label: 'Step Title',
                       required: true
@@ -127,7 +127,7 @@ Form.find({name: 'journey'}).remove(function() {
                   },
                   {
                     key: 'stepBlurb',
-                    type: 'input',
+                    type: 'materialinput',
                     templateOptions: {
                       label: 'Step Blurb',
                       required: false
@@ -135,7 +135,7 @@ Form.find({name: 'journey'}).remove(function() {
                   },
                   {
                     key: 'stepTime',
-                    type: 'input',
+                    type: 'materialinput',
                     templateOptions: {
                       label: 'Time of event',
                       required: false
@@ -143,7 +143,7 @@ Form.find({name: 'journey'}).remove(function() {
                   },
                   {
                     key: 'stepImage',
-                    type: 'input',
+                    type: 'materialinput',
                     templateOptions: {
                       label: 'Step Image Url',
                       required: true
