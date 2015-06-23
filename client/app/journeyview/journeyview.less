@@ -5,6 +5,7 @@
 @dark-warm-grey   : #1d1815;
 
 @step-divider-length : 200px;
+@step-divider-height : 6px;
 
 
 .journey-wrapper {
@@ -39,7 +40,14 @@
     background: @dark-warm-grey;
     width: @step-divider-length + 100;
     left: ((@step-divider-length + 50) * -1);
-    height: 5px;
+    height: @step-divider-height;
+    border-radius: @step-divider-height / 2;
+  }
+  &:first-child {
+    margin-left: 0;
+    &:before {
+      display: none;
+    }
   }
   .img-mask {
     width: 150px;
