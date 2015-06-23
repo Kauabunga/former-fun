@@ -1,19 +1,22 @@
 
 h1 {{journeyDefinition.journeyTitle}}
 
-div(ng-repeat='step in journeyDefinition.steps')
+div(ng-repeat='step in journeyDefinition.steps' class="step-container")
 
   h3 # {{$index + 1}} {{step.stepTitle}}
   img(ng-src='{{step.stepImage}}')
 
-  h5 Thinking
-  p {{step.stepThinking}}
+  .panel
+    h5 Thinking
+    p {{step.stepThinking}}
 
-  h5 Feeling
-  p {{step.stepFeeling}}
+  .panel
+    h5 Feeling
+    p {{step.stepFeeling}}
 
-  h5 Doing
-  p {{step.stepDoing}}
+  .panel
+    h5 Doing
+    p {{step.stepDoing}}
 
   hr
 
