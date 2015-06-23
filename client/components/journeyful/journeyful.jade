@@ -8,19 +8,23 @@ h1 {{journeyDefinition.journeyTitle}}
       .img-mask
         img(ng-src='{{step.stepImage}}')
       h3 {{$index + 1}} {{step.stepTitle}}
+      
+      md-tabs
+        md-tab(label='Thinking')
+          md-content
+            //- .empathy-panel
+            h5 Thinking
+            p {{step.stepThinking}}
+              
+        md-tab(label='Feeling')
+          md-content
+            //- .empathy-panel
+            h5 Feeling
+            p {{step.stepFeeling}}
 
-      .empathy-panel
-        h5 Thinking
-        p {{step.stepThinking}}
-
-      .empathy-panel
-        h5 Feeling
-        p {{step.stepFeeling}}
-
-      .empathy-panel.last
-        h5 Doing
-        p {{step.stepDoing}}
-
-
-
-
+            
+        md-tab(label='Doing')
+          md-content        
+            //- .empathy-panel.last
+            h5 Doing
+            p {{step.stepDoing}}
