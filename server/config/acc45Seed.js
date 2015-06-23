@@ -66,6 +66,9 @@ var _ = require('lodash');
             console.log('error fetching transformation script', error);
           });
       });
+  })
+  .catch(function(error){
+    console.log('Error creating transformations - probably duplicate?');
   });
 
 //});
