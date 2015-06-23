@@ -7,18 +7,18 @@ h1 {{journeyDefinition.journeyTitle}}
 
       .img-mask
         img(ng-src='{{step.stepImage}}')
-      h3 {{$index + 1}} {{step.stepTitle}}
+      h2 {{$index + 1}} {{step.stepTitle}}
 
       .empathy-panel
-        h5 Thinking
+        h3 Thinking
         p {{step.stepThinking}}
 
       .empathy-panel
-        h5 Feeling
+        h3 Feeling
         p {{step.stepFeeling}}
 
-      .empathy-panel.last
-        h5 Doing
+      .empathy-panel
+        h3 Doing
         p {{step.stepDoing}}
 
 
