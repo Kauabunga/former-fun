@@ -42,6 +42,8 @@ angular.module('formerFunApp')
         'steps': [
           {
             'stepTitle': 'Alarm goes off',
+            'stepBlurb': 'This is my step blurb',
+            'stepTime': '6am',
             'stepImage': 'http://thumbs.dreamstime.com/x/blue-alarm-clock-17117626.jpg',
             'stepThinking': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
             'stepFeeling': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
@@ -49,6 +51,8 @@ angular.module('formerFunApp')
           },
           {
             'stepTitle': 'open eyes',
+            'stepBlurb': 'This is my step blurb',
+            'stepTime': '6:10am',
             'stepImage': 'http://img4.wikia.nocookie.net/__cb20140309032630/creepypasta/images/a/af/Wake_up.jpg',
             'stepThinking': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
             'stepFeeling': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
@@ -56,13 +60,17 @@ angular.module('formerFunApp')
           },
           {
             'stepTitle': 'Yawn',
-            'stepImage': 'http://img4.wikia.nocookie.net/__cb20140309032630/creepypasta/images/a/af/Wake_up.jpg',
+            'stepBlurb': 'This is my step blurb',
+            'stepTime': '6:25am',
+            'stepImage': 'http://www.bandofcats.com/wp-content/uploads/2009/09/43_cat-yawns.jpg',
             'stepThinking': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
             'stepFeeling': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
             'stepDoing': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.'
           },
           {
             'stepTitle': 'Get dressed',
+            'stepBlurb': 'This is my step blurb',
+            'stepTime': '6:45am',
             'stepImage': 'http://24.media.tumblr.com/tumblr_ls5cayTKJY1qebqlto1_500.jpg',
             'stepThinking': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
             'stepFeeling': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
@@ -70,6 +78,8 @@ angular.module('formerFunApp')
           },
           {
             'stepTitle': 'Walk into wall',
+            'stepBlurb': 'This is my step blurb',
+            'stepTime': '6:55am',
             'stepImage': 'http://blog.contagiouscompanies.com/wp-content/uploads/2014/09/Banging-your-head-against-a-wall.jpg',
             'stepThinking': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',
             'stepFeeling': 'As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.',

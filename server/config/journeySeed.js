@@ -126,6 +126,22 @@ Form.find({name: 'journey'}).remove(function() {
                     }
                   },
                   {
+                    key: 'stepBlurb',
+                    type: 'input',
+                    templateOptions: {
+                      label: 'Step Blurb',
+                      required: false
+                    }
+                  },
+                  {
+                    key: 'stepTime',
+                    type: 'input',
+                    templateOptions: {
+                      label: 'Time of event',
+                      required: false
+                    }
+                  },
+                  {
                     key: 'stepImage',
                     type: 'input',
                     templateOptions: {

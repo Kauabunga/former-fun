@@ -11,6 +11,8 @@ h1 {{journeyDefinition.journeyTitle}}
         img(ng-src='{{step.stepImage}}')
 
       h3 {{step.stepTitle}}
+      p.step-blurb {{step.stepBlurb}}
+      p.step-time {{step.stepTime}}
 
       md-tabs(md-no-pagination="true" md-stretch-tabs="always" md-dynamic-height='false')
         md-tab(label='Thinking')
