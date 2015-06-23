@@ -5,12 +5,16 @@
 
 .journey-wrapper {
   max-width: 10000px;
+  white-space:nowrap;
+  text-align: center;
 }
 
 .step-container {
   width: 400px;
-  float: left;
+  display: inline-block;
   padding: 20px;
+  white-space: pre-wrap;
+  vertical-align: top;
   .img-mask {
     width: 150px;
     height: 150px;
@@ -24,5 +28,19 @@
       width: 180px;
       height: auto;
     }
+  }
+}
+
+.empathy-panel {
+  width: 48%;
+  float: left;
+  margin: 0 1%;
+  p {
+    font-size: 11px;
+  }
+  &.last {
+    display: block;
+    margin: 0 auto;
+    float: none;
   }
 }
