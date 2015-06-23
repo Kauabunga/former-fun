@@ -45,8 +45,8 @@ angular.module('formerFunApp')
           {
             "stepTitle": "open eyes",
             "stepImage": "http://img4.wikia.nocookie.net/__cb20140309032630/creepypasta/images/a/af/Wake_up.jpg",
-            "stepThinking": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
-            "stepFeeling": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
+            "stepThinking": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
+            "stepFeeling": "As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero.",
             "stepDoing": "Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She'll be right fossicker also as dry as a chuck a yewy. He's got a massive grog how lets throw a dero."
           }
         ],
