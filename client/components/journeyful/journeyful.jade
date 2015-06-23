@@ -5,11 +5,12 @@ h1 {{journeyDefinition.journeyTitle}}
   .journey-container
 
     div.step-container(ng-repeat='step in journeyDefinition.steps')
-
+      .step-number
+        {{$index + 1}}
       .img-mask
         img(ng-src='{{step.stepImage}}')
 
-      h3 {{$index + 1}} {{step.stepTitle}}
+      h3 {{step.stepTitle}}
 
       md-tabs(md-no-pagination="true" md-stretch-tabs="always" md-dynamic-height='false')
         md-tab(label='Thinking')
