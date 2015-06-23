@@ -23,7 +23,7 @@ var _ = require('lodash');
 //                                     ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
-Transformation.find({}).remove(function() {
+//Transformation.find({}).remove(function() {
   Transformation.createAsync(
     {
       name: 'nhiNumber',
@@ -68,7 +68,7 @@ Transformation.find({}).remove(function() {
       });
   });
 
-});
+//});
 
 
 
@@ -79,7 +79,7 @@ Transformation.find({}).remove(function() {
 //                                     ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
-Form.find({}).remove(function() {
+Form.find({name: 'acc45'}).remove(function() {
   Form.create(
     {
       name: 'acc45',

@@ -64,7 +64,7 @@ var _ = require('lodash');
 //                                     ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
-//Form.find({}).remove(function() {
+Form.find({name: 'journey'}).remove(function() {
   Form.create(
     {
       name: 'journey',
@@ -159,5 +159,5 @@ var _ = require('lodash');
       }
     }
   );
-//});
+});
 
