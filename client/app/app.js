@@ -9,6 +9,8 @@ angular.module('formerFunApp', [
   'formly',
   'ngStorage',
   'ngMaterial',
+  'ngAnimate',
+  'ngTouch',
   'ngMessages'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -95,9 +97,14 @@ angular.module('formerFunApp')
 
     formlyConfig.setType({
       name: 'repeatSection',
-      template: '<md-tabs class="{{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="">' +
+      template: '<md-tabs class="{{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="false">' +
                     '<md-tab label="{{element.stepTitle || name}}" class="repeatsection" ng-repeat="(name, element) in model[options.key]" ng-init="fields = copyFields(to.fields)">' +
                       '<md-content class="md-padding">' +
+                        '<div style="margin-bottom:20px;">' +
+                          '<md-button type="button" ng-show="!$first" class="md-primary md-raised" ng-click="moveLeft(model[options.key], $index)"> Move Left </md-button>' +
+                          '<md-button type="button" ng-show="!$last"  class="md-primary md-raised" ng-click="moveRight(model[options.key], $index)"> Move Right </md-button>' +
+                          '<md-button type="button" class="md-accent md-raised" ng-click="remove(model[options.key], $index)"> Remove </md-button>' +
+                        '</div>' +
                         '<formly-form fields="fields" model="element" bind-name="\'formly_ng_repeat\' + index + $parent.$index"></formly-form> ' +
                         '<div style="margin-bottom:20px;">' +
                           '<md-button type="button" ng-show="!$first" class="md-primary md-raised" ng-click="moveLeft(model[options.key], $index)"> Move Left </md-button>' +

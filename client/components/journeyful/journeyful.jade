@@ -3,20 +3,24 @@ h1 {{journeyDefinition.journeyTitle}}
 
 .journey-wrapper
   .journey-container
-    div(ng-repeat='step in journeyDefinition.steps' class="step-container")
+
+    div.step-container(ng-repeat='step in journeyDefinition.steps')
 
       .img-mask
         img(ng-src='{{step.stepImage}}')
 
       h3 {{$index + 1}} {{step.stepTitle}}
-      
-      md-tabs(md-no-pagination="false" md-stretch-tabs="always" md-dynamic-height="")
-        md-tab(label='Thinking')
-          p {{step.stepThinking}}
-              
-        md-tab(label='Feeling')
-          p {{step.stepFeeling}}
 
-            
+      md-tabs(md-no-pagination="true" md-stretch-tabs="always" md-dynamic-height='false')
+        md-tab(label='Thinking')
+          md-content
+            p {{step.stepThinking}}
+
+        md-tab(label='Feeling')
+          md-content
+            p {{step.stepFeeling}}
+
+
         md-tab(label='Doing')
-          p {{step.stepDoing}}
+          md-content
+            p {{step.stepDoing}}
