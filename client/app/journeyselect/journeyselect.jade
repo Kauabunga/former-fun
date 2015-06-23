@@ -9,8 +9,14 @@ md-content
         md-button.md-raised.md-primary(type='button') Create new journey
 
 
+
+
   md-list
     md-list-item(ng-repeat='journey in journeys track by $index')
       a(href='journeyedit//{{journey._formId}}')
         md-button.md-raised(type='button') {{journey.journeyTitle || journey._formId}}
 
+
+
+
+  md-button.md-raised.md-accent(type='button', ng-click='clearLocalStorage()') Clear local storage
