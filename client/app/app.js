@@ -74,7 +74,7 @@ angular.module('formerFunApp')
             'stepDoing': 'Lets throw a lizard drinking where lets throw a old fella. As cross as a longneck my get a dog up ya boogie board. She\'ll be right fossicker also as dry as a chuck a yewy. He\'s got a massive grog how lets throw a dero.'
           }
         ],
-        'journeyTitle': 'Wake up'
+        'journeyTitle': 'My morning wake up'
       }, $localStorage[formDataKey]);
 
     }

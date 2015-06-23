@@ -1,25 +1,26 @@
 
 h1 {{journeyDefinition.journeyTitle}}
 
-div(ng-repeat='step in journeyDefinition.steps' class="step-container")
+.journey-wrapper
+  .journey-container
+    div(ng-repeat='step in journeyDefinition.steps' class="step-container")
 
-  .img-mask
-    img(ng-src='{{step.stepImage}}')
-  h3 {{$index + 1}} {{step.stepTitle}}
+      .img-mask
+        img(ng-src='{{step.stepImage}}')
+      h3 {{$index + 1}} {{step.stepTitle}}
 
-  .empathy-panel
-    h5 Thinking
-    p {{step.stepThinking}}
+      .empathy-panel
+        h5 Thinking
+        p {{step.stepThinking}}
 
-  .empathy-panel
-    h5 Feeling
-    p {{step.stepFeeling}}
+      .empathy-panel
+        h5 Feeling
+        p {{step.stepFeeling}}
 
-  .empathy-panel.last
-    h5 Doing
-    p {{step.stepDoing}}
+      .empathy-panel.last
+        h5 Doing
+        p {{step.stepDoing}}
 
-  hr
 
 
 
