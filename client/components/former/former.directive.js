@@ -126,8 +126,7 @@ angular.module('formerFunApp')
          * @returns {string}
          */
         function createNewId(){
-          return '_' + _.random(100000000001, 999999999999);
-          //return scope.formDefinition.name + '_' + _.random(100000000001, 999999999999);
+          return former.getNewFormId(scope.formName);
         }
 
 
@@ -136,11 +135,7 @@ angular.module('formerFunApp')
          * @param formId
          */
         function isValidFormId(formId){
-
-          var formName = getFormName();
-          //var formRegex = new RegExp('\\b' + formName + '_\\d{12}\\b');
           var formRegex = new RegExp('\\b' + '_\\d{12}\\b');
-
           return formId && formRegex.test(formId);
         }
 

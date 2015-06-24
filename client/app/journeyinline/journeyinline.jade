@@ -5,7 +5,8 @@ md-content.journey-inline-view
       a(href='/journeyview/{{currentId}}')
         h4 Journey Inline View
 
-  .journey-wrapper
+  .journey-wrapper(ng-class='{"fade-in": fadeIn}')
+
     .journey-container
 
       former.former-container(form-controls='formControls', form-definition='formDefinition',

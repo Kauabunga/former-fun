@@ -8,6 +8,12 @@ body {
   overflow-x: scroll;
   overflow-y: hidden;
   background-color: white;
+
+  opacity: 0;
+  .transition(opacity 500ms ease);
+  &.fade-in {
+    opacity: 1;
+  }
 }
 
 .journey-container {

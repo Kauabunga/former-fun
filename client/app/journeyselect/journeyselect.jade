@@ -2,23 +2,23 @@ md-content.journey-select
 
   .container
     .col-sm-8.col-sm-offset-3.margin-top-md
-      h2 Welcome to the 
+      h2 Welcome to the
         span Journey Creator
       h4 Select or create a journey
 
       .margin-top-sm
-      a(href='/journeyedit')
+      a(href='/journeyedit//')
         md-button.md-raised.md-primary.create-button(type='button') Create new journey
 
       div.margin-top-lg
         hr
-        h4 Previous created Journeys
+        h4 Previously created Journeys
       md-list
         md-list-item(ng-repeat='journey in journeys track by $index')
-          a(href='journeyedit//{{journey._formId}}')
+          a(href='/journeyview/{{journey._formId}}')
             md-button.md-raised.previous-created(type='button') {{journey.journeyTitle || journey._formId}}
 
 
       div.margin-top-sm
         hr
-        md-button(type='button', ng-click='clearLocalStorage()') Clear local storage
+        md-button(type='button', ng-click='clearLocalStorage()', style='color: #bbb;') Clear local storage

@@ -1,7 +1,7 @@
 
 h1.journey-title.margin-top-none {{journeyDefinition.journeyTitle}}
 
-.journey-wrapper
+.journey-wrapper(ng-class='{"fade-in": fadeIn}')
   .journey-container
 
     .step-container(ng-repeat='step in journeyDefinition.steps' ng-class="{'focus':step.focus, 'unfocus': step.unfocus}")
