@@ -64,7 +64,7 @@ angular.module('formerFunApp', [
     });
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('light-blue')
+      .primaryPalette('blue')
       .accentPalette('orange');
 
   });
