@@ -156,7 +156,7 @@ angular.module('formerFunApp')
 
     formlyConfig.setType({
       name: 'repeatJourneyStep',
-      template: '<div class="repeatsection {{::to.className}}" ng-repeat="(name, element) in model[options.key]" ng-init="fields = copyFields(to.fields)">' +
+      template: '<div class="repeatsection {{::to.className}}" ng-class="{\'focus\':element.focus, \'unfocus\': element.unfocus}" ng-repeat="(name, element) in model[options.key]" ng-init="fields = copyFields(to.fields)">' +
                   '<formly-form fields="fields" model="element" bind-name="\'formly_ng_repeat\' + index + $parent.$index"></formly-form> ' +
                 '</div>',
 
@@ -171,25 +171,6 @@ angular.module('formerFunApp')
 
       }
     });
-
-
-
-    formlyConfig.setType({
-      name: 'journeyImage',
-      template: '<img />',
-
-      controller: function($scope) {
-        $scope.formOptions = { formState: $scope.formState };
-
-        $scope.copyFields = copyFields;
-
-        function copyFields(fields) {
-          return angular.copy(fields);
-        }
-
-      }
-    });
-
 
 
     formlyConfig.setType({

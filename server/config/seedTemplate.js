@@ -284,11 +284,22 @@ Template.find({}).remove(function() {
   Template.create(
     {
       name: 'journeyImage',
-      template: '<img class="{{to.className}}" ng-src="{{model[options.key]}}" />'
+      template: '<div class="{{to.className}}" ng-click="to.formerActionButton($event, this)" style="background-image: url(\'{{model[options.key]}}\');"></div>',
+      defaultOptions: {
+        expressionProperties: {
+
+        }
+      }
     },
     {
       name: 'journeyIndex',
-      template: '<div class="step-number {{to.className}}">{{$index}}</div>'
+      template: '<div class="step-number {{to.className}}">{{$parent.$parent.$parent.$parent.$index + 1}}</div>',
+      defaultOptions: {
+        defaultValue: 'Default title value',
+        templateOptions: {
+
+        }
+      }
     },
     {
       name: 'journeyEmotions',
@@ -341,7 +352,7 @@ Template.find({}).remove(function() {
     {
       name: 'inlineparagraph',
       template: '<p ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlineparagraph {{to.className}}">' +
-                  '<textarea msd-elastic="\n" ng-model="model[options.key]" />' +
+                  '<textarea msd-elastic="" ng-model="model[options.key]" />' +
                 '</p>',
       defaultOptions: {
         defaultValue: 'Default title value',

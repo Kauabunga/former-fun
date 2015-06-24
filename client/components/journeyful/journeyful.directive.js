@@ -31,8 +31,8 @@ angular.module('formerFunApp')
                 item.unfocus = true;
                 item.focus = false;
               }
-            });  
-          }
+            });
+          };
           // first - all steps reset
           // This happens everytime there is a click
           _.each(scope.journeyDefinition.steps, function(item) {
@@ -53,7 +53,7 @@ angular.module('formerFunApp')
                 unfocusAll(step);
               }
             } else {
-              
+
             }
           });
         };
