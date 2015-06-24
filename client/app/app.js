@@ -6,6 +6,7 @@ angular.module('formerFunApp', [
   'ngSanitize',
   'btford.socket-io',
   'ui.router',
+  'monospaced.elastic',
   'formly',
   'ngStorage',
   'ngMaterial',
@@ -172,18 +173,44 @@ angular.module('formerFunApp')
     });
 
 
+
+    formlyConfig.setType({
+      name: 'journeyEmotions',
+      template: '<md-tabs class="journey-emotions {{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="true">' +
+                  '<md-tab label="{{field.label || name}}" class="repeatsection" ng-repeat="(name, field) in to.fields">' +
+                    '<md-content class="md-padding">' +
+                      '<p ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlineparagraph {{to.className}}}">' +
+                        '<textarea msd-elastic="\n" ng-model="model[field.key]" />' +
+                      '</p>' +
+                    '</md-content>' +
+                  '</md-tab>' +
+                '</md-tabs>',
+
+      controller: function($scope) {
+        $scope.formOptions = { formState: $scope.formState };
+
+        $scope.copyFields = copyFields;
+
+        function copyFields(fields) {
+          return angular.copy(fields);
+        }
+
+      }
+    });
+
+
     formlyConfig.setType({
       name: 'repeatSection',
       template: '<md-tabs class="{{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="true">' +
                     '<md-tab label="{{element.stepTitle || name}}" class="repeatsection" ng-repeat="(name, element) in model[options.key]" ng-init="fields = copyFields(to.fields)">' +
                       '<md-content class="md-padding">' +
-                        '<div style="margin-bottom:20px;">' +
+                        '<div ng-hide="to.disableButtons" style="margin-bottom:20px;">' +
                           '<md-button type="button" ng-show="!$first" class="md-primary md-raised" ng-click="moveLeft(model[options.key], $index)"> Move Left </md-button>' +
                           '<md-button type="button" ng-show="!$last"  class="md-primary md-raised" ng-click="moveRight(model[options.key], $index)"> Move Right </md-button>' +
                           '<md-button type="button" class="md-accent md-raised" ng-click="remove(model[options.key], $index)"> Remove </md-button>' +
                         '</div>' +
                         '<formly-form fields="fields" model="element" bind-name="\'formly_ng_repeat\' + index + $parent.$index"></formly-form> ' +
-                        '<div style="margin-bottom:20px;">' +
+                        '<div ng-hide="to.disableButtons" style="margin-bottom:20px;">' +
                           '<md-button type="button" ng-show="!$first" class="md-primary md-raised" ng-click="moveLeft(model[options.key], $index)"> Move Left </md-button>' +
                           '<md-button type="button" ng-show="!$last"  class="md-primary md-raised" ng-click="moveRight(model[options.key], $index)"> Move Right </md-button>' +
                           '<md-button type="button" class="md-accent md-raised" ng-click="remove(model[options.key], $index)"> Remove </md-button>' +
@@ -192,9 +219,14 @@ angular.module('formerFunApp')
                       '</md-content>' +
                     '</md-tab>' +
                   '</md-tabs>' +
-                  '<p class="AddNewButton"> ' +
+                  '<p ng-hide="to.disableButtons" class="AddNewButton"> ' +
                     '<md-button type="button" class="md-primary md-raised" ng-click="addNew()" >{{to.btnText}}</md-button>' +
                   '</p>',
+      defaultOptions: {
+        templateOptions: {
+          disableButtons: false
+        }
+      },
 
       controller: function($scope) {
         $scope.formOptions = { formState: $scope.formState };

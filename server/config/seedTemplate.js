@@ -323,7 +323,7 @@ Template.find({}).remove(function() {
     {
       name: 'inlineparagraph',
       template: '<p ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlineparagraph {{to.className}}}">' +
-                  '<textarea ng-model="model[options.key]" />' +
+                  '<textarea msd-elastic="\n" ng-model="model[options.key]" />' +
                 '</p>',
       defaultOptions: {
         defaultValue: 'Default title value',

@@ -232,7 +232,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                   },
                   {
                     key: 'stepTime',
-                    type: 'materialinput',
+                    type: 'inlineparagraph',
                     templateOptions: {
                       label: 'Time of event',
                       required: false
@@ -247,24 +247,24 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     }
                   },
                   {
-                    key: 'stepThinking',
-                    type: 'textarea',
+                    type: 'journeyEmotions',
+                    key: 'journeyEmotions',
+                    defaultValue: [{stepThinking: 'Default thinking', stepFeeling: 'Default feeling', stepDoing: 'Default doing'}],
                     templateOptions: {
-                      label: 'Thinking'
-                    }
-                  },
-                  {
-                    key: 'stepFeeling',
-                    type: 'textarea',
-                    templateOptions: {
-                      label: 'Feeling'
-                    }
-                  },
-                  {
-                    key: 'stepDoing',
-                    type: 'textarea',
-                    templateOptions: {
-                      label: 'Doing'
+                      fields: [
+                        {
+                          key: 'stepThinking',
+                          label: 'Thinking'
+                        },
+                        {
+                          key: 'stepFeeling',
+                          label: 'Feeling'
+                        },
+                        {
+                          key: 'stepDoing',
+                          label: 'Doing'
+                        }
+                      ]
                     }
                   }
                 ]
