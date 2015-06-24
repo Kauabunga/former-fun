@@ -22,6 +22,7 @@ angular.module('formerFunApp')
         scope.formId = $stateParams[scope.formIdStateParam];
         scope.formSection = $stateParams[scope.formSectionStateParam];
         scope.formFields = undefined;
+        scope.formName = undefined;
 
         //TODO this submit action should come from scope main.ctrl?
         // optional?
@@ -50,6 +51,8 @@ angular.module('formerFunApp')
          */
         function init(){
 
+          scope.formName = scope.formDefinition.name;
+
           var validFormId = isValidFormId(scope.formId);
           var validFormSection = isValidFormSection(scope.formSection);
 
@@ -59,15 +62,25 @@ angular.module('formerFunApp')
             transitionTo(scope.formSection, scope.formId, true);
           }
           else {
+            var modelKey = getFormModelKey();
             //bind form model to local scope with formId
             //TODO this model should come from the former service????
-            scope.formModel = $localStorage[scope.formDefinition.name + scope.formId] = $localStorage[scope.formDefinition.name + scope.formId] || {};
+            scope.formModel = $localStorage[modelKey] = $localStorage[modelKey] || {};
 
             //write formId to model
             scope.formModel._formId = scope.formId;
 
             loadSection(scope.formDefinition.sections[scope.formSection]);
           }
+        }
+
+        /**
+         *
+         * @returns {*}
+         */
+        function getFormModelKey(){
+          //return scope.formDefinition.name + scope.formId;
+          return scope.formId;
         }
 
         /**
@@ -109,7 +122,8 @@ angular.module('formerFunApp')
          * @returns {string}
          */
         function createNewId(){
-          return scope.formDefinition.name + '_' + _.random(100000000001, 999999999999);
+          return '_' + _.random(100000000001, 999999999999);
+          //return scope.formDefinition.name + '_' + _.random(100000000001, 999999999999);
         }
 
 
@@ -120,7 +134,8 @@ angular.module('formerFunApp')
         function isValidFormId(formId){
 
           var formName = getFormName();
-          var formRegex = new RegExp('\\b' + formName + '_\\d{12}\\b');
+          //var formRegex = new RegExp('\\b' + formName + '_\\d{12}\\b');
+          var formRegex = new RegExp('\\b' + '_\\d{12}\\b');
 
           return formId && formRegex.test(formId);
         }

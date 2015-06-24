@@ -13,10 +13,60 @@ angular.module('formerFunApp', [
   'ngTouch',
   'ngMessages'
 ])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
     $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode(true);
+
+
+    $mdThemingProvider.definePalette('primaryPalette', {
+      '50': '4af100', // STUPID LIME GREEN used to identify areas needing attention
+      '100': '7ddcf9', //Searching bar styling
+      '200': '4af100',
+      '300': '4af100',
+      '400': '4af100',
+      '500': '2eb2e6', // Primary hue for buttons & active states
+      '600': '8c8c8c', // Mid tone blue for disabled buttons
+      '700': '4af100',
+      '800': '4af100',
+      '900': '4af100',
+      'A100': '4af100',
+      'A200': '4af100',
+      'A400': '4af100',
+      'A700': '4af100',
+      'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
+                                          // on this palette should be dark or light
+      'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
+        '200', '300', '400', 'A100'],
+      'contrastLightColors': undefined    // could also specify this if default was 'dark'
+    });
+
+    $mdThemingProvider.definePalette('accentPalette', {
+      '50': '4af100',
+      '100': '4af100',
+      '200': '4af100',
+      '300': '4af100',
+      '400': '4af100',
+      '500': '4af100',
+      '600': '4af100',
+      '700': '4af100',
+      '800': '4af100',
+      '900': '4af100',
+      'A100': '4af100',
+      'A200': '2eb2e6', // Default primary hue for checkboxes/radios
+      'A400': '4af100',
+      'A700': '4af100',
+      'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
+                                          // on this palette should be dark or light
+      'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
+        '200', '300', '400', 'A100'],
+      'contrastLightColors': undefined    // could also specify this if default was 'dark'
+    });
+
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue')
+      .accentPalette('orange');
+
   });
 
 
@@ -25,20 +75,18 @@ angular.module('formerFunApp')
   .run(function($log, formlyConfig, $http, $localStorage){
 
 
-
-
     var formIdsKey = 'localFormIds_journey';
-    var formDataKey = 'journeyjourney_502004385926';
+    var formDataKey = '_502004385926';
 
     //defaulting template for wake up journey
 
     $localStorage[formIdsKey] = $localStorage[formIdsKey] || [];
 
-    if($localStorage[formIdsKey].indexOf('journey_502004385926') === -1){
+    if($localStorage[formIdsKey].indexOf('_502004385926') === -1){
 
-      $localStorage[formIdsKey].push('journey_502004385926');
+      $localStorage[formIdsKey].push('_502004385926');
       $localStorage[formDataKey] = _.merge({
-        '_formId': 'journey_502004385926',
+        '_formId': '_502004385926',
         'steps': [
           {
             'stepTitle': 'Alarm goes off',
@@ -103,7 +151,26 @@ angular.module('formerFunApp')
     // TODO move this into a template transformer :: NOTE template is in index.html
     // TODO move this into a template transformer
 
-    //
+
+
+    formlyConfig.setType({
+      name: 'repeatJourneyStep',
+      template: '<div class="repeatsection {{::to.className}}" ng-repeat="(name, element) in model[options.key]" ng-init="fields = copyFields(to.fields)">' +
+                  '<formly-form fields="fields" model="element" bind-name="\'formly_ng_repeat\' + index + $parent.$index"></formly-form> ' +
+                '</div>',
+
+      controller: function($scope) {
+        $scope.formOptions = { formState: $scope.formState };
+
+        $scope.copyFields = copyFields;
+
+        function copyFields(fields) {
+          return angular.copy(fields);
+        }
+
+      }
+    });
+
 
     formlyConfig.setType({
       name: 'repeatSection',

@@ -30,7 +30,8 @@
 
 
     var viewJourneyButton = getField(form, 'start', 'viewJourney');
-    console.log('transforming viewJourneyButton', viewJourneyButton);
+    var viewInlineJourneyButton = getField(form, 'start', 'viewInlineJourney');
+    $log.debug('transforming viewJourneyButton', viewJourneyButton, viewInlineJourneyButton);
 
     if( ! viewJourneyButton.templateOptions.targetState ){
       $log.warn('No targetState in template options');
@@ -45,7 +46,9 @@
     }
 
     viewJourneyButton.templateOptions = viewJourneyButton.templateOptions || {};
+    viewInlineJourneyButton.templateOptions = viewInlineJourneyButton.templateOptions || {};
     viewJourneyButton.templateOptions.formerActionButton = viewJourney;
+    viewInlineJourneyButton.templateOptions.formerActionButton = viewJourney;
 
     /**
      *
@@ -53,11 +56,12 @@
      * @param scope
      */
     function viewJourney($event, scope, to){
+      $log.debug('view Journey', $event, to);
 
+      //TODO stateparams based off config
       var params = {};
-      params[viewJourneyButton.templateOptions.targetStateIdParam] = $stateParams[viewJourneyButton.templateOptions.currentStateIdParam];
-
-      scope.$emit('go', viewJourneyButton.templateOptions.targetState, params);
+      params[to.targetStateIdParam] = $stateParams[to.currentStateIdParam];
+      scope.$emit('go', to.targetState, params);
     }
   }
 

@@ -24,7 +24,7 @@ angular.module('formerFunApp')
     function fetchLocalFormData(formName, formId){
 
       if(formName && formId){
-        var formData = $localStorage[formName + formId];
+        var formData = $localStorage[formId];
 
         if(formData){
           return $q.when(formData);
@@ -37,7 +37,7 @@ angular.module('formerFunApp')
         return fetchLocalFormIds(formName)
           .then(function(ids){
             return $q.when(_.map(ids, function(id){
-              return $localStorage[formName + id];
+              return $localStorage[id];
             }));
           });
 
