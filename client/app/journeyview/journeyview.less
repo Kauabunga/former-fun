@@ -83,7 +83,10 @@ body {
     }
   }
   md-tabs {
-    display: none;
+    overflow: hidden;
+    max-height: 0;
+    @my-transition: min-height @transition-timing @transition-ease, max-height @transition-timing @transition-ease;
+    .transition(@my-transition);
   }
   &.unfocus {
     h3 {
@@ -119,7 +122,8 @@ body {
       .font-size(1.6);
     }
     md-tabs {
-      display: block; 
+      max-height: 500px;
+      min-height: 200px !important;
     }
     &:before {
       //the width is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
