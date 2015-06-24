@@ -16,6 +16,7 @@
 .step-container {
   position: relative;
   width: 400px;
+  min-height: 300px;
   display: inline-block;
   opacity: 1;
   p {
@@ -62,11 +63,23 @@
     background-position: 50%;
     background-size: cover;
     border: 3px solid @dark-warm-grey;
+    @my-transition: background-color @transition-timing @transition-ease, border @transition-timing @transition-ease; 
+    .transition(@my-transition);
+    &:focus {
+      outline: none;
+    }
   }
   md-tabs {
     display: none;
   }
   &.unfocus {
+    h3 {
+      color: @grey-lighter;
+      .font-size(2.2);
+    }
+    .step-number {
+      background-color: @grey;
+    }
     .img-mask {
       background-color: @grey-lighter;
       border-color: @grey-lighter;
@@ -88,10 +101,10 @@
       display: block;
     }
     &:before {
-      .horizontal-gradient(@grey-lighter, @dark-warm-grey);
+      .horizontal-gradient(@grey-lighter, @dark-warm-grey, 10%, 100%);
     }
     &:after {
-      .horizontal-gradient(@dark-warm-grey, @grey-lighter);
+      .horizontal-gradient(@dark-warm-grey, @grey-lighter, 0%, 90%);
     }
   }
 }
