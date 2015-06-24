@@ -4,11 +4,11 @@ h1 {{journeyDefinition.journeyTitle}}
 .journey-wrapper
   .journey-container
 
-    div.step-container(ng-repeat='step in journeyDefinition.steps')
+    .step-container(ng-repeat='step in journeyDefinition.steps' ng-class="{'focus':step.focus, 'unfocus': step.unfocus}")
+
       .step-number
         {{$index + 1}}
-      .img-mask
-        img(ng-src='{{step.stepImage}}')
+      .img-mask(style="background-image: url('{{step.stepImage}}');",ng-click="toggleZoom(step)")
 
       h3 {{step.stepTitle}}
       p.step-blurb {{step.stepBlurb}}
@@ -27,3 +27,7 @@ h1 {{journeyDefinition.journeyTitle}}
         md-tab(label='Doing')
           md-content
             p {{step.stepDoing}}
+
+
+
+
