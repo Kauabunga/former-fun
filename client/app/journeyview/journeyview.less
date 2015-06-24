@@ -1,10 +1,11 @@
-
+body {
+  background-color: @off-white;
+}
 
 .journey-wrapper {
   width: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
-  background-color: @off-white;
 }
 
 .journey-container {
@@ -12,6 +13,7 @@
   min-width: 1500px;
   white-space:nowrap;
   text-align: center;
+  background-color: white;
 }
 
 .step-container {
@@ -114,6 +116,11 @@
     }
   }
   &.focus {
+    .step-time {
+      color: @fragrant-blue;
+      font-weight: 700;
+      .font-size(1.6);
+    }
     md-tabs {
       max-height: 500px;
       min-height: 200px !important;
