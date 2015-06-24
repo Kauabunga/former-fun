@@ -11,6 +11,7 @@ angular.module('formerFunApp')
     return {
       fetchLocalFormIds: fetchLocalFormIds,
       fetchLocalFormData: fetchLocalFormData,
+      getNewFormId: getNewFormId,
       getLocalFormIdsKey: getLocalFormIdsKey,
       loadForm: loadForm,
       loadTemplates: loadTemplates
@@ -49,6 +50,14 @@ angular.module('formerFunApp')
 
     }
 
+
+    /**
+     *
+     * @param formName
+     */
+    function getNewFormId(formName){
+      return '_' + _.random(100000000001, 999999999999);
+    }
 
     /**
      *

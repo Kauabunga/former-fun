@@ -8,6 +8,7 @@ angular.module('formerFunApp')
 
     $scope.journeys = undefined;
 
+    $scope.newFormId = createNewFormId();
     $scope.clearLocalStorage = clearLocalStorage;
 
 
@@ -29,6 +30,13 @@ angular.module('formerFunApp')
     function clearLocalStorage(){
       $window.localStorage.clear();
       $window.location.reload();
+    }
+
+    /**
+     *
+     */
+    function createNewFormId(){
+      return former.getNewFormId(formName);
     }
 
 
