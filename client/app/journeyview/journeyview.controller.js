@@ -6,6 +6,7 @@ angular.module('formerFunApp')
     var formName = 'journey';
 
     $scope.journeyDefinition = undefined;
+    $scope.currentId = $stateParams.currentId;
 
     $scope.gotoEditor = gotoEditor;
 

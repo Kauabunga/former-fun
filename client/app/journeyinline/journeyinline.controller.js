@@ -10,6 +10,7 @@ angular.module('formerFunApp')
 
 
     $scope.journeyDefinition = undefined;
+    $scope.currentId = $stateParams.currentId;
 
     $scope.gotoEditor = gotoEditor;
 

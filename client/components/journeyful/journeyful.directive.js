@@ -43,9 +43,10 @@ angular.module('formerFunApp')
             // if this is the step being clicked
             if(step === item) {
               // if the item is already in focus
-              if(item.focus)
+              if(item.focus){
                 // switch focus class off
                 item.focus = false;
+              }
               else {
                 // or switch the focus class on
                 item.focus = true;

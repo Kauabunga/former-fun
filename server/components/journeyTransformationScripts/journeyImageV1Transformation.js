@@ -1,4 +1,6 @@
 
+/* global _ */
+
 (function(window){
 
   'use strict';
@@ -48,10 +50,14 @@
       $log.debug('transforming viewJourneyImage', field);
 
       field.link = function(scope){
-
+        scope.model.stepImage = scope.model.stepImage || 'https://upload.wikimedia.org/wikipedia/commons/3/33/White_square_with_question_mark.png';
       };
 
       field.templateOptions.formerActionButton = function($event, scope){
+
+        //TODO add double click behaviour to edit image
+        //TODO if no image url then default to edit image
+
         $log.debug('Journey Image click', scope);
 
         var allSteps = scope.$parent.$parent.$parent.$parent.model.steps;
