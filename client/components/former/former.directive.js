@@ -59,7 +59,11 @@ angular.module('formerFunApp')
           if( ! validFormSection || ! validFormId){
             scope.formId = validFormId ? scope.formId : getNewFormLocalStorageId();
             scope.formSection = validFormSection ? scope.formSection : scope.formDefinition.defaultSection;
-            transitionTo(scope.formSection, scope.formId, true);
+
+            scope.$evalAsync(function(){
+              transitionTo(scope.formSection, scope.formId, true);
+            });
+
           }
           else {
             var modelKey = getFormModelKey();

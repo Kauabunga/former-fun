@@ -281,12 +281,30 @@ Template.find({}).remove(function() {
     }
   );
 
-
-
   Template.create(
     {
+      name: 'journeyImage',
+      template: '<img class="{{to.className}}" ng-src="{{model[options.key]}}" />'
+    },
+    {
+      name: 'journeyIndex',
+      template: '<div class="step-number {{to.className}}">{{$index}}</div>'
+    },
+    {
+      name: 'journeyEmotions',
+      template: '<md-tabs class="journey-emotions {{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="true">' +
+                  '<md-tab label="{{field.label || name}}" class="repeatsection" ng-repeat="(name, field) in to.fields">' +
+                    '<md-content class="md-padding">' +
+                      '<p ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlineparagraph {{to.className}}">' +
+                        '<textarea msd-elastic="\n" ng-model="model[field.key]" />' +
+                      '</p>' +
+                    '</md-content>' +
+                  '</md-tab>' +
+                '</md-tabs>'
+    },
+    {
       name: 'inlinetitle-1',
-      template: '<h1 ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlinetitle {{to.className}}}">' +
+      template: '<h1 ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlinetitle {{to.className}}">' +
                   '<input ng-model="model[options.key]" />' +
                 '</h1>',
       defaultOptions: {
@@ -298,7 +316,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'inlinetitle-2',
-      template: '<h2 ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlinetitle {{to.className}}}">' +
+      template: '<h2 ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlinetitle {{to.className}}">' +
                   '<input ng-model="model[options.key]" />' +
                 '</h2>',
       defaultOptions: {
@@ -310,7 +328,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'inlinetitle-3',
-      template: '<h3 ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlinetitle {{to.className}}}">' +
+      template: '<h3 ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlinetitle {{to.className}}">' +
                   '<input ng-model="model[options.key]" />' +
                 '</h3>',
       defaultOptions: {
@@ -322,8 +340,8 @@ Template.find({}).remove(function() {
     },
     {
       name: 'inlineparagraph',
-      template: '<p ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlineparagraph {{to.className}}}">' +
-                  '<textarea ng-model="model[options.key]" />' +
+      template: '<p ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlineparagraph {{to.className}}">' +
+                  '<textarea msd-elastic="\n" ng-model="model[options.key]" />' +
                 '</p>',
       defaultOptions: {
         defaultValue: 'Default title value',

@@ -215,10 +215,24 @@ Form.find({name: 'journeyinline'}).remove(function() {
                 className: 'step-container',
                 fields: [
                   {
+                    type: 'journeyIndex',
+                    templateOptions: {
+
+                    }
+                  },
+                  {
+                    key: 'stepImage',
+                    type: 'journeyImage',
+                    templateOptions: {
+                      className: 'img-mask'
+                    }
+                  },
+                  {
                     key: 'stepTitle',
                     type: 'inlinetitle-2',
                     templateOptions: {
                       label: 'Step Title',
+                      className: 'center',
                       required: true
                     }
                   },
@@ -227,14 +241,16 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     type: 'inlineparagraph',
                     templateOptions: {
                       label: 'Step Blurb',
+                      className: 'step-blurb center',
                       required: false
                     }
                   },
                   {
                     key: 'stepTime',
-                    type: 'materialinput',
+                    type: 'inlineparagraph',
                     templateOptions: {
                       label: 'Time of event',
+                      className: 'step-time center',
                       required: false
                     }
                   },
@@ -247,24 +263,24 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     }
                   },
                   {
-                    key: 'stepThinking',
-                    type: 'textarea',
+                    type: 'journeyEmotions',
+                    key: 'journeyEmotions',
+                    defaultValue: [{stepThinking: 'Default thinking', stepFeeling: 'Default feeling', stepDoing: 'Default doing'}],
                     templateOptions: {
-                      label: 'Thinking'
-                    }
-                  },
-                  {
-                    key: 'stepFeeling',
-                    type: 'textarea',
-                    templateOptions: {
-                      label: 'Feeling'
-                    }
-                  },
-                  {
-                    key: 'stepDoing',
-                    type: 'textarea',
-                    templateOptions: {
-                      label: 'Doing'
+                      fields: [
+                        {
+                          key: 'stepThinking',
+                          label: 'Thinking'
+                        },
+                        {
+                          key: 'stepFeeling',
+                          label: 'Feeling'
+                        },
+                        {
+                          key: 'stepDoing',
+                          label: 'Doing'
+                        }
+                      ]
                     }
                   }
                 ]
