@@ -80,7 +80,7 @@
       outline: none;
     }
   }
-  md-tabs {
+  md-tabs, .step-blurb {
     overflow: hidden;
     max-height: 0;
     @my-transition: min-height @transition-timing @transition-ease, max-height @transition-timing @transition-ease;
@@ -117,6 +117,9 @@
     md-tabs {
       max-height: 500px;
       min-height: 200px !important;
+    }
+    .step-blurb {
+      max-height: 50px
     }
     &:before {
       //the width is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
