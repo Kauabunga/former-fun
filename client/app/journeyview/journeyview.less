@@ -83,11 +83,22 @@ body {
       outline: none;
     }
   }
-  md-tabs, .step-blurb {
+
+  .step-blurb {
+    overflow: hidden;
+    max-height: 0;
+    @my-transition: all @transition-timing @transition-ease;
+    .transition(@my-transition);
+  }
+
+  md-tabs {
     overflow: hidden;
     max-height: 0;
     @my-transition: min-height @transition-timing @transition-ease, max-height @transition-timing @transition-ease;
     .transition(@my-transition);
+  }
+  .step-time {
+    .transition(all @transition-timing @transition-ease);
   }
   &.unfocus {
     h3 {
@@ -181,8 +192,14 @@ body {
 
 h1 {
   text-align: center;
+
   color: @loud-orange !important;
   font-weight: 700;
+
+  &.journey-title {
+
+  }
+
 }
 
 

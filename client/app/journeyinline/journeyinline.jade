@@ -1,8 +1,9 @@
-md-content
+md-content.journey-inline-view
 
   .container
     .col-sm-8
-      h4 Journey Inline View
+      a(href='/journeyview/{{currentId}}')
+        h4 Journey Inline View
 
     .col-sm-2.col-sm-offset-2
       md-button.md-primary(type='button', ng-click='gotoEditor()') Back to editor

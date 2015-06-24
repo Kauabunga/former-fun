@@ -99,7 +99,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
               key: 'viewJourney',
               type: 'button',
               templateOptions: {
-                label: 'View journey',
+                label: 'View presentation',
                 targetState: 'journeyview',
                 targetStateIdParam: 'currentId',
                 currentStateIdParam: 'currentId'
@@ -109,7 +109,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
               key: 'viewInlineJourney',
               type: 'button',
               templateOptions: {
-                label: 'View inline journey',
+                label: 'View inline',
                 targetState: 'journeyinline',
                 targetStateIdParam: 'currentId',
                 currentStateIdParam: 'currentId'
@@ -212,6 +212,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
               type: 'inlinetitle-1',
               defaultValue: 'Customer journey title',
               templateOptions: {
+                className: 'journey-title',
                 heading: 'Create a customer journey'
               }
             },
@@ -239,6 +240,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                   {
                     key: 'stepTitle',
                     type: 'inlinetitle-2',
+                    defaultValue: 'Default step title',
                     templateOptions: {
                       label: 'Step Title',
                       className: 'center',
@@ -248,6 +250,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                   {
                     key: 'stepBlurb',
                     type: 'inlineparagraph',
+                    defaultValue: 'Default step blurb',
                     templateOptions: {
                       label: 'Step Blurb',
                       className: 'step-blurb center',
@@ -257,6 +260,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                   {
                     key: 'stepTime',
                     type: 'inlineparagraph',
+                    defaultValue: 'Default step time',
                     templateOptions: {
                       label: 'Time of event',
                       className: 'step-time center',
