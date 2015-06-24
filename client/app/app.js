@@ -173,25 +173,6 @@ angular.module('formerFunApp')
     });
 
 
-
-    formlyConfig.setType({
-      name: 'journeyImage',
-      template: '<img />',
-
-      controller: function($scope) {
-        $scope.formOptions = { formState: $scope.formState };
-
-        $scope.copyFields = copyFields;
-
-        function copyFields(fields) {
-          return angular.copy(fields);
-        }
-
-      }
-    });
-
-
-
     formlyConfig.setType({
       name: 'repeatSection',
       template: '<md-tabs class="{{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="true">' +
