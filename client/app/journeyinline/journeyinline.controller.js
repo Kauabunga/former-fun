@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .controller('JourneyInlineViewCtrl', function ($log, $scope, $http, $q, $window, former, $state, $stateParams) {
+  .controller('JourneyInlineViewCtrl', function ($log, $scope, $http, $q, $window, former, $state, $stateParams, $timeout) {
 
 
     var viewFormName = 'journeyinline';
@@ -11,6 +11,7 @@ angular.module('formerFunApp')
 
     $scope.journeyDefinition = undefined;
     $scope.currentId = $stateParams.currentId;
+    $scope.fadeIn = false;
 
     $scope.gotoEditor = gotoEditor;
 
@@ -39,6 +40,9 @@ angular.module('formerFunApp')
           })
           .then(function(formDefinition){
             $scope.formDefinition = formDefinition;
+            $timeout(function(){
+              $scope.fadeIn = true;
+            });
           });
 
 
