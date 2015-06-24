@@ -28,7 +28,6 @@
 
 
     var viewJourneyRepeater = getField(form, 'start', 'steps');
-
     _.map(viewJourneyRepeater.templateOptions.fields, function(field){
       if(field.type === 'journeyImage'){
         transformJourneyImage(field);

@@ -292,12 +292,38 @@ Template.find({}).remove(function() {
       }
     },
     {
+      name: 'viewbutton',
+      extends: 'button'
+    },
+    {
       name: 'journeyIndex',
-      template: '<div class="step-number {{to.className}}">{{$parent.$parent.$parent.$parent.$index + 1}}</div>',
+      //template: '<div class="step-number {{to.className}}">{{getIndex()}}</div>',
+      template: '<div class="{{to.className}}">' +
+                  '<md-fab-speed-dial md-open="demo.isOpen" md-direction="to.direction" class="{{to.animationMode}}">' +
+                    '<md-fab-trigger>' +
+                      '<md-button aria-label="menu" class="md-fab md-warn">' +
+                        '{{getIndex()}}' +
+                      '</md-button>' +
+                    '</md-fab-trigger>' +
+                    '<md-fab-actions>' +
+                      '<md-button class="md-fab md-raised md-mini" ng-repeat="position in getTargetPositions() track by $index">' +
+                        '{{position}}' +
+                      '</md-button>' +
+                      '<md-button aria-label="facebook" class="md-fab md-raised md-mini">' +
+                        '<md-icon md-svg-src="assets/images/ic_cross_24px.svg"></md-icon>' +
+                      '</md-button>' +
+                      '<md-button aria-label="Google hangout" class="md-fab md-raised md-mini">' +
+                        '<md-icon md-svg-src="assets/images/ic_cross_24px.svg"></md-icon>' +
+                      '</md-button>' +
+                    '</md-fab-actions>' +
+                  '</md-fab-speed-dial>' +
+                '</div>',
+
       defaultOptions: {
         defaultValue: 'Default title value',
         templateOptions: {
-
+          direction: 'right',
+          animationMode: 'md-fling'
         }
       }
     },

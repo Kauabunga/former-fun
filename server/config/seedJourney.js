@@ -27,6 +27,7 @@ var _ = require('lodash');
 
 Transformation.find({name: 'viewJourneyButton'}).remove(function() {
 Transformation.find({name: 'journeyImage'}).remove(function() {
+Transformation.find({name: 'journeyIndexButton'}).remove(function() {
 
   Transformation.createAsync(
     {
@@ -38,6 +39,11 @@ Transformation.find({name: 'journeyImage'}).remove(function() {
       name: 'journeyImage',
       version: '1.0',
       scriptFilePath: './server/components/journeyTransformationScripts/journeyImageV1Transformation.js'
+    },
+    {
+      name: 'journeyIndexButton',
+      version: '1.0',
+      scriptFilePath: './server/components/journeyTransformationScripts/journeyIndexButtonV1Transformation.js'
     }
   ).then(function(transformations){
 
@@ -63,6 +69,7 @@ Transformation.find({name: 'journeyImage'}).remove(function() {
       console.log('Error creating transformations - probably duplicate?');
     });
 
+});
 });
 });
 
@@ -97,7 +104,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
             },
             {
               key: 'viewJourney',
-              type: 'button',
+              type: 'viewbutton',
               templateOptions: {
                 label: 'View presentation',
                 className: 'view-journey-button journey-presentation',
@@ -108,7 +115,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
             },
             {
               key: 'viewInlineJourney',
-              type: 'button',
+              type: 'viewbutton',
               templateOptions: {
                 label: 'View inline',
                 className: 'view-journey-button journey-inline',
@@ -204,7 +211,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
       defaultSection: 'start',
       transformationModules: {
         baseurl: '/api/transformations',
-        modules: ['date', 'journeyImage']
+        modules: ['date', 'journeyImage', 'journeyIndexButton']
       },
       sections: {
         'start': {
@@ -221,7 +228,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
             {
               type: 'repeatJourneyStep',
               key: 'steps',
-              defaultValue: [{stepTitle: 'Default step title', stepImage: '', stepThinking: 'Default thinking', stepFeeling: 'Default feeling', stepDoing: 'Default doing'}],
+              defaultValue: [{stepTitle: 'Fill out the step title ...', stepThinking: 'Default thinking', stepFeeling: 'Default feeling', stepDoing: 'Default doing'}],
               templateOptions: {
                 className: 'step-container',
                 fields: [
