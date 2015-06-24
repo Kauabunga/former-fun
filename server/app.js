@@ -20,8 +20,9 @@ mongoose.connection.on('error', function(err) {
 );
 // Populate DB with sample data
 if(config.seedDB) {
-  require('./config/acc45Seed');
-  require('./config/journeySeed');
+  require('./config/seedAcc45');
+  require('./config/seedJourney');
+  require('./config/seedTemplate');
 }
 
 // Setup server

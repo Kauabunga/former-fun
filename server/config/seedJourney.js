@@ -25,7 +25,7 @@ var _ = require('lodash');
 //                                     ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
-//Transformation.find({}).remove(function() {
+Transformation.find({name: 'viewJourneyButton'}).remove(function() {
   Transformation.createAsync(
     {
       name: 'viewJourneyButton',
@@ -56,7 +56,7 @@ var _ = require('lodash');
       console.log('Error creating transformations - probably duplicate?');
     });
 
-//});
+});
 
 
 
@@ -68,6 +68,7 @@ var _ = require('lodash');
 //////////////////////////////////////////////////////////////////////////////////
 
 Form.find({name: 'journey'}).remove(function() {
+Form.find({name: 'journeyinline'}).remove(function() {
   Form.create(
     {
       name: 'journey',
@@ -92,6 +93,16 @@ Form.find({name: 'journey'}).remove(function() {
               templateOptions: {
                 label: 'View journey',
                 targetState: 'journeyview',
+                targetStateIdParam: 'currentId',
+                currentStateIdParam: 'currentId'
+              }
+            },
+            {
+              key: 'viewInlineJourney',
+              type: 'button',
+              templateOptions: {
+                label: 'View inline journey',
+                targetState: 'journeyinline',
                 targetStateIdParam: 'currentId',
                 currentStateIdParam: 'currentId'
               }
@@ -176,7 +187,94 @@ Form.find({name: 'journey'}).remove(function() {
           ]
         }
       }
+    },
+    {
+      name: 'journeyinline',
+      version: '1.0',
+      defaultSection: 'start',
+      transformationModules: {
+        baseurl: '/api/transformations',
+        modules: ['date']
+      },
+      sections: {
+        'start': {
+          fields: [
+            {
+              key: 'journeyTitle',
+              type: 'inlinetitle-1',
+              defaultValue: 'Customer journey title',
+              templateOptions: {
+                heading: 'Create a customer journey'
+              }
+            },
+            {
+              type: 'repeatJourneyStep',
+              key: 'steps',
+              defaultValue: [{stepTitle: 'Default step title', stepImage: '', stepThinking: 'Default thinking', stepFeeling: 'Default feeling', stepDoing: 'Default doing'}],
+              templateOptions: {
+                className: 'step-container',
+                fields: [
+                  {
+                    key: 'stepTitle',
+                    type: 'inlinetitle-2',
+                    templateOptions: {
+                      label: 'Step Title',
+                      required: true
+                    }
+                  },
+                  {
+                    key: 'stepBlurb',
+                    type: 'inlineparagraph',
+                    templateOptions: {
+                      label: 'Step Blurb',
+                      required: false
+                    }
+                  },
+                  {
+                    key: 'stepTime',
+                    type: 'materialinput',
+                    templateOptions: {
+                      label: 'Time of event',
+                      required: false
+                    }
+                  },
+                  {
+                    key: 'stepImage',
+                    type: 'materialinput',
+                    templateOptions: {
+                      label: 'Step Image Url',
+                      required: true
+                    }
+                  },
+                  {
+                    key: 'stepThinking',
+                    type: 'textarea',
+                    templateOptions: {
+                      label: 'Thinking'
+                    }
+                  },
+                  {
+                    key: 'stepFeeling',
+                    type: 'textarea',
+                    templateOptions: {
+                      label: 'Feeling'
+                    }
+                  },
+                  {
+                    key: 'stepDoing',
+                    type: 'textarea',
+                    templateOptions: {
+                      label: 'Doing'
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
     }
   );
+});
 });
 

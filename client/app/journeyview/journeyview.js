@@ -3,8 +3,8 @@
 angular.module('formerFunApp')
   .config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.when('/journeyview', '/journeyedit/');
-    $urlRouterProvider.when('/journeyview/', '/journeyedit/');
+    $urlRouterProvider.when('/journeyview', '/journeyview/');
+    $urlRouterProvider.when('/journeyview/', '/journeyview/');
 
     $stateProvider
       .state('journeyview', {

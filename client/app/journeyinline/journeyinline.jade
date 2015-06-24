@@ -1,0 +1,17 @@
+md-content
+
+  .container
+    .col-sm-8
+      h4 Journey View
+
+    .col-sm-4
+      md-button.md-primary(type='button', ng-click='gotoEditor()') Back to editor
+
+  .journey-wrapper
+    .journey-container
+
+      former.former-container(form-controls='formControls', form-definition='formDefinition',
+          form-model='journey', form-section-state-param='currentSection',
+          form-id-state-param='currentId', form-submit='submitForm')
+
+
