@@ -27,8 +27,78 @@
 
     var viewJourneyRepeater = getField(form, 'start', 'steps');
 
+    _.map(viewJourneyRepeater.templateOptions.fields, function(field){
+      if(field.type === 'journeyImage'){
+        transformJourneyImage(field);
+      }
+      else {
+        return field;
+      }
+    });
 
     $log.debug('transforming viewJourneyRepeater', viewJourneyRepeater);
+
+
+    /**
+     *
+     * @param field
+     */
+    function transformJourneyImage(field){
+
+      $log.debug('transforming viewJourneyImage', field);
+
+      field.link = function(scope){
+
+      };
+
+      field.templateOptions.formerActionButton = function($event, scope){
+        $log.debug('Journey Image click', scope);
+
+        var allSteps = scope.$parent.$parent.$parent.$parent.model.steps;
+        var currentStep = scope.model;
+
+        var unfocusAll = function(step) {
+          _.each(allSteps, function(item) {
+            if(step !== item) {
+              item.unfocus = true;
+              item.focus = false;
+            }
+          });
+        };
+
+        // first - all steps reset
+        // This happens everytime there is a click
+        _.map(allSteps, function(step) {
+          step.unfocus = false;
+        });
+
+        // first - all steps reset
+        // This happens everytime there is a click
+        _.map(allSteps, function(item) {
+          item.unfocus = false;
+        });
+        // second - we toggle the focus class on the item being clicked
+        _.map(allSteps, function(item) {
+          // if this is the step being clicked
+          if(currentStep === item) {
+            // if the item is already in focus
+            if(item.focus)
+            // switch focus class off
+              item.focus = false;
+            else {
+              // or switch the focus class on
+              item.focus = true;
+              // add unfocus classes to all other steps
+              unfocusAll(currentStep);
+            }
+          } else {
+
+          }
+        });
+
+      };
+
+    }
 
   }
 

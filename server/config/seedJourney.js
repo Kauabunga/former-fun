@@ -266,7 +266,6 @@ Form.find({name: 'journeyinline'}).remove(function() {
                   {
                     type: 'journeyEmotions',
                     key: 'journeyEmotions',
-                    defaultValue: [{stepThinking: 'Default thinking', stepFeeling: 'Default feeling', stepDoing: 'Default doing'}],
                     templateOptions: {
                       fields: [
                         {

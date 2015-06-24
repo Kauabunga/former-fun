@@ -27,6 +27,7 @@
   margin: 0 (@step-divider-length / 2);
   padding: 20px;
   vertical-align: top;
+  //set up lines between steps. There is one left and one right of the image. They are before/after elements
   &:before, &:after {
     content: "";
     display: block;
@@ -37,6 +38,8 @@
     border-radius: @step-divider-height / 2;
     //the width is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
     width: (@step-divider-length / 2) + 100;
+    @my-transition: left @transition-timing @transition-ease, right @transition-timing @transition-ease;
+    .transition(@my-transition);
   }
   &:before {
     //the width is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
@@ -52,6 +55,12 @@
       display: none;
     }
   }
+  &:last-child {
+    margin-right: 0;
+    &:after {
+      display: none;
+    }
+  }
   .img-mask {
     width: 150px;
     height: 150px;
@@ -63,7 +72,8 @@
     background-position: 50%;
     background-size: cover;
     border: 3px solid @dark-warm-grey;
-    @my-transition: background-color @transition-timing @transition-ease, border @transition-timing @transition-ease;
+    @my-transition: width @transition-timing @transition-ease, height @transition-timing @transition-ease, background-color @transition-timing @transition-ease, border @transition-timing @transition-ease;
+
     .transition(@my-transition);
     &:focus {
       outline: none;
@@ -75,7 +85,7 @@
   &.unfocus {
     h3 {
       color: @grey-lighter;
-      .font-size(2.2);
+      .font-size(3);
     }
     .step-number {
       background-color: @grey;
@@ -88,8 +98,8 @@
         background-color: rgba(255, 255, 255, 0.7);
         content: "";
         display: block;
-        width: 150px;
-        height: 150px;
+        width: 100%;
+        height: 100%;
       }
     }
     &:before, &:after {
@@ -101,10 +111,22 @@
       display: block;
     }
     &:before {
-      .horizontal-gradient(@grey-lighter, @dark-warm-grey, 10%, 100%);
+      //the width is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
+      left: (((@step-divider-length / 1.5) + 5) * -1);
     }
     &:after {
-      .horizontal-gradient(@dark-warm-grey, @grey-lighter, 0%, 90%);
+      //the width is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
+      right: (((@step-divider-length / 1.5) + 5) * -1);
+    }
+    .img-mask {
+      width: 250px;
+      height: 250px;
+    }
+    &:before {
+      .horizontal-gradient(@grey-lighter, @dark-warm-grey, 30%, 100%);
+    }
+    &:after {
+      .horizontal-gradient(@dark-warm-grey, @grey-lighter, 0%, 60%);
     }
   }
 }
