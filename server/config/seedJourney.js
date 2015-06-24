@@ -100,6 +100,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
               type: 'button',
               templateOptions: {
                 label: 'View presentation',
+                className: 'view-journey-button journey-presentation',
                 targetState: 'journeyview',
                 targetStateIdParam: 'currentId',
                 currentStateIdParam: 'currentId'
@@ -110,6 +111,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
               type: 'button',
               templateOptions: {
                 label: 'View inline',
+                className: 'view-journey-button journey-inline',
                 targetState: 'journeyinline',
                 targetStateIdParam: 'currentId',
                 currentStateIdParam: 'currentId'
