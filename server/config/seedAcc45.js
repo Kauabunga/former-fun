@@ -23,7 +23,11 @@ var _ = require('lodash');
 //                                     ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
-//Transformation.find({}).remove(function() {
+Transformation.find({name: 'nhiNumber'}).remove(function() {
+Transformation.find({name: 'address'}).remove(function() {
+Transformation.find({name: 'date'}).remove(function() {
+Transformation.find({name: 'injuryDate'}).remove(function() {
+Transformation.find({name: 'icd10'}).remove(function() {
   Transformation.createAsync(
     {
       name: 'nhiNumber',
@@ -71,7 +75,11 @@ var _ = require('lodash');
     console.log('Error creating transformations - probably duplicate?');
   });
 
-//});
+});
+});
+});
+});
+});
 
 
 

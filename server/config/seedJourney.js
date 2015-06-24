@@ -26,11 +26,18 @@ var _ = require('lodash');
 //////////////////////////////////////////////////////////////////////////////////
 
 Transformation.find({name: 'viewJourneyButton'}).remove(function() {
+Transformation.find({name: 'journeyImage'}).remove(function() {
+
   Transformation.createAsync(
     {
       name: 'viewJourneyButton',
       version: '1.0',
       scriptFilePath: './server/components/journeyTransformationScripts/viewJourneyButtonV1Transformation.js'
+    },
+    {
+      name: 'journeyImage',
+      version: '1.0',
+      scriptFilePath: './server/components/journeyTransformationScripts/journeyImageV1Transformation.js'
     }
   ).then(function(transformations){
 
@@ -56,6 +63,7 @@ Transformation.find({name: 'viewJourneyButton'}).remove(function() {
       console.log('Error creating transformations - probably duplicate?');
     });
 
+});
 });
 
 
@@ -194,7 +202,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
       defaultSection: 'start',
       transformationModules: {
         baseurl: '/api/transformations',
-        modules: ['date']
+        modules: ['date', 'journeyImage']
       },
       sections: {
         'start': {
@@ -224,7 +232,8 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     key: 'stepImage',
                     type: 'journeyImage',
                     templateOptions: {
-                      className: 'img-mask'
+                      className: 'img-mask',
+                      formerActionButton: 'DECORATED BY TRANSFORMATIONS'
                     }
                   },
                   {
@@ -252,14 +261,6 @@ Form.find({name: 'journeyinline'}).remove(function() {
                       label: 'Time of event',
                       className: 'step-time center',
                       required: false
-                    }
-                  },
-                  {
-                    key: 'stepImage',
-                    type: 'materialinput',
-                    templateOptions: {
-                      label: 'Step Image Url',
-                      required: true
                     }
                   },
                   {

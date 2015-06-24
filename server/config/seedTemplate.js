@@ -284,7 +284,7 @@ Template.find({}).remove(function() {
   Template.create(
     {
       name: 'journeyImage',
-      template: '<div class="{{to.className}}" style="background-image: url(\'{{model[options.key]}}\');" />',
+      template: '<div class="{{to.className}}" ng-click="formerActionButton($event, this)" style="background-image: url(\'{{model[options.key]}}\');" />',
       defaultOptions: {
         expressionProperties: {
 
