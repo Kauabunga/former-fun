@@ -90,18 +90,18 @@ body {
   }
   &.unfocus {
     h3 {
-      color: @grey-lighter;
+      color: @grey-fade;
       .font-size(3);
     }
     .step-number {
-      background-color: @journey-grey-light;
+      background-color: darken(@grey-fade, 5%);
     }
     .step-time {
       opacity: 0.5;
     }
     .img-mask {
-      background-color: @grey-lighter;
-      border-color: @grey-lighter;
+      background-color: @grey-fade;
+      border-color: @grey-fade;
       //create a translucent overlay over the image to make it appear faded
       &:before {
         background-color: rgba(255, 255, 255, 0.7);
@@ -112,7 +112,7 @@ body {
       }
     }
     &:before, &:after {
-      background-color: @grey-lighter;
+      background-color: @grey-fade;
     }
   }
   &.focus {
@@ -141,10 +141,11 @@ body {
       height: 250px;
     }
     &:before {
-      .horizontal-gradient(@journey-grey-light, @journey-grey, 30%, 100%);
+      .horizontal-gradient(@grey-fade, @dark-warm-grey, 30%, 100%);
     }
     &:after {
-      .horizontal-gradient(@journey-grey, @journey-grey-light, 0%, 60%);
+      .horizontal-gradient(@dark-warm-grey, @grey-fade, 0%, 60%);
+>>>>>>> 1a880698f5d15b8f7c8da7b587782ee70eca2591
     }
   }
 }
