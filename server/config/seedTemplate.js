@@ -281,6 +281,26 @@ Template.find({}).remove(function() {
     }
   );
 
+
+  /**
+   *
+   * @param number
+   * @returns {string}
+   */
+  function getButtons(number){
+    var result = '';
+    var i;
+    for(i = 1; i < number; i++){
+      result += '<md-button type="button" ng-click="moveToIndex(' + i + ')" ng-show="getIndexString() != ' + i + ' && ' + i + ' <= getTotalPositions()" class="md-fab md-raised md-mini">' +
+                  '<h4>' + i + '</h4>' +
+                '</md-button>';
+    }
+    return result;
+  }
+
+  /**
+   *
+   */
   Template.create(
     {
       name: 'journeyImage',
@@ -299,22 +319,14 @@ Template.find({}).remove(function() {
       name: 'journeyIndex',
       //template: '<div class="step-number {{to.className}}">{{getIndex()}}</div>',
       template: '<div class="{{to.className}}">' +
-                  '<md-fab-speed-dial md-open="demo.isOpen" md-direction="to.direction" class="{{to.animationMode}}">' +
+                  '<md-fab-speed-dial md-open="demo.isOpen" md-direction="{{to.direction}}" class="{{to.animationMode}}">' +
                     '<md-fab-trigger>' +
-                      '<md-button aria-label="menu" class="md-fab md-warn">' +
-                        '{{getIndex()}}' +
+                      '<md-button type="button" aria-label="menu" class="md-fab md-accent">' +
+                        '<h4>{{getIndexString()}}</h4>' +
                       '</md-button>' +
                     '</md-fab-trigger>' +
                     '<md-fab-actions>' +
-                      '<md-button class="md-fab md-raised md-mini" ng-repeat="position in getTargetPositions() track by $index">' +
-                        '{{position}}' +
-                      '</md-button>' +
-                      '<md-button aria-label="facebook" class="md-fab md-raised md-mini">' +
-                        '<md-icon md-svg-src="assets/images/ic_cross_24px.svg"></md-icon>' +
-                      '</md-button>' +
-                      '<md-button aria-label="Google hangout" class="md-fab md-raised md-mini">' +
-                        '<md-icon md-svg-src="assets/images/ic_cross_24px.svg"></md-icon>' +
-                      '</md-button>' +
+                      getButtons(20) +
                     '</md-fab-actions>' +
                   '</md-fab-speed-dial>' +
                 '</div>',
@@ -322,8 +334,8 @@ Template.find({}).remove(function() {
       defaultOptions: {
         defaultValue: 'Default title value',
         templateOptions: {
-          direction: 'right',
-          animationMode: 'md-fling'
+          direction: 'left',
+          animationMode: 'md-scale'
         }
       }
     },
