@@ -22,19 +22,28 @@
     margin-top: 20px;
     white-space: pre-wrap;
   }
-  margin-left: @step-divider-length;
+  //the margin value is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
+  margin: 0 (@step-divider-length / 2);
   padding: 20px;
   vertical-align: top;
-  &:before {
+  &:before, &:after {
     content: "";
     display: block;
     position: absolute;
     top: 95px;
     background: @dark-warm-grey;
-    width: @step-divider-length + 100;
-    left: ((@step-divider-length + 50) * -1);
     height: @step-divider-height;
     border-radius: @step-divider-height / 2;
+    //the width is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
+    width: (@step-divider-length / 2) + 100;
+  }
+  &:before {
+    //the width is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
+    left: (((@step-divider-length / 2) + 5) * -1);
+  }
+  &:after {
+    //the width is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
+    right: (((@step-divider-length / 2) + 5) * -1);
   }
   &:first-child {
     margin-left: 0;
@@ -58,11 +67,31 @@
     display: none;
   }
   &.unfocus {
-    opacity: .5;
+    .img-mask {
+      background-color: @grey-lighter;
+      border-color: @grey-lighter;
+      //create a translucent overlay over the image to make it appear faded
+      &:before {
+        background-color: rgba(255, 255, 255, 0.7);
+        content: "";
+        display: block;
+        width: 150px;
+        height: 150px;
+      }
+    }
+    &:before, &:after {
+      background-color: @grey-lighter;
+    }
   }
   &.focus {
     md-tabs {
       display: block;
+    }
+    &:before {
+      .horizontal-gradient(@grey-lighter, @dark-warm-grey);
+    }
+    &:after {
+      .horizontal-gradient(@dark-warm-grey, @grey-lighter);
     }
   }
 }
