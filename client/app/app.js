@@ -175,16 +175,8 @@ angular.module('formerFunApp')
 
 
     formlyConfig.setType({
-      name: 'journeyEmotions',
-      template: '<md-tabs class="journey-emotions {{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="true">' +
-                  '<md-tab label="{{field.label || name}}" class="repeatsection" ng-repeat="(name, field) in to.fields">' +
-                    '<md-content class="md-padding">' +
-                      '<p ng-focus="isFocused = true" ng-blur="isFocused = false" ng-class="{\'is-focused\': isFocused}" class="inlineparagraph {{to.className}}}">' +
-                        '<textarea msd-elastic="\n" ng-model="model[field.key]" />' +
-                      '</p>' +
-                    '</md-content>' +
-                  '</md-tab>' +
-                '</md-tabs>',
+      name: 'journeyImage',
+      template: '<img />',
 
       controller: function($scope) {
         $scope.formOptions = { formState: $scope.formState };
@@ -197,6 +189,7 @@ angular.module('formerFunApp')
 
       }
     });
+
 
 
     formlyConfig.setType({

@@ -215,10 +215,18 @@ Form.find({name: 'journeyinline'}).remove(function() {
                 className: 'step-container',
                 fields: [
                   {
+                    key: 'stepImage',
+                    type: 'journeyImage',
+                    templateOptions: {
+                      className: 'img-mask'
+                    }
+                  },
+                  {
                     key: 'stepTitle',
                     type: 'inlinetitle-2',
                     templateOptions: {
                       label: 'Step Title',
+                      className: 'center',
                       required: true
                     }
                   },
@@ -227,6 +235,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     type: 'inlineparagraph',
                     templateOptions: {
                       label: 'Step Blurb',
+                      className: 'step-blurb center',
                       required: false
                     }
                   },
@@ -235,6 +244,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     type: 'inlineparagraph',
                     templateOptions: {
                       label: 'Time of event',
+                      className: 'step-time center',
                       required: false
                     }
                   },
