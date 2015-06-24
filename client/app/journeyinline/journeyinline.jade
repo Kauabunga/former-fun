@@ -5,9 +5,6 @@ md-content.journey-inline-view
       a(href='/journeyview/{{currentId}}')
         h4 Journey Inline View
 
-    .col-sm-2.col-sm-offset-2
-      md-button.md-primary(type='button', ng-click='gotoEditor()') Back to editor
-
   .journey-wrapper
     .journey-container
 
@@ -16,3 +13,5 @@ md-content.journey-inline-view
           form-id-state-param='currentId', form-submit='submitForm')
 
 
+  md-button.md-fab.back-button(type='button', ng-click='gotoEditor()')
+    md-icon(md-svg-icon='/assets/images/back.svg')

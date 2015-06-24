@@ -5,11 +5,11 @@ md-content.journey-presentation-view
       a(href='/journeyinline/start/{{currentId}}')
         h4 Journey Presentation View
 
-    .col-sm-2.col-sm-offset-2
-      md-button.md-primary(type='button', ng-click='gotoEditor()') Back to editor
-
-
   journeyful(journey-definition='journeyDefinition')
 
 
   //pre {{journeyDefinition | json}}
+  
+  md-button.md-fab.back-button(type='button', ng-click='gotoEditor()')
+    md-icon(md-svg-icon='/assets/images/back.svg')
+  
