@@ -27,6 +27,7 @@
 
     var $stateParams = $injector.get('$stateParams');
     var $log = $injector.get('$log');
+    var $timeout = $injector.get('$timeout');
 
 
 
@@ -61,7 +62,7 @@
      */
     function link(scope){
 
-      scope.getIndex = function() {
+      scope.getIndexString = function() {
         return getIndex() + 1;
       };
 
@@ -69,24 +70,23 @@
         return scope.$parent.$parent.$parent.$parent.$index;
       }
 
-      console.log(scope);
-      console.log(scope);
-      console.log(scope);
-      console.log(scope);
-      scope.getTargetIndexes = function(){
-        var count = scope.$parent.$parent.$parent.$parent.$parent.model.steps.length;
-        var currentIndex = getIndex();
-        var i;
-        var indexes = [];
-        for(i = 0; i < count; i++){
-          if(i === currentIndex){
-            continue;
-          }
-          indexes.push('' + i);
-        }
+      scope.getTotalPositions = function(){
+        return scope.$parent.$parent.$parent.$parent.$parent.model.steps.length;
+      };
 
-        return indexes;
-      }
+      scope.moveToIndex = function(targetIndex){
+        var model = scope.$parent.$parent.$parent.$parent.$parent.model;
+
+        $timeout(function(){
+          var currentIndex = getIndex();
+          var currentStep = model.steps[currentIndex];
+          model.steps.splice(currentIndex, 1);
+          $timeout(function(){
+            model.steps.splice(targetIndex - 1, 0, currentStep);
+          });
+        });
+
+      };
     }
 
 

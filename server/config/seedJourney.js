@@ -235,7 +235,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                   {
                     type: 'journeyIndex',
                     templateOptions: {
-
+                      className: 'journey-index'
                     }
                   },
                   {
