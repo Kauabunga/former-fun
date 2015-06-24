@@ -287,6 +287,10 @@ Template.find({}).remove(function() {
       template: '<img class="{{to.className}}" ng-src="{{model[options.key]}}" />'
     },
     {
+      name: 'journeyIndex',
+      template: '<div class="step-number {{to.className}}">{{$index}}</div>'
+    },
+    {
       name: 'journeyEmotions',
       template: '<md-tabs class="journey-emotions {{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="true">' +
                   '<md-tab label="{{field.label || name}}" class="repeatsection" ng-repeat="(name, field) in to.fields">' +

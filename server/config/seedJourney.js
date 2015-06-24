@@ -215,6 +215,12 @@ Form.find({name: 'journeyinline'}).remove(function() {
                 className: 'step-container',
                 fields: [
                   {
+                    type: 'journeyIndex',
+                    templateOptions: {
+
+                    }
+                  },
+                  {
                     key: 'stepImage',
                     type: 'journeyImage',
                     templateOptions: {
