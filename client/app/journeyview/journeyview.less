@@ -1,5 +1,6 @@
 body {
   background-color: @off-white;
+  color: @journey-grey;
 }
 
 .journey-wrapper {
@@ -36,7 +37,7 @@ body {
     display: block;
     position: absolute;
     top: 95px;
-    background: @journey-grey;
+    background: @journey-grey-light;
     height: @step-divider-height;
     border-radius: @step-divider-height / 2;
     //the width is halved because each step has a line left and right. These are positioned to just overlap so it looks like one continuous line
@@ -117,10 +118,24 @@ body {
   }
 
   &.focus {
+    p {
+      font-weight: 700;
+      .font-size(1.8);
+    }
+    h3 {
+      .font-size(5.2);
+    }
+    .img-mask {
+      border: 5px solid @journey-grey;
+    }
+    .step-number {
+      color: @loud-orange;
+    }
     .step-time {
       color: @fragrant-blue;
       font-weight: 700;
-      .font-size(1.6);
+      .font-size(2);
+      margin-top: -10px;
     }
     md-tabs {
       max-height: 500px;
@@ -142,10 +157,10 @@ body {
       height: 250px;
     }
     &:before {
-      .horizontal-gradient(@grey-fade, @dark-warm-grey, 30%, 100%);
+      .horizontal-gradient(@grey-fade, @journey-grey, 30%, 80%);
     }
     &:after {
-      .horizontal-gradient(@dark-warm-grey, @grey-fade, 0%, 60%);
+      .horizontal-gradient(@journey-grey, @grey-fade, 0%, 80%);
     }
   }
 }
@@ -166,6 +181,8 @@ body {
 
 h1 {
   text-align: center;
+  color: @loud-orange !important;
+  font-weight: 700;
 }
 
 
