@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .controller('JourneyEditCtrl', function ($log, $scope, $http, $q, $window, former, $state, $stateParams) {
+  .controller('JourneyEditCtrl', function ($log, $scope, $http, $q, $window, former, $state, $stateParams, $timeout) {
 
     var formName = 'journey';
     var formBaseurl = '/api/forms/';
@@ -10,6 +10,7 @@ angular.module('formerFunApp')
     $scope.formDefinition = undefined;
     $scope.formControls = undefined;
     $scope.previousForms = undefined;
+    $scope.fadeIn = false;
 
     $scope.submitForm = submitForm;
     $scope.selectPreviousForm = selectPreviousForm;
@@ -38,6 +39,9 @@ angular.module('formerFunApp')
         })
         .then(function(formDefinition){
           $scope.formDefinition = formDefinition;
+          $timeout(function(){
+            $scope.fadeIn = true;
+          }, 100);
         });
     }
 

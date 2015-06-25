@@ -1,15 +1,13 @@
 md-content.journey-presentation-view
 
-  .container
-    .col-sm-8
-      a(href='/journeyinline/start/{{currentId}}')
-        h4 Journey Presentation View
-
   journeyful(journey-definition='journeyDefinition')
 
 
-  //pre {{journeyDefinition | json}}
-  
-  md-button.md-fab.back-button(type='button', ng-click='gotoEditor()')
-    md-icon(md-svg-icon='/assets/images/back.svg')
-  
+  a(href='/journeyselect')
+    md-button.md-fab.home-button(type='button')
+      md-icon(md-svg-icon='/assets/images/ic_home_24px.svg')
+
+  a(href='/journeyinline/start/{{currentId}}')
+    md-button.md-fab.edit-button(type='button', ng-click='gotoEditor()')
+      md-icon(md-svg-icon='/assets/images/ic_edit_24px.svg')
+

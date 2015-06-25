@@ -68,12 +68,23 @@ angular.module('formerFunApp', [
       .primaryPalette('blue')
       .accentPalette('orange');
 
-  });
+  })
+
+  .run(function($log, formlyConfig, $localStorage, $injector){
 
 
+    var $rootScope = $injector.get('$rootScope');
 
-angular.module('formerFunApp')
-  .run(function($log, formlyConfig, $http, $localStorage){
+
+    /**
+     *
+     */
+    $rootScope.$on('$stateChangeSuccess', function (event, next) {
+      //$rootScope.currentRouteClass = $state.current.name.replace(/\./g, ' ');
+      $rootScope.currentRouteClass = window.location.pathname.split('/').join(' ').toString();
+
+    });
+
 
 
     var formIdsKey = 'localFormIds_journey';
