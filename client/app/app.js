@@ -70,7 +70,7 @@ angular.module('formerFunApp', [
 
   })
 
-  .run(function($log, formlyConfig, $localStorage, $injector){
+  .run(function($log, formlyConfig, $localStorage, $injector, $timeout){
 
 
     var $rootScope = $injector.get('$rootScope');
@@ -81,7 +81,9 @@ angular.module('formerFunApp', [
      */
     $rootScope.$on('$stateChangeSuccess', function (event, next) {
       //$rootScope.currentRouteClass = $state.current.name.replace(/\./g, ' ');
-      $rootScope.currentRouteClass = window.location.pathname.split('/').join(' ').toString();
+      $timeout(function(){
+        $rootScope.currentRouteClass = window.location.pathname.split('/').join(' ').toString();
+      });
 
     });
 
