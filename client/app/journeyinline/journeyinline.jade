@@ -3,7 +3,7 @@ md-content.journey-inline-view
   .container
     .col-sm-8
       a(href='/journeyview/{{currentId}}')
-        h4 Journey Edit
+        h4.edit-title Journey Edit
 
   .journey-wrapper(ng-class='{"fade-in": fadeIn}')
 
@@ -20,9 +20,9 @@ md-content.journey-inline-view
       md-icon(md-svg-icon='/assets/images/ic_home_24px.svg')
 
   a(href='/journeyview/{{currentId}}')
-    md-button.md-fab.edit-button(type='button', ng-click='gotoEditor()')
+    md-button.md-fab.edit-button.presentation-view(type='button', ng-click='gotoEditor()')
       md-icon(md-svg-icon='/assets/images/ic_eye_24px.svg')
 
-  //a(href='/journeyinline/start/{{currentId}}')
-    md-button.md-fab.edit-button(type='button', ng-click='gotoEditor()')
-      md-icon(md-svg-icon='/assets/images/ic_edit_24px.svg')
+  a(href='/journeyedit/start/{{currentId}}')
+    md-button.md-fab.edit-button-full(type='button', ng-click='gotoEditor()')
+      md-icon(md-svg-icon='/assets/images/ic_list_24px.svg')

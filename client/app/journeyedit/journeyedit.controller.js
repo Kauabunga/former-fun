@@ -11,6 +11,7 @@ angular.module('formerFunApp')
     $scope.formControls = undefined;
     $scope.previousForms = undefined;
     $scope.fadeIn = false;
+    $scope.currentId = $stateParams.currentId;
 
     $scope.submitForm = submitForm;
     $scope.selectPreviousForm = selectPreviousForm;
