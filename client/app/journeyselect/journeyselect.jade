@@ -7,8 +7,8 @@ md-content.journey-select
       h4 Select or create a journey
 
       .margin-top-sm
-      a(href='/journeyinline//')
-        md-button.md-raised.md-primary.create-button(type='button') Create new journey
+      a.create-button(href='/journeyinline//')
+        md-button.md-raised.md-primary(type='button') Create new journey
 
 
       div.margin-top-lg
@@ -18,10 +18,10 @@ md-content.journey-select
       md-list
         md-list-item(ng-repeat='journey in journeys track by $index')
           a(href='/journeyview/{{journey._formId}}')
-            md-button.md-raised.previous-created(type='button') {{journey.journeyTitle || journey._formId}}
+            md-button.previous-created(type='button') {{journey.journeyTitle || journey._formId}}
 
-          md-button.action-button.md-warn(type='button', ng-click='deleteJourney(journey)') Delete
-          md-button.action-button.md-primary(type='button', ng-click='shareJourney(journey)') Share
+          md-button.action-button.md-warn.previous-created-action(type='button', ng-click='deleteJourney(journey)') Delete
+          md-button.action-button.md-primary.previous-created-action(type='button', ng-click='shareJourney(journey)') Share
 
 
       div.margin-top-sm.padding-bottom-md
