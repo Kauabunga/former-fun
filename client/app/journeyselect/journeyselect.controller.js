@@ -7,6 +7,8 @@ angular.module('formerFunApp')
 
 
     $scope.journeys = undefined;
+    $scope.deleteJourney = deleteJourney;
+    $scope.selectJourney = selectJourney;
 
     $scope.newFormId = createNewFormId();
     $scope.clearLocalStorage = clearLocalStorage;
@@ -23,6 +25,19 @@ angular.module('formerFunApp')
       return getLocalJourneys(formName);
     }
 
+    /**
+     *
+     */
+    function deleteJourney(){
+      $log.debug('deleteJourney');
+    }
+
+    /**
+     *
+     */
+    function selectJourney(){
+      $log.debug('selectJourney');
+    }
 
     /**
      *

@@ -94,6 +94,9 @@ angular.module('formerFunApp')
          */
         function loadSection(formSection){
           $log.debug('Loading form section', formSection);
+
+          trackFormId($stateParams[scope.formIdStateParam]);
+
           scope.formFields = formSection.fields;
         }
 

@@ -3,21 +3,25 @@ md-content.journey-select
   .container
     .col-sm-8.col-sm-offset-3.margin-top-md
       h2 Welcome to the
-        | 
-        span Journey Creator
+        span &nbsp;Journey Creator
       h4 Select or create a journey
 
       .margin-top-sm
-      a(href='/journeyedit//')
+      a(href='/journeyinline//')
         md-button.md-raised.md-primary.create-button(type='button') Create new journey
+
 
       div.margin-top-lg
         hr
         h4 Previously created Journeys
+
       md-list
         md-list-item(ng-repeat='journey in journeys track by $index')
           a(href='/journeyview/{{journey._formId}}')
             md-button.md-raised.previous-created(type='button') {{journey.journeyTitle || journey._formId}}
+
+          md-button.action-button.md-warn(type='button', ng-click='deleteJourney(journey)') Delete
+          md-button.action-button.md-primary(type='button', ng-click='shareJourney(journey)') Share
 
 
       div.margin-top-sm.padding-bottom-md
