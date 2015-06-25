@@ -23,30 +23,24 @@ angular.module('formerFunApp')
      * @returns {*}
      */
     function init(){
-      if( ! $stateParams.currentId ){
-        return gotoEditor();
-      }
-      else {
 
-        return fetchTemplates()
-          .then(function(templates){
-            return former.loadTemplates(templates);
-          })
-          .then(function(){
-            return fetchForm(viewFormName);
-          })
-          .then(function(formComplete){
-            return former.loadForm(formComplete);
-          })
-          .then(function(formDefinition){
-            $scope.formDefinition = formDefinition;
-            $timeout(function(){
-              $scope.fadeIn = true;
-            });
+      return fetchTemplates()
+        .then(function(templates){
+          return former.loadTemplates(templates);
+        })
+        .then(function(){
+          return fetchForm(viewFormName);
+        })
+        .then(function(formComplete){
+          return former.loadForm(formComplete);
+        })
+        .then(function(formDefinition){
+          $scope.formDefinition = formDefinition;
+          $timeout(function(){
+            $scope.fadeIn = true;
           });
+        });
 
-
-      }
     }
 
 
@@ -54,11 +48,7 @@ angular.module('formerFunApp')
      *
      */
     function gotoEditor(){
-
       console.log('gotoEditor', $stateParams);
-
-      //TODO this is a bug? why is this not redirecting to the default section....
-      $stateParams.currentSection = 'start';
 
       return $state.go('journeyedit', $stateParams, { reload: true });
     }
