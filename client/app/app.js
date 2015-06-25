@@ -171,7 +171,7 @@ angular.module('formerFunApp', [
                   '<formly-form fields="fields" model="element" bind-name="\'formly_ng_repeat\' + index + $parent.$index"></formly-form> ' +
                 '</div>',
 
-      controller: function($scope) {
+      controller: ['$scope', function($scope) {
         $scope.formOptions = { formState: $scope.formState };
 
         $scope.copyFields = copyFields;
@@ -180,7 +180,7 @@ angular.module('formerFunApp', [
           return angular.copy(fields);
         }
 
-      }
+      }]
     });
 
 
@@ -213,7 +213,7 @@ angular.module('formerFunApp', [
         }
       },
 
-      controller: function($scope) {
+      controller: ['$scope', function($scope) {
         $scope.formOptions = { formState: $scope.formState };
         $scope.addNew = addNew;
         $scope.remove = remove;
@@ -255,7 +255,7 @@ angular.module('formerFunApp', [
 
           repeatsection.push(newsection);
         }
-      }
+      }]
     });
 
   });
