@@ -35,6 +35,8 @@ angular.module('formerFunApp')
      */
     function init(){
 
+      var sendSocketUpdateThrottle = _.debounce(sendSocketUpdate, 500, false);
+
       var journeyWatcher = $scope.$watch('journey', function(){
         $log.debug('journeyWatcher', $scope.journey);
 
@@ -48,7 +50,7 @@ angular.module('formerFunApp')
               $scope.disableWatcher = false;
             }
             else if($scope.disableWatcher === false){
-              sendSocketUpdate();
+              sendSocketUpdateThrottle();
             }
           }
         }
