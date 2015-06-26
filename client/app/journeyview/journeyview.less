@@ -103,7 +103,7 @@ body {
     @my-transition: min-height @transition-timing @transition-ease, max-height @transition-timing @transition-ease;
     .transition(@my-transition);
   }
-  .step-time {
+  .step-time, .step-number {
     .transition(all @transition-timing @transition-ease);
   }
   &.unfocus {
@@ -136,11 +136,11 @@ body {
 
   &.focus {
     p {
-      font-weight: 700;
       .font-size(1.8);
     }
     h3 {
       .font-size(5.2);
+      color: @fragrant-blue;
     }
     .img-mask {
       border: 5px solid @journey-grey;
@@ -149,7 +149,7 @@ body {
       color: @loud-orange;
     }
     .step-time {
-      color: @fragrant-blue;
+      color: @grey-fade;
       font-weight: 700;
       .font-size(2);
       margin-top: -10px;
