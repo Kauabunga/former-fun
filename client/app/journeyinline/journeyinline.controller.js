@@ -20,7 +20,9 @@ angular.module('formerFunApp')
 
 
     $scope.$on('$destroy', function(){
-      socket.socket.removeListener('journey:updated', socketUpdate);
+
+      //TODO what is the correct method?
+      socket.socket.off('journey:updated', socketUpdate);
     });
 
 
@@ -96,6 +98,7 @@ angular.module('formerFunApp')
 
         $scope.disableWatcher = true;
         _.merge($scope.journey, journey, true);
+        $scope.journeyTitle = journey.title;
 
         $timeout(function(){
           $scope.disableWatcher = false;
@@ -109,6 +112,7 @@ angular.module('formerFunApp')
      */
     function gotoEditor(){
       console.log('gotoEditor', $stateParams);
+
       return $state.go('journeyedit', $stateParams, { reload: true });
     }
 

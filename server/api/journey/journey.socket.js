@@ -31,7 +31,7 @@ exports.register = function(socket, socketio) {
         }
         else {
 
-          journey.stepTitle = updateJourney.stepTitle;
+          journey.journeyTitle = updateJourney.journeyTitle;
           journey.steps = updateJourney.steps;
 
           journey.save(function(error, updatedJourney){
