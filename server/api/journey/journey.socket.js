@@ -30,12 +30,13 @@ exports.register = function(socket, socketio) {
           Journey.create(updateJourney);
         }
         else {
-          _.merge(journey, updateJourney, true);
-          console.log('journey', journey._formId);
+
+          journey.journeyTitle = updateJourney.journeyTitle;
+          journey.steps = updateJourney.steps;
 
           journey.save(function(error, updatedJourney){
             console.log('saved journey', journey._formId);
-            socketio.emit('journey:updated', updateJourney);
+            socketio.emit('journey:updated', journey);
           });
         }
 

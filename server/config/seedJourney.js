@@ -270,8 +270,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     defaultValue: 'Default step title',
                     templateOptions: {
                       label: 'Step Title',
-                      className: 'center',
-                      required: true
+                      className: 'center'
                     }
                   },
                   {
@@ -280,8 +279,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     defaultValue: 'Default step blurb',
                     templateOptions: {
                       label: 'Step Blurb',
-                      className: 'step-blurb center',
-                      required: false
+                      className: 'step-blurb center'
                     }
                   },
                   {
@@ -290,8 +288,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     defaultValue: 'Default step time',
                     templateOptions: {
                       label: 'Time of event',
-                      className: 'step-time center',
-                      required: false
+                      className: 'step-time center'
                     }
                   },
                   {

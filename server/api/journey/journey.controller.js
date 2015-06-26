@@ -23,7 +23,7 @@ exports.show = function(req, res) {
 // Creates a new journey in the DB.
 exports.create = function(req, res) {
 
-  console.log('creating journey', req.body._formId);
+  console.log('creating journey', req.body);
 
   Journey.create(req.body, function(err, journey) {
     if(err) { return handleError(res, err); }

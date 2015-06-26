@@ -20,7 +20,9 @@ angular.module('formerFunApp')
 
 
     $scope.$on('$destroy', function(){
-      socket.socket.removeListener('journey:updated', socketUpdate);
+
+      //TODO what is the correct method?
+      socket.socket.off('journey:updated', socketUpdate);
     });
 
 
@@ -32,6 +34,8 @@ angular.module('formerFunApp')
      * @returns {*}
      */
     function init(){
+
+      var sendSocketUpdateThrottle = _.debounce(sendSocketUpdate, 500, false);
 
       var journeyWatcher = $scope.$watch('journey', function(){
         $log.debug('journeyWatcher', $scope.journey);
@@ -46,7 +50,7 @@ angular.module('formerFunApp')
               $scope.disableWatcher = false;
             }
             else if($scope.disableWatcher === false){
-              sendSocketUpdate();
+              sendSocketUpdateThrottle();
             }
           }
         }
@@ -96,6 +100,7 @@ angular.module('formerFunApp')
 
         $scope.disableWatcher = true;
         _.merge($scope.journey, journey, true);
+        $scope.journeyTitle = journey.title;
 
         $timeout(function(){
           $scope.disableWatcher = false;
@@ -109,6 +114,7 @@ angular.module('formerFunApp')
      */
     function gotoEditor(){
       console.log('gotoEditor', $stateParams);
+
       return $state.go('journeyedit', $stateParams, { reload: true });
     }
 
