@@ -17,6 +17,8 @@ exports.register = function(socket, socketio) {
   });
 
 
+
+
   socket.on('journey:update', function(updateJourney){
 
     console.log('journey:update event', updateJourney._id, updateJourney._formId);
@@ -24,19 +26,16 @@ exports.register = function(socket, socketio) {
     Journey.findOneAsync({_formId: updateJourney._formId})
       .then(function(journey){
 
-        var updateId = updateJourney._updateId;
-
         if( ! journey ){
           Journey.create(updateJourney);
         }
         else {
-          _.merge(journey, updateJourney);
+          _.merge(journey, updateJourney, true);
           console.log('journey', journey._formId);
-          //TODO This isn't triggering our post save hook????
-          journey.save(function(){
-            console.log('saving journey', journey._formId);
-            journey._updateId = updateId;
-            socketio.emit('journey:updated', journey);
+
+          journey.save(function(error, updatedJourney){
+            console.log('saved journey', journey._formId);
+            socketio.emit('journey:updated', updateJourney);
           });
         }
 

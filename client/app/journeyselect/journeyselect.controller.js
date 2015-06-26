@@ -9,6 +9,7 @@ angular.module('formerFunApp')
     $scope.journeys = undefined;
     $scope.sharedJourneys = undefined;
 
+    $scope.deleteSharedJourney = deleteSharedJourney;
     $scope.deleteJourney = deleteJourney;
     $scope.shareJourney = shareJourney;
 
@@ -39,7 +40,7 @@ angular.module('formerFunApp')
      *
      */
     function socketUpdate(status, sharedJourney){
-      $log.debug('socketUpdate', arguments);
+      $log.debug('socketUpdate', status, sharedJourney);
       addSharedJourney(sharedJourney);
     }
 
@@ -62,15 +63,28 @@ angular.module('formerFunApp')
 
     /**
      *
+     * @param journey
+     */
+    function deleteSharedJourney(journey){
+      deleteJourney(journey)
+        .then(function(){
+          $http.delete('/api/journeys/' + journey._id)
+            .then(function(response){
+              $log.debug('successfully deleted shared journey', response);
+            });
+        });
+    }
+
+    /**
+     *
      */
     function deleteJourney(journey){
       $log.debug('deleteJourney', journey);
-      former.deleteForm(formName, journey)
+      return former.deleteForm(formName, journey)
         .then(function(deletedForm){
           getLocalJourneys(formName);
 
           //TODO add undo function
-
         });
     }
 
@@ -86,7 +100,7 @@ angular.module('formerFunApp')
 
       $http.post('/api/journeys', journeyCopy)
         .then(function(response){
-          $log.debug('shareJourneyResponse', response);
+          $log.debug('shareJourneyResponse', response.data);
         })
         .catch(function(error){
           $log.debug('shareJourneyError', error);
