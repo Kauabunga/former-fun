@@ -126,7 +126,6 @@ h1 {
     width: 40px;
     height: 40px;
     padding-top: 3px;
-    padding-right: 3px;
     color: darken(@grey-fade, 20%) !important;
   }
 }
@@ -155,7 +154,7 @@ a:hover {
   text-decoration: none;
 }
 
-input:focus, textarea:focus, :focus, a:focus {
+input:focus, textarea:focus, :focus, a:focus, :not(md-tab-item:focus) {
   outline: 2px solid @loud-orange;
   padding: 2px;
 }
