@@ -71,7 +71,7 @@ angular.module('formerFunApp')
           $http.delete('/api/journeys/' + journey._id)
             .then(function(response){
               $log.debug('successfully deleted shared journey', response);
-            })
+            });
         });
     }
 
