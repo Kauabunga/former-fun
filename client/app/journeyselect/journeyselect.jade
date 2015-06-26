@@ -23,6 +23,7 @@ md-content.journey-select
           md-button.action-button.md-warn.previous-created-action(type='button', ng-click='deleteJourney(journey)') Delete
           a(href='/journeyinline//{{journey._formId}}')
             md-button.action-button.md-accent.previous-created-action(type='button') Edit
+
           md-button.action-button.md-primary.previous-created-action(type='button', ng-click='shareJourney(journey)') Share
 
 
@@ -40,6 +41,8 @@ md-content.journey-select
             md-button.action-button.md-warn.previous-created-action(type='button', ng-click='deleteSharedJourney(journey)') Delete
             a(href='/journeyinline//{{journey._formId}}')
               md-button.action-button.md-accent.previous-created-action(type='button') Edit
+
+            md-button.action-button.md-primary.previous-created-action(type='button', ng-click='copyJourney(journey)') Copy
 
 
 
