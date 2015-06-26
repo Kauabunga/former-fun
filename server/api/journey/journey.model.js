@@ -25,6 +25,7 @@ var JourneySchema = new Schema({
 });
 
 
+
 var JourneyModel = mongoose.model('Journey', JourneySchema);
 
 Promise.promisifyAll(JourneyModel);

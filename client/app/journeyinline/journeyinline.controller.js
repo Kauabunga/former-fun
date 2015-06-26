@@ -14,9 +14,16 @@ angular.module('formerFunApp')
     $scope.fadeIn = false;
     $scope.journey = undefined;
 
-    $scope.disableWatcher = false;
+    $scope.disableWatcher = undefined;
 
     $scope.gotoEditor = gotoEditor;
+
+
+    $scope.$on('$destroy', function(){
+
+      //TODO what is the correct method?
+      socket.socket.off('journey:updated', socketUpdate);
+    });
 
 
     return init();
@@ -29,20 +36,24 @@ angular.module('formerFunApp')
     function init(){
 
       var journeyWatcher = $scope.$watch('journey', function(){
+        $log.debug('journeyWatcher', $scope.journey);
 
-        if($scope.journey && $scope.journey._formId && ! $scope.journey.isShared){
-          return journeyWatcher();
-        }
-
-        if($scope.journey && $scope.journey._formId &&
-          $scope.journey.isShared && ! $scope.disableWatcher){
-
-          sendSocketUpdate();
+        if($scope.journey && $scope.journey._formId){
+          if(! $scope.journey.isShared){
+            return journeyWatcher();
+          }
+          else {
+            if($scope.disableWatcher === undefined){
+              socket.socket.on('journey:updated', socketUpdate);
+              $scope.disableWatcher = false;
+            }
+            else if($scope.disableWatcher === false){
+              sendSocketUpdate();
+            }
+          }
         }
       }, true);
 
-
-      socket.socket.on('journey:updated', socketUpdate);
 
 
 
@@ -72,9 +83,7 @@ angular.module('formerFunApp')
      */
     function sendSocketUpdate(){
       $log.debug('sending update');
-
-      var journeyUpdate = _.merge({_updateId: former.getNewFormId()}, $scope.journey);
-      socket.socket.emit('journey:update', journeyUpdate);
+      socket.socket.emit('journey:update', $scope.journey);
     }
 
     /**
@@ -85,10 +94,12 @@ angular.module('formerFunApp')
       $log.debug('socketUpdate', journey);
 
       if(journey && journey.isShared && journey._formId &&
-        journey._formId === $scope.journey._formId){
+        journey._formId === $scope.journey._formId && ! $scope.disableWatcher){
 
         $scope.disableWatcher = true;
+
         _.merge($scope.journey, journey, true);
+
 
         $timeout(function(){
           $scope.disableWatcher = false;
