@@ -10,6 +10,7 @@ angular.module('formerFunApp')
 
     return {
       fetchLocalFormIds: fetchLocalFormIds,
+      deleteForm: deleteForm,
       fetchLocalFormData: fetchLocalFormData,
       getNewFormId: getNewFormId,
       getLocalFormIdsKey: getLocalFormIdsKey,
@@ -94,6 +95,27 @@ angular.module('formerFunApp')
       return formCache[form.name];
     }
 
+
+    /**
+     *
+     * @param formData
+     */
+    function deleteForm(formName, formData){
+      var formId = formData;
+      if(typeof formData !== 'string'){
+        formId = formData._formId;
+      }
+
+      var formIds = $localStorage[getLocalFormIdsKey(formName)];
+      if(formIds.indexOf(formId) !== -1){
+        formIds.splice(formIds.indexOf(formId), 1);
+      }
+
+      var deletedFormData = $localStorage[formId];
+
+      $localStorage[formId] = undefined;
+      return $q.when(deletedFormData);
+    }
 
     /**
      *

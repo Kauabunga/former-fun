@@ -11,17 +11,18 @@ function onDisconnect(socket) {
 }
 
 // When the user connects.. perform this
-function onConnect(socket) {
+function onConnect(socket, socketio) {
   // When the client emits 'info', this listens and executes
   socket.on('info', function (data) {
     console.info('[%s] %s', socket.address, JSON.stringify(data, null, 2));
   });
 
   // Insert sockets below
-  require('../api/mock/mock.socket').register(socket);
-  require('../api/transformation/transformation.socket').register(socket);
-  require('../api/form/form.socket').register(socket);
-  require('../api/template/template.socket').register(socket);
+  require('../api/journey/journey.socket').register(socket, socketio);
+  require('../api/mock/mock.socket').register(socket, socketio);
+  require('../api/transformation/transformation.socket').register(socket, socketio);
+  require('../api/form/form.socket').register(socket, socketio);
+  require('../api/template/template.socket').register(socket, socketio);
 }
 
 module.exports = function (socketio) {
@@ -49,12 +50,12 @@ module.exports = function (socketio) {
 
     // Call onDisconnect.
     socket.on('disconnect', function () {
-      onDisconnect(socket);
+      onDisconnect(socket, socketio);
       console.info('[%s] DISCONNECTED', socket.address);
     });
 
     // Call onConnect.
-    onConnect(socket);
+    onConnect(socket, socketio);
     console.info('[%s] CONNECTED', socket.address);
   });
 };

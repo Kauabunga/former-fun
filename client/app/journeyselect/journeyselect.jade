@@ -22,6 +22,20 @@ md-content.journey-select
 
           md-button.action-button.md-warn(type='button', ng-click='deleteJourney(journey)') Delete
           md-button.action-button.md-primary(type='button', ng-click='shareJourney(journey)') Share
+          a(href='/journeyinline//{{journey._formId}}')
+            md-button.action-button.md-accent(type='button', ng-click='shareJourney(journey)') Edit
+
+
+
+      div.margin-top-lg
+        hr
+        h4 Shared Journeys
+
+      md-list
+        md-list-item(ng-repeat='journey in sharedJourneys track by $index')
+          a(href='/journeyview/{{journey._formId}}')
+            md-button.md-raised.previous-created(type='button') {{journey.journeyTitle || journey._formId}}
+
 
 
       div.margin-top-sm.padding-bottom-md

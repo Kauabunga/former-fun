@@ -7,6 +7,7 @@
 
 
 
+var Journey = require('../api/journey/journey.model');
 var Template = require('../api/template/template.model');
 var Transformation = require('../api/transformation/transformation.model');
 var Form = require('../api/form/form.model');
@@ -17,6 +18,23 @@ var fs = require('fs');
 Promise.promisifyAll(fs);
 var _ = require('lodash');
 
+
+
+Journey.find({}).remove(function(){
+
+  Journey.createAsync(
+    {
+      _formId: '_666666666666',
+      journeyTitle: 'YAYAYAYA',
+      steps: [
+        {
+          stepTitle: ''
+        }
+      ]
+    }
+  );
+
+});
 
 
 //////////////////////////////////////////////////////////////////////////////////
