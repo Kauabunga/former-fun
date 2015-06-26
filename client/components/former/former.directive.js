@@ -67,8 +67,10 @@ angular.module('formerFunApp')
           }
           else {
             var modelKey = getFormModelKey();
+
             //bind form model to local scope with formId
             //TODO this model should come from the former service????
+
             scope.formModel = $localStorage[modelKey] = $localStorage[modelKey] || {};
 
             //write formId to model
@@ -167,9 +169,8 @@ angular.module('formerFunApp')
           }
           if(targetId){
             $stateParams[scope.formIdStateParam] = targetId;
+            trackFormId(targetId);
           }
-
-          trackFormId($stateParams[scope.formIdStateParam]);
 
           var options = replace ? { location: 'replace' } : {};
           $state.transitionTo(

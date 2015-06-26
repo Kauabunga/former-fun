@@ -38,6 +38,7 @@ angular.module('formerFunApp')
       else if(formName){
         return fetchLocalFormIds(formName)
           .then(function(ids){
+            $log.debug('fetchLocalFormData ids', ids);
             return $q.when(_.map(ids, function(id){
               return $localStorage[id];
             }));

@@ -22,17 +22,6 @@ var _ = require('lodash');
 
 Journey.find({}).remove(function(){
 
-  Journey.createAsync(
-    {
-      _formId: '_666666666666',
-      journeyTitle: 'YAYAYAYA',
-      steps: [
-        {
-          stepTitle: ''
-        }
-      ]
-    }
-  );
 
 });
 

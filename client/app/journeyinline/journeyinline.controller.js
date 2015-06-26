@@ -20,9 +20,7 @@ angular.module('formerFunApp')
 
 
     $scope.$on('$destroy', function(){
-
-      //TODO what is the correct method?
-      socket.socket.off('journey:updated', socketUpdate);
+      socket.socket.removeListener('journey:updated', socketUpdate);
     });
 
 
@@ -57,8 +55,6 @@ angular.module('formerFunApp')
       }, true);
 
 
-
-
       return fetchTemplates()
         .then(function(templates){
           return former.loadTemplates(templates);
@@ -71,6 +67,13 @@ angular.module('formerFunApp')
         })
         .then(function(formDefinition){
           $scope.formDefinition = formDefinition;
+
+          //rejigging name here so it matches with all our other ids
+          //TODO should really have a form.type
+          //TODO should really have a form.type
+          //TODO should really have a form.type
+          //TODO should really have a form.type
+          $scope.formDefinition.name = 'journey';
 
           $timeout(function(){
             $scope.fadeIn = true;
