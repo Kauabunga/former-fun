@@ -22,7 +22,6 @@ exports.register = function(socket, socketio) {
   socket.on('journey:update', function(updateJourney){
 
     console.log('journey:update event', updateJourney._id, updateJourney._formId);
-    console.log('journey:update event', updateJourney);
 
     Journey.findOneAsync({_formId: updateJourney._formId})
       .then(function(journey){
