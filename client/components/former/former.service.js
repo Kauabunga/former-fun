@@ -13,7 +13,9 @@ angular.module('formerFunApp')
       deleteForm: deleteForm,
       fetchLocalFormData: fetchLocalFormData,
       getNewFormId: getNewFormId,
+      addForm: addForm,
       getLocalFormIdsKey: getLocalFormIdsKey,
+      trackFormId: trackFormId,
       loadForm: loadForm,
       loadTemplates: loadTemplates
     };
@@ -126,8 +128,6 @@ angular.module('formerFunApp')
     function loadTemplates(templates) {
       $log.debug('templates response', templates);
 
-
-
       _(templates).sort(function(a, b){
           var aExtends = a.extends !== undefined;
           var bExtends = b.extends !== undefined;
@@ -230,6 +230,37 @@ angular.module('formerFunApp')
       }
 
       return transformationDeferred.promise;
+    }
+
+    /**
+     *
+     * @param formName
+     * @param form
+     */
+    function addForm(formName, form){
+      if( ! form._formId){
+        $log.error('adding form with no id');
+        return $q.reject();
+      }
+
+      trackFormId(formName, form._formId);
+      $localStorage[form._formId] = form;
+
+      return $q.when(form);
+    }
+
+
+    /**
+     *
+     * @param formName
+     * @param id
+     */
+    function trackFormId(formName, id){
+      var localStorageKey = getLocalFormIdsKey(formName);
+      $localStorage[localStorageKey] = $localStorage[localStorageKey] || [];
+      if($localStorage[localStorageKey].indexOf(id) === -1){
+        $localStorage[localStorageKey].push(id);
+      }
     }
 
     /**

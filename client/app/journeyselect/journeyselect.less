@@ -1,5 +1,11 @@
 .journey-select {
 
+  opacity: 0;
+  .transition(opacity 200ms ease);
+  &.fade-in {
+    opacity: 1;
+  }
+
   button.action-button {
     width: auto;
   }

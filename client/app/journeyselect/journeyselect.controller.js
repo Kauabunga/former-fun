@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .controller('JourneySelectCtrl', function ($log, $scope, $http, $q, $window, former, $mdToast, socket, $localStorage) {
+  .controller('JourneySelectCtrl', function ($log, $scope, $http, $q, $window, former, $mdToast, socket, $localStorage, $timeout) {
 
     var formName = 'journey';
 
@@ -29,10 +29,19 @@ angular.module('formerFunApp')
      * @returns {*}
      */
     function init(){
-      getSharedJourneys(formName)
+      getSharedJourneys(formName, true)
         .then(function(){
-          socket.syncUpdates('journey', $scope.sharedJourneys, socketUpdate);
+          getSharedJourneys(formName, false)
+            .then(function(){
+              socket.syncUpdates('journey', $scope.sharedJourneys, socketUpdate);
+
+            });
         });
+
+      $timeout(function(){
+        $scope.fadeIn = true;
+      }, 50);
+
       return getLocalJourneys(formName);
     }
 
@@ -50,15 +59,10 @@ angular.module('formerFunApp')
      * @param sharedJourney
      */
     function addSharedJourney(sharedJourney){
-
-      //TODO should be in former service
-      //TODO should be in former service
-      //TODO should be in former service
-      //TODO should be in former service
-      //TODO should be in former service
-      //former.addFormData(formName, sharedJourney);
-
-      $localStorage[sharedJourney._formId] = sharedJourney;
+      former.addForm(formName, sharedJourney)
+        .catch(function(){
+          $log.error('error adding form', arguments);
+        });
     }
 
     /**
@@ -67,7 +71,7 @@ angular.module('formerFunApp')
      */
     function deleteSharedJourney(journey){
       deleteJourney(journey)
-        .then(function(){
+        .then(function(deletedForm){
           $http.delete('/api/journeys/' + journey._id)
             .then(function(response){
               $log.debug('successfully deleted shared journey', response);
@@ -77,14 +81,47 @@ angular.module('formerFunApp')
 
     /**
      *
+     * @param deletedJourney
+     * @returns {*}
+     */
+    function showUndoDeleteToast(deletedJourney) {
+      var toast = $mdToast.simple()
+        .content('Journey Deleted')
+        .action('UNDO')
+        .highlightAction(false)
+        .position('top right');
+
+      return $mdToast.show(toast);
+    }
+
+    /**
+     *
      */
     function deleteJourney(journey){
       $log.debug('deleteJourney', journey);
       return former.deleteForm(formName, journey)
-        .then(function(deletedForm){
+        .then(function(deletedJourney){
+
           getLocalJourneys(formName);
 
-          //TODO add undo function
+          showUndoDeleteToast(deletedJourney)
+            .then(function(){
+              if(deletedJourney.isShared){
+                shareJourney(deletedJourney);
+              }
+              else {
+                former.addForm(formName, deletedJourney)
+                  .then(function(){
+                    getLocalJourneys(formName);
+                  })
+                  .catch(function(){
+                    $log.error('error adding form', arguments);
+                  });
+              }
+
+            });
+
+          return deleteJourney;
         });
     }
 
@@ -144,8 +181,8 @@ angular.module('formerFunApp')
      *
      * @param formName
      */
-    function getSharedJourneys(){
-      return $http.get('/api/journeys')
+    function getSharedJourneys(formName, cached){
+      return $http({method: 'GET', cache: cached || false, url: '/api/journeys'})
         .then(function(response){
           $log.debug('getSharedJourneys', response.data);
           $scope.sharedJourneys = response.data;

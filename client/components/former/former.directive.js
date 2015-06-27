@@ -186,11 +186,7 @@ angular.module('formerFunApp')
          * @param id
          */
         function trackFormId(id){
-          var localStorageKey = former.getLocalFormIdsKey(scope.formDefinition.name);
-          $localStorage[localStorageKey] = $localStorage[localStorageKey] || [];
-          if($localStorage[localStorageKey].indexOf(id) === -1){
-            $localStorage[localStorageKey].push(id);
-          }
+          former.trackFormId(scope.formDefinition.name, id);
         }
 
 
