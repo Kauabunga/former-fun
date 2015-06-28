@@ -26,12 +26,48 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
 
+    <style>
+      #app-loading-screen.fade-out {
+        opacity: 0;
+      }
+      #app-loading-screen {
+        transition: all 500ms ease;
+        -ms-transition: all 500ms ease;
+        -moz-transition: all 500ms ease;
+        -o-transition: all 500ms ease;
+        opacity: 1;
+        height: 100%;
+        width: 100%;
+        z-index: 99999999999;
+        position: absolute;
+        background-color: #f9f9f9;
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function(event){
+        setTimeout(function(){
+          var _loadingScreenElement = document.getElementById('app-loading-screen');
+          if(_loadingScreenElement){
+            _loadingScreenElement.className = 'fade-out';
+            setTimeout(function() {
+              _loadingScreenElement.parentNode.removeChild(_loadingScreenElement);
+            }, 500);
+          }
+        });
+      });
+    </script>
+
+
 
   </head>
   <body ng-app="formerFunApp" class="{{currentRouteClass}}">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+
+
+    <div id="app-loading-screen"></div>
 
     <!-- Add your site or application content here -->
     <div ui-view="" autoscroll="true"></div>
@@ -88,6 +124,7 @@
           <script src="app/journeyinline/journeyinline.js"></script>
           <script src="app/journeyselect/journeyselect.controller.js"></script>
           <script src="app/journeyselect/journeyselect.js"></script>
+          <script src="app/journeyselect/undotoast.controller.js"></script>
           <script src="app/journeyview/journeyview.controller.js"></script>
           <script src="app/journeyview/journeyview.js"></script>
           <script src="app/main/main.controller.js"></script>

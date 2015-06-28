@@ -8,7 +8,7 @@ h1.journey-title {{journeyDefinition.journeyTitle}}
 
       .step-number
         {{$index + 1}}
-      .img-mask(style="background-image: url('{{step.stepImage}}');", ng-click="toggleZoom(step)")
+      .img-mask(style="background-image: url('{{step.stepImage}}');", ng-click="toggleZoom(step, $index)")
 
       h3 {{step.stepTitle}}
       p.step-blurb {{step.stepBlurb}}
