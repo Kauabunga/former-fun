@@ -45,12 +45,9 @@ angular.module('formerFunApp')
         function scrollToStep(step, $index){
           $log.debug('scrolling to step', step, $index);
 
-
-
           $timeout(function(){
             var $stepContainer = $('.step-container');
             var stepContainerWidth = $stepContainer.outerWidth() * 0.75;
-
 
             var offset = 0;
             if($index !== 0){
@@ -62,8 +59,6 @@ angular.module('formerFunApp')
 
           });
 
-
-
         }
 
 
@@ -73,10 +68,6 @@ angular.module('formerFunApp')
          */
         scope.toggleZoom = function toggleZoom(step, $index) {
           console.log(' togglin...');
-
-          $timeout(function(){
-            scrollToStep(step, $index);
-          });
 
           var unfocusAll = function(step) {
             _.each(scope.journeyDefinition.steps, function(item) {
