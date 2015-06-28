@@ -16,7 +16,7 @@ angular.module('formerFunApp')
         $log.debug('journeyDefinition', scope.journeyDefinition);
 
         scope.fadeIn = false;
-        scope.scrollTo = scrollTo;
+        scope.scrollToStep = scrollToStep;
 
 
         var journeyDefinitionWatcherDestroy = scope.$watch('journeyDefinition', function() {
@@ -42,7 +42,7 @@ angular.module('formerFunApp')
          *
          * @param step
          */
-        function scrollTo(step, $index){
+        function scrollToStep(step, $index){
           $log.debug('scrolling to step', step, $index);
 
 
@@ -75,7 +75,7 @@ angular.module('formerFunApp')
           console.log(' togglin...');
 
           $timeout(function(){
-            scrollTo(step, $index);
+            scrollToStep(step, $index);
           });
 
           var unfocusAll = function(step) {

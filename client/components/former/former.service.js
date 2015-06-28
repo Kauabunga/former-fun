@@ -244,7 +244,7 @@ angular.module('formerFunApp')
       }
 
       if(formName && formName._formId){
-        $log.error('need to pass formName to add form addForm(formName, form)')
+        $log.error('need to pass formName to add form addForm(formName, form)');
         return $q.reject();
       }
 

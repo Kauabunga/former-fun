@@ -110,7 +110,6 @@ angular.module('formerFunApp')
      */
     function showUndoDeleteToast(deletedJourney) {
 
-
       return $mdToast.show({
         controller: 'UndoToastCtrl',
         templateUrl: 'app/journeyselect/undotoast.html',
@@ -118,15 +117,6 @@ angular.module('formerFunApp')
         position: 'top right'
       });
 
-
-      var toast = $mdToast.simple()
-        .content('Journey Deleted')
-        .action('UNDO')
-        .hideDelay(0)
-        .highlightAction(false)
-        .position('top right');
-
-      return $mdToast.show(toast);
     }
 
     /**
