@@ -8,10 +8,11 @@ md-content.journey-inline-view
     .col-sm-2.col-sm-offset-2
       md-button.md-primary(type='button', ng-click='gotoEditor()') Back to editor
 
+
   .journey-wrapper
     .journey-container
-
-      former.former-container(form-controls='formControls', form-definition='formDefinition',
+      panzoom(config="config" model="model" style="{{panStyle}}")
+        former.former-container(form-controls='formControls', form-definition='formDefinition',
           form-model='journey', form-section-state-param='currentSection',
           form-id-state-param='currentId', form-submit='submitForm')
 

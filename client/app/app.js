@@ -12,7 +12,8 @@ angular.module('formerFunApp', [
   'ngMaterial',
   'ngAnimate',
   'ngTouch',
-  'ngMessages'
+  'ngMessages',
+  'panzoom'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
     $urlRouterProvider.otherwise('/');

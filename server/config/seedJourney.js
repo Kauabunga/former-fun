@@ -28,6 +28,8 @@ var _ = require('lodash');
 Transformation.find({name: 'viewJourneyButton'}).remove(function() {
 Transformation.find({name: 'journeyImage'}).remove(function() {
 Transformation.find({name: 'journeyIndexButton'}).remove(function() {
+Transformation.find({name: 'journeyAddButton'}).remove(function() {
+Transformation.find({name: 'journeyRemoveButton'}).remove(function() {
 
   Transformation.createAsync(
     {
@@ -44,6 +46,16 @@ Transformation.find({name: 'journeyIndexButton'}).remove(function() {
       name: 'journeyIndexButton',
       version: '1.0',
       scriptFilePath: './server/components/journeyTransformationScripts/journeyIndexButtonV1Transformation.js'
+    },
+    {
+      name: 'journeyAddButton',
+        version: '1.0',
+      scriptFilePath: './server/components/journeyTransformationScripts/journeyAddButtonV1Transformation.js'
+    },
+    {
+      name: 'journeyRemoveButton',
+      version: '1.0',
+      scriptFilePath: './server/components/journeyTransformationScripts/journeyRemoveButtonV1Transformation.js'
     }
   ).then(function(transformations){
 
@@ -69,6 +81,8 @@ Transformation.find({name: 'journeyIndexButton'}).remove(function() {
       console.log('Error creating transformations - probably duplicate?');
     });
 
+});
+});
 });
 });
 });
@@ -211,7 +225,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
       defaultSection: 'start',
       transformationModules: {
         baseurl: '/api/transformations',
-        modules: ['date', 'journeyImage', 'journeyIndexButton']
+        modules: ['date', 'journeyImage', 'journeyIndexButton', 'journeyAddButton', 'journeyRemoveButton']
       },
       sections: {
         'start': {
@@ -236,6 +250,18 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     type: 'journeyIndex',
                     templateOptions: {
                       className: 'journey-index'
+                    }
+                  },
+                  {
+                    type: 'journeyAdd',
+                    templateOptions: {
+                      className: 'btn-add'
+                    }
+                  },
+                  {
+                    type: 'journeyRemove',
+                    templateOptions: {
+                      className: 'btn-remove'
                     }
                   },
                   {

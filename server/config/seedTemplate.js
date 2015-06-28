@@ -340,6 +340,22 @@ Template.find({}).remove(function() {
       }
     },
     {
+      name: 'journeyAdd',
+      template: '<md-button type="button" class="md-fab md-accent md-raised btn-add" ng-click="addNew()" >+</md-button>',
+      templateOptions: {
+        direction: 'left',
+        animationMode: 'md-scale'
+      }
+    },
+    {
+      name: 'journeyRemove',
+      template: '<md-button type="button" class="md-fab md-accent md-raised btn-remove" ng-click="remove($index)">x</md-button>',
+      templateOptions: {
+        direction: 'left',
+        animationMode: 'md-scale'
+      }
+    },
+    {
       name: 'journeyEmotions',
       template: '<md-tabs class="journey-emotions {{hideRepeat}}" md-no-pagination="false" md-stretch-tabs="never" md-dynamic-height="true">' +
                   '<md-tab label="{{field.label || name}}" class="repeatsection" ng-repeat="(name, field) in to.fields">' +

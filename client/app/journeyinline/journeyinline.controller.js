@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .controller('JourneyInlineViewCtrl', function ($log, $scope, $http, $q, $window, former, $state, $stateParams) {
+  .controller('JourneyInlineViewCtrl', function ($log, $scope, $http, $q, $window, former, $state, $stateParams,
+                                                 PanZoomService, $timeout) {
 
 
     var viewFormName = 'journeyinline';
@@ -13,6 +14,31 @@ angular.module('formerFunApp')
     $scope.currentId = $stateParams.currentId;
 
     $scope.gotoEditor = gotoEditor;
+    $scope.model = {};
+
+    var initial = {
+      x:50,
+      y:50
+    };
+
+    $scope.config = {
+      zoomLevels: 1,
+      neutralZoomLevel: 1,
+      initialZoomLevel: 1,
+      zoomOnDoubleClick: false,
+      zoomOnMouseWheel: false
+    };
+
+
+
+    $timeout(function(){
+      $scope.panStyle = 'height:' + $window.screen.height + 'px;width:' + $window.screen.width+'px';
+      PanZoomService.getAPI('PanZoom').then(function(api) {
+        api.zoomToFit(initial);
+      });
+    });
+
+
 
     return init();
 
