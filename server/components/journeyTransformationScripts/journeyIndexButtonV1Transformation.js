@@ -1,4 +1,6 @@
 
+/* global _ */
+
 (function(window){
 
   'use strict';
@@ -21,15 +23,12 @@
 
     var $injector = angular.injector([angularName]);
     //var $http = $injector.get('$http');
-
     //var $state = $injector.get('$state');
     //var $location = $injector.get('$location');
 
     var $stateParams = $injector.get('$stateParams');
     var $log = $injector.get('$log');
     var $timeout = $injector.get('$timeout');
-
-
 
 
     var viewJourneyRepeater = getField(form, 'start', 'steps');
@@ -49,11 +48,8 @@
      * @param field
      */
     function transformJourneyIndex(field){
-
       field.link = link;
       field.templateOptions = field.templateOptions || {};
-
-
     }
 
     /**

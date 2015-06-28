@@ -10,8 +10,12 @@ angular.module('formerFunApp')
 
     return {
       fetchLocalFormIds: fetchLocalFormIds,
+      deleteForm: deleteForm,
       fetchLocalFormData: fetchLocalFormData,
+      getNewFormId: getNewFormId,
+      addForm: addForm,
       getLocalFormIdsKey: getLocalFormIdsKey,
+      trackFormId: trackFormId,
       loadForm: loadForm,
       loadTemplates: loadTemplates
     };
@@ -36,6 +40,7 @@ angular.module('formerFunApp')
       else if(formName){
         return fetchLocalFormIds(formName)
           .then(function(ids){
+            $log.debug('fetchLocalFormData ids', ids);
             return $q.when(_.map(ids, function(id){
               return $localStorage[id];
             }));
@@ -49,6 +54,14 @@ angular.module('formerFunApp')
 
     }
 
+
+    /**
+     *
+     * @param formName
+     */
+    function getNewFormId(formName){
+      return '_' + _.random(100000000001, 999999999999);
+    }
 
     /**
      *
@@ -88,13 +101,32 @@ angular.module('formerFunApp')
 
     /**
      *
+     * @param formData
+     */
+    function deleteForm(formName, formData){
+      var formId = formData;
+      if(typeof formData !== 'string'){
+        formId = formData._formId;
+      }
+
+      var formIds = $localStorage[getLocalFormIdsKey(formName)];
+      if(formIds.indexOf(formId) !== -1){
+        formIds.splice(formIds.indexOf(formId), 1);
+      }
+
+      var deletedFormData = $localStorage[formId];
+
+      $localStorage[formId] = undefined;
+      return $q.when(deletedFormData);
+    }
+
+    /**
+     *
      * @param templates
      * @returns {*}
      */
     function loadTemplates(templates) {
       $log.debug('templates response', templates);
-
-
 
       _(templates).sort(function(a, b){
           var aExtends = a.extends !== undefined;
@@ -198,6 +230,37 @@ angular.module('formerFunApp')
       }
 
       return transformationDeferred.promise;
+    }
+
+    /**
+     *
+     * @param formName
+     * @param form
+     */
+    function addForm(formName, form){
+      if( ! form._formId){
+        $log.error('adding form with no id');
+        return $q.reject();
+      }
+
+      trackFormId(formName, form._formId);
+      $localStorage[form._formId] = form;
+
+      return $q.when(form);
+    }
+
+
+    /**
+     *
+     * @param formName
+     * @param id
+     */
+    function trackFormId(formName, id){
+      var localStorageKey = getLocalFormIdsKey(formName);
+      $localStorage[localStorageKey] = $localStorage[localStorageKey] || [];
+      if($localStorage[localStorageKey].indexOf(id) === -1){
+        $localStorage[localStorageKey].push(id);
+      }
     }
 
     /**

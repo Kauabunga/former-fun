@@ -69,12 +69,25 @@ angular.module('formerFunApp', [
       .primaryPalette('blue')
       .accentPalette('orange');
 
-  });
+  })
+
+  .run(function($log, formlyConfig, $localStorage, $injector, $timeout){
 
 
+    var $rootScope = $injector.get('$rootScope');
 
-angular.module('formerFunApp')
-  .run(function($log, formlyConfig, $http, $localStorage){
+
+    /**
+     *
+     */
+    $rootScope.$on('$stateChangeSuccess', function (event, next) {
+      //$rootScope.currentRouteClass = $state.current.name.replace(/\./g, ' ');
+      $timeout(function(){
+        $rootScope.currentRouteClass = window.location.pathname.split('/').join(' ').toString();
+      });
+
+    });
+
 
 
     var formIdsKey = 'localFormIds_journey';
@@ -161,7 +174,7 @@ angular.module('formerFunApp')
                   '<formly-form fields="fields" model="element" bind-name="\'formly_ng_repeat\' + index + $parent.$index"></formly-form> ' +
                 '</div>',
 
-      controller: function($scope) {
+      controller: ['$scope', function($scope) {
         $scope.formOptions = { formState: $scope.formState };
 
         $scope.copyFields = copyFields;
@@ -170,7 +183,7 @@ angular.module('formerFunApp')
           return angular.copy(fields);
         }
 
-      }
+      }]
     });
 
 
@@ -203,7 +216,7 @@ angular.module('formerFunApp')
         }
       },
 
-      controller: function($scope) {
+      controller: ['$scope', function($scope) {
         $scope.formOptions = { formState: $scope.formState };
         $scope.addNew = addNew;
         $scope.remove = remove;
@@ -245,7 +258,7 @@ angular.module('formerFunApp')
 
           repeatsection.push(newsection);
         }
-      }
+      }]
     });
 
   });

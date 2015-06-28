@@ -1,4 +1,14 @@
 
+.journey-edit-container {
+
+  .transition(opacity 300ms ease);
+  opacity: 0;
+
+  &.fade-in {
+    opacity: 1;
+  }
+}
+
 
 .view-journey-button {
   float: left;
@@ -22,4 +32,14 @@
     height: 45px;
     .font-size(1.6)
   }
+}
+
+.step-time textarea:focus{
+  height: 34px !important;
+}
+
+h2 input:focus{
+  height: 42px;
+  line-height: 34px;
+  padding-top: 0px;
 }

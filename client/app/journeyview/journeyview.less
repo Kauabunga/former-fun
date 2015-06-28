@@ -8,6 +8,12 @@ body {
   overflow-x: scroll;
   overflow-y: hidden;
   background-color: white;
+
+  opacity: 0;
+  .transition(opacity 500ms ease);
+  &.fade-in {
+    opacity: 1;
+  }
 }
 
 .journey-container {
@@ -23,9 +29,9 @@ body {
   min-height: 400px;
   display: inline-block;
   opacity: 1;
+  white-space: normal;
   p {
     margin-top: 20px;
-    white-space: pre-wrap;
   }
   .btn-remove {
     position: absolute;
@@ -114,7 +120,7 @@ body {
     @my-transition: min-height @transition-timing @transition-ease, max-height @transition-timing @transition-ease;
     .transition(@my-transition);
   }
-  .step-time {
+  .step-time, .step-number {
     .transition(all @transition-timing @transition-ease);
   }
   &.unfocus {
@@ -147,11 +153,11 @@ body {
 
   &.focus {
     p {
-      font-weight: 700;
       .font-size(1.8);
     }
     h3 {
       .font-size(5.2);
+      color: @fragrant-blue;
     }
     .img-mask {
       border: 5px solid @journey-grey;
@@ -160,7 +166,7 @@ body {
       color: @loud-orange;
     }
     .step-time {
-      color: @fragrant-blue;
+      color: @grey-fade;
       font-weight: 700;
       .font-size(2);
       margin-top: -10px;
@@ -209,7 +215,6 @@ body {
 
 h1 {
   text-align: center;
-
   color: @loud-orange !important;
   font-weight: 700;
 
@@ -219,7 +224,6 @@ h1 {
 
 }
 
-
 .step-number {
   background: @journey-grey;
   border-radius: 50%;
@@ -227,9 +231,9 @@ h1 {
   width: 50px;
   height: 50px;
   .font-size(3);
-  font-family: 'museobold';
   line-height: 50px;
   position: absolute;
   top: 30px;
   left: 25%;
+  font-weight: 700;
 }

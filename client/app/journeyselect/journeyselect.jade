@@ -1,24 +1,52 @@
-md-content.journey-select
+md-content.journey-select(ng-class='{"fade-in": fadeIn}')
 
   .container
     .col-sm-8.col-sm-offset-3.margin-top-md
-      h2 Welcome to the 
-        span Journey Creator
+      h2 Welcome to the
+        span &nbsp;Journey&nbsp;Creator
       h4 Select or create a journey
 
       .margin-top-sm
-      a(href='/journeyedit')
-        md-button.md-raised.md-primary.create-button(type='button') Create new journey
+      a.create-button(href='/journeyinline//')
+        md-button.md-raised.md-primary(type='button') Create new journey
+
 
       div.margin-top-lg
         hr
-        h4 Previous created Journeys
+        h4 Your Journeys
+
       md-list
-        md-list-item(ng-repeat='journey in journeys track by $index')
-          a(href='journeyedit//{{journey._formId}}')
-            md-button.md-raised.previous-created(type='button') {{journey.journeyTitle || journey._formId}}
+        md-list-item(ng-hide='journey.isShared' ng-repeat='journey in journeys track by $index')
+          a(href='/journeyview/{{journey._formId}}')
+            md-button.previous-created(type='button') {{journey.journeyTitle || journey._formId}}
+
+          md-button.action-button.md-warn.previous-created-action(type='button', ng-click='deleteJourney(journey)') Delete
+          a(href='/journeyinline//{{journey._formId}}')
+            md-button.action-button.md-accent.previous-created-action(type='button') Edit
+
+          md-button.action-button.md-primary.previous-created-action(type='button', ng-click='shareJourney(journey)') Share
 
 
-      div.margin-top-sm
-        hr
-        md-button(type='button', ng-click='clearLocalStorage()') Clear local storage
+
+      div(ng-show='sharedJourneys && sharedJourneys.length > 0')
+        div.margin-top-lg
+          hr
+          h4 Shared Journeys
+
+        md-list
+          md-list-item(ng-repeat='journey in sharedJourneys track by $index')
+            a(href='/journeyview/{{journey._formId}}')
+              md-button.previous-created(type='button') {{journey.journeyTitle || journey._formId}}
+
+            md-button.action-button.md-warn.previous-created-action(type='button', ng-click='deleteSharedJourney(journey)') Delete
+            a(href='/journeyinline//{{journey._formId}}')
+              md-button.action-button.md-accent.previous-created-action(type='button') Edit
+
+            md-button.action-button.md-primary.previous-created-action(type='button', ng-click='copyJourney(journey)') Copy
+
+
+
+
+      div.margin-top-sm.padding-bottom-md
+        //hr
+        //md-button(type='button', ng-click='clearLocalStorage()', style='color: #bbb;') Clear local storage

@@ -1,5 +1,7 @@
 
-
+body.journeyinline {
+  background-color: @journey-grey;
+}
 
 md-content.journey-inline-view {
 
@@ -9,6 +11,10 @@ md-content.journey-inline-view {
     margin-top: 20px;
   }
 
+  .edit-title {
+    color: @grey-fade;
+    font-weight: 700;
+  }
 
   .step-container {
     margin-top: 70px;
@@ -22,4 +28,27 @@ md-content.journey-inline-view {
     margin: 0;
   }
 
+  .focus .journey-index button h4 {
+    color: @loud-orange !important;
+  }
+}
+
+
+.journey-index {
+  button {
+    background-color: @journey-grey !important;
+    h4 {
+      font-weight: 700;
+      color: white;
+      .font-size(3);
+    }
+  }
+  md-fab-actions {
+    button {
+      background-color: darken(@grey-fade, 20%) !important;
+    }
+    h4 {
+      .font-size(1.6);
+    }
+  }
 }

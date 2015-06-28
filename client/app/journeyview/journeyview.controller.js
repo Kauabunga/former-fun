@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .controller('JourneyViewCtrl', function ($log, $scope, $http, $q, $window, former, $state, $stateParams) {
+  .controller('JourneyViewCtrl', function ($log, $scope, $http, $q, $window, former, $state, $stateParams, $timeout) {
 
     var formName = 'journey';
 
@@ -36,6 +36,7 @@ angular.module('formerFunApp')
         .then(function(formData){
           $scope.journeyDefinition = formData;
           $log.debug('getLocalJourney', $scope.journeyDefinition);
+
           return $scope.journeyDefinition;
         })
         .catch(function(error){

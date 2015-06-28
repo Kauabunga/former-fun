@@ -67,8 +67,10 @@ angular.module('formerFunApp')
           }
           else {
             var modelKey = getFormModelKey();
+
             //bind form model to local scope with formId
             //TODO this model should come from the former service????
+
             scope.formModel = $localStorage[modelKey] = $localStorage[modelKey] || {};
 
             //write formId to model
@@ -94,6 +96,9 @@ angular.module('formerFunApp')
          */
         function loadSection(formSection){
           $log.debug('Loading form section', formSection);
+
+          trackFormId($stateParams[scope.formIdStateParam]);
+
           scope.formFields = formSection.fields;
         }
 
@@ -126,8 +131,7 @@ angular.module('formerFunApp')
          * @returns {string}
          */
         function createNewId(){
-          return '_' + _.random(100000000001, 999999999999);
-          //return scope.formDefinition.name + '_' + _.random(100000000001, 999999999999);
+          return former.getNewFormId(scope.formName);
         }
 
 
@@ -136,11 +140,7 @@ angular.module('formerFunApp')
          * @param formId
          */
         function isValidFormId(formId){
-
-          var formName = getFormName();
-          //var formRegex = new RegExp('\\b' + formName + '_\\d{12}\\b');
           var formRegex = new RegExp('\\b' + '_\\d{12}\\b');
-
           return formId && formRegex.test(formId);
         }
 
@@ -169,9 +169,8 @@ angular.module('formerFunApp')
           }
           if(targetId){
             $stateParams[scope.formIdStateParam] = targetId;
+            trackFormId(targetId);
           }
-
-          trackFormId($stateParams[scope.formIdStateParam]);
 
           var options = replace ? { location: 'replace' } : {};
           $state.transitionTo(
@@ -187,11 +186,7 @@ angular.module('formerFunApp')
          * @param id
          */
         function trackFormId(id){
-          var localStorageKey = former.getLocalFormIdsKey(scope.formDefinition.name);
-          $localStorage[localStorageKey] = $localStorage[localStorageKey] || [];
-          if($localStorage[localStorageKey].indexOf(id) === -1){
-            $localStorage[localStorageKey].push(id);
-          }
+          former.trackFormId(scope.formDefinition.name, id);
         }
 
 

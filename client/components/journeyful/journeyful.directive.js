@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module('formerFunApp')
-  .directive('journeyful', function ($log, $state, $stateParams, $rootScope, $localStorage, former) {
+  .directive('journeyful', function ($log, $timeout) {
 
     return {
       templateUrl: 'components/journeyful/journeyful.html',
@@ -15,6 +15,9 @@ angular.module('formerFunApp')
 
         $log.debug('journeyDefinition', scope.journeyDefinition);
 
+        scope.fadeIn = false;
+
+
         var journeyDefinitionWatcherDestroy = scope.$watch('journeyDefinition', function() {
           $log.debug('journeyDefinition watcher', scope.journeyDefinition);
           if(scope.journeyDefinition){
@@ -23,6 +26,21 @@ angular.module('formerFunApp')
           }
         });
 
+        /**
+         *
+         */
+        function init(){
+          $timeout(function(){
+            scope.fadeIn = true;
+          });
+
+        }
+
+
+        /**
+         *
+         * @param step
+         */
         scope.toggleZoom = function toggleZoom(step) {
           console.log(' togglin...');
           var unfocusAll = function(step) {
@@ -60,13 +78,6 @@ angular.module('formerFunApp')
         };
 
 
-        /**
-         *
-         */
-        function init(){
-
-
-        }
 
 
       }

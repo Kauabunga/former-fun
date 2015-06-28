@@ -37,11 +37,13 @@ h1 {
     font-weight: bold;
     font-size: 4rem;
     color: @journey-grey;
+    letter-spacing: -0.12rem;
   }
 
   .step-time {
-    color: @blue;
+    color: @fragrant-blue;
     .font-size(2);
+    letter-spacing: -0.03rem;
   }
 
 
@@ -84,4 +86,75 @@ h1 {
   @media(min-width: @screen-sm){
     margin-right: 5%;
   }
+}
+
+.home-button {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background: lighten(@grey-fade, 10%) !important;
+  md-icon {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    color: darken(@grey-fade, 20%) !important;
+  }
+}
+
+.edit-button {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background: lighten(@grey-fade, 10%) !important;
+  md-icon {
+    width: 40px;
+    height: 40px;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    padding-left: 2px;
+    text-align: center;
+    color: darken(@grey-fade, 20%) !important;
+  }
+}
+
+.edit-button-full {
+  position: fixed;
+  bottom: 10px;
+  right: 80px;
+  background: lighten(@grey-fade, 10%) !important;
+  md-icon {
+    width: 40px;
+    height: 40px;
+    padding-top: 3px;
+    color: darken(@grey-fade, 20%) !important;
+  }
+}
+
+.presentation-view {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background: @journey-grey !important;
+  md-icon {
+    width: 40px;
+    height: 40px;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    color: @loud-orange !important;
+  }
+}
+
+
+//hides  all scrollbars
+::-webkit-scrollbar {
+    display: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+input:focus, textarea:focus, a:focus {
+  outline: 2px solid @loud-orange;
+  padding: 2px;
 }

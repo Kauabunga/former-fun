@@ -1,7 +1,5 @@
-md-content
+md-content.journey-edit-container(ng-class='{"fade-in": fadeIn}')
 
-  a(href='/journeyselect')
-    md-button(type='button') Back to select
 
   former.former-container(form-controls='formControls', form-definition='formDefinition',
                               form-model='journey', form-section-state-param='currentSection',
@@ -20,3 +18,17 @@ md-content
       .col-sm-8.col-md-9
         h3 Current form data
         pre {{journey | json}}
+
+
+
+  a(href='/journeyselect')
+    md-button.md-fab.home-button(type='button')
+      md-icon(md-svg-icon='/assets/images/ic_home_24px.svg')
+
+  a(href='/journeyview/{{currentId}}')
+    md-button.md-fab.edit-button.presentation-view(type='button')
+      md-icon(md-svg-icon='/assets/images/ic_eye_24px.svg')
+  
+  a(href='/journeyinline//{{currentId}}')
+    md-button.md-fab.edit-button-full(type='button')
+      md-icon(md-svg-icon='/assets/images/ic_edit_24px.svg')

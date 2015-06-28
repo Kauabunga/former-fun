@@ -1,4 +1,16 @@
 .journey-select {
+
+  opacity: 0;
+  .transition(opacity 200ms ease);
+  &.fade-in {
+    opacity: 1;
+  }
+
+  button.action-button {
+    width: auto;
+  }
+
+  background:@off-white;
   h2 {
     font-weight: 700;
     color: @journey-grey;
@@ -11,19 +23,35 @@
     .font-size(2.2);
   }
   .previous-created {
+    color: @fragrant-blue;
     margin-left: 0;
     width: 200px;
     height: 30px;
+    border: 1px solid @grey-fade;
+    &:hover {
+      background: @fragrant-blue !important;
+      border: 1px solid @fragrant-blue;
+      color: white;
+    }
+  }
+  .previous-created-action {
+    &:hover {
+      background: lighten(@grey-fade, 20%) !important;
+    }
   }
   .create-button {
-    width: 300px;
-    height: 45px;
-    .font-size(2);
-    margin-left: 0;
+    display:inline-block;
+    button {
+      width: 300px;
+      height: 45px;
+      .font-size(2);
+      margin-left: 0;
+      &:hover {
+        background: @fragrant-blue-active !important;
+      }
+    }
   }
-  a:hover s.create-button {
-    background:@fragrant-blue-active !important;
-  }
+
   hr {
     border-top: 1px solid lighten(@grey-fade, 10%);;
     height: 1px;

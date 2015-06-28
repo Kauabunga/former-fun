@@ -7,6 +7,7 @@
 
 
 
+var Journey = require('../api/journey/journey.model');
 var Template = require('../api/template/template.model');
 var Transformation = require('../api/transformation/transformation.model');
 var Form = require('../api/form/form.model');
@@ -17,6 +18,12 @@ var fs = require('fs');
 Promise.promisifyAll(fs);
 var _ = require('lodash');
 
+
+
+Journey.find({}).remove(function(){
+
+
+});
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -278,8 +285,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     defaultValue: 'Default step title',
                     templateOptions: {
                       label: 'Step Title',
-                      className: 'center',
-                      required: true
+                      className: 'center'
                     }
                   },
                   {
@@ -288,8 +294,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     defaultValue: 'Default step blurb',
                     templateOptions: {
                       label: 'Step Blurb',
-                      className: 'step-blurb center',
-                      required: false
+                      className: 'step-blurb center'
                     }
                   },
                   {
@@ -298,8 +303,7 @@ Form.find({name: 'journeyinline'}).remove(function() {
                     defaultValue: 'Default step time',
                     templateOptions: {
                       label: 'Time of event',
-                      className: 'step-time center',
-                      required: false
+                      className: 'step-time center'
                     }
                   },
                   {
