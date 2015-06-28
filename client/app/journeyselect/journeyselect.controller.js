@@ -12,6 +12,7 @@ angular.module('formerFunApp')
     $scope.deleteSharedJourney = deleteSharedJourney;
     $scope.deleteJourney = deleteJourney;
     $scope.shareJourney = shareJourney;
+    $scope.copyJourney = copyJourney;
 
     $scope.newFormId = createNewFormId();
     $scope.clearLocalStorage = clearLocalStorage;
@@ -40,7 +41,7 @@ angular.module('formerFunApp')
 
       $timeout(function(){
         $scope.fadeIn = true;
-      }, 50);
+      }, 100);
 
       return getLocalJourneys(formName);
     }
@@ -81,13 +82,47 @@ angular.module('formerFunApp')
 
     /**
      *
+     * @param journey
+     */
+    function copyJourney(journey){
+
+      $log.debug('copy journey', journey);
+
+      var journeyCopy = angular.copy(journey);
+
+      journeyCopy.isShared = false;
+      journeyCopy._id = undefined;
+      journeyCopy.__v = undefined;
+      journeyCopy._formId = createNewFormId();
+
+      $log.debug('copied journey', journeyCopy);
+
+      return former.addForm(formName, journeyCopy)
+        .then(function(){
+          getLocalJourneys(formName);
+        });
+    }
+
+    /**
+     *
      * @param deletedJourney
      * @returns {*}
      */
     function showUndoDeleteToast(deletedJourney) {
+
+
+      return $mdToast.show({
+        controller: 'UndoToastCtrl',
+        templateUrl: 'app/journeyselect/undotoast.html',
+        hideDelay: 0,
+        position: 'top right'
+      });
+
+
       var toast = $mdToast.simple()
         .content('Journey Deleted')
         .action('UNDO')
+        .hideDelay(0)
         .highlightAction(false)
         .position('top right');
 
@@ -105,20 +140,21 @@ angular.module('formerFunApp')
           getLocalJourneys(formName);
 
           showUndoDeleteToast(deletedJourney)
-            .then(function(){
-              if(deletedJourney.isShared){
-                shareJourney(deletedJourney);
+            .then(function(shouldUndo){
+              if(shouldUndo){
+                if(deletedJourney.isShared){
+                  shareJourney(deletedJourney);
+                }
+                else {
+                  former.addForm(formName, deletedJourney)
+                    .then(function(){
+                      getLocalJourneys(formName);
+                    })
+                    .catch(function(){
+                      $log.error('error adding form', arguments);
+                    });
+                }
               }
-              else {
-                former.addForm(formName, deletedJourney)
-                  .then(function(){
-                    getLocalJourneys(formName);
-                  })
-                  .catch(function(){
-                    $log.error('error adding form', arguments);
-                  });
-              }
-
             });
 
           return deleteJourney;
@@ -168,9 +204,12 @@ angular.module('formerFunApp')
     function getLocalJourneys(formName){
       return former.fetchLocalFormData(formName)
         .then(function(forms){
-          $scope.journeys = forms;
-          $log.debug('getLocalJourneys', $scope.journeys);
-          return $scope.journeys;
+          var localJourneys = _.filter(forms, function(journey){
+            return journey && ! journey.isShared;
+          });
+          $scope.journeys = localJourneys;
+          $log.debug('getLocalJourneys', localJourneys);
+          return localJourneys;
         })
         .catch(function(error){
           $log.error('Error getting local journey', error);

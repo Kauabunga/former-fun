@@ -239,7 +239,12 @@ angular.module('formerFunApp')
      */
     function addForm(formName, form){
       if( ! form._formId){
-        $log.error('adding form with no id');
+        $log.error('adding form with no id', formName, form);
+        return $q.reject();
+      }
+
+      if(formName && formName._formId){
+        $log.error('need to pass formName to add form addForm(formName, form)')
         return $q.reject();
       }
 

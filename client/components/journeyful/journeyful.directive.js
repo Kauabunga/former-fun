@@ -16,6 +16,7 @@ angular.module('formerFunApp')
         $log.debug('journeyDefinition', scope.journeyDefinition);
 
         scope.fadeIn = false;
+        scope.scrollTo = scrollTo;
 
 
         var journeyDefinitionWatcherDestroy = scope.$watch('journeyDefinition', function() {
@@ -41,8 +42,42 @@ angular.module('formerFunApp')
          *
          * @param step
          */
-        scope.toggleZoom = function toggleZoom(step) {
+        function scrollTo(step, $index){
+          $log.debug('scrolling to step', step, $index);
+
+
+
+          $timeout(function(){
+            var $stepContainer = $('.step-container');
+            var stepContainerWidth = $stepContainer.outerWidth() * 0.75;
+
+
+            var offset = 0;
+            if($index !== 0){
+              offset += stepContainerWidth;
+            }
+            offset += (Math.max(0, $index - 1 ) * (stepContainerWidth * 2));
+
+            $('.journey-wrapper').animate({scrollLeft: offset }, 300);
+
+          });
+
+
+
+        }
+
+
+        /**
+         *
+         * @param step
+         */
+        scope.toggleZoom = function toggleZoom(step, $index) {
           console.log(' togglin...');
+
+          $timeout(function(){
+            scrollTo(step, $index);
+          });
+
           var unfocusAll = function(step) {
             _.each(scope.journeyDefinition.steps, function(item) {
               if(step !== item) {

@@ -55,30 +55,57 @@ angular.module('formerFunApp')
       }, true);
 
 
-      return fetchTemplates()
-        .then(function(templates){
-          return former.loadTemplates(templates);
-        })
-        .then(function(){
-          return fetchForm(viewFormName);
-        })
-        .then(function(formComplete){
-          return former.loadForm(formComplete);
-        })
-        .then(function(formDefinition){
-          $scope.formDefinition = formDefinition;
 
-          //rejigging name here so it matches with all our other ids
-          //TODO should really have a form.type
-          //TODO should really have a form.type
-          //TODO should really have a form.type
-          //TODO should really have a form.type
-          $scope.formDefinition.name = 'journey';
+      var resolves = [fetchTemplates(), fetchForm(viewFormName)];
 
-          $timeout(function(){
-            $scope.fadeIn = true;
-          });
+      $q.all(resolves)
+        .then(function(definitions){
+          var templates = definitions[0];
+          var form = definitions[1];
+
+          former.loadTemplates(templates)
+            .then(function(){
+              return former.loadForm(form);
+            })
+            .then(function(formDefinition){
+              $scope.formDefinition = formDefinition;
+
+              //rejigging name here so it matches with all our other ids
+              //TODO should really have a form.type
+              $scope.formDefinition.name = 'journey';
+
+              $timeout(function(){
+                $scope.fadeIn = true;
+              });
+            });
+
         });
+
+
+      //return fetchTemplates()
+      //  .then(function(templates){
+      //    return former.loadTemplates(templates);
+      //  })
+      //  .then(function(){
+      //    return fetchForm(viewFormName);
+      //  })
+      //  .then(function(formComplete){
+      //    return former.loadForm(formComplete);
+      //  })
+      //  .then(function(formDefinition){
+      //    $scope.formDefinition = formDefinition;
+      //
+      //    //rejigging name here so it matches with all our other ids
+      //    //TODO should really have a form.type
+      //    //TODO should really have a form.type
+      //    //TODO should really have a form.type
+      //    //TODO should really have a form.type
+      //    $scope.formDefinition.name = 'journey';
+      //
+      //    $timeout(function(){
+      //      $scope.fadeIn = true;
+      //    });
+      //  });
     }
 
 

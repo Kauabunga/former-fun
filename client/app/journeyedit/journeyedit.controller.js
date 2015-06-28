@@ -28,21 +28,24 @@ angular.module('formerFunApp')
 
       fetchExistingFormIds();
 
-      return fetchTemplates()
-        .then(function(templates){
-          return former.loadTemplates(templates);
-        })
-        .then(function(){
-          return fetchForm(formName);
-        })
-        .then(function(formComplete){
-          return former.loadForm(formComplete);
-        })
-        .then(function(formDefinition){
-          $scope.formDefinition = formDefinition;
-          $timeout(function(){
-            $scope.fadeIn = true;
-          }, 100);
+
+      var resolves = [fetchTemplates(), fetchForm(formName)];
+
+      return $q.all(resolves)
+        .then(function(definitions){
+          var templates = definitions[0];
+          var form = definitions[1];
+
+          return former.loadTemplates(templates)
+            .then(function(){
+              return former.loadForm(form);
+            })
+            .then(function(formDefinition){
+              $scope.formDefinition = formDefinition;
+              $timeout(function(){
+                $scope.fadeIn = true;
+              });
+            });
         });
     }
 
