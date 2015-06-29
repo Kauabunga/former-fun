@@ -349,7 +349,7 @@ Template.find({}).remove(function() {
     },
     {
       name: 'journeyRemove',
-      template: '<md-button type="button" class="md-fab md-accent md-raised btn-remove" ng-click="remove($index)">x</md-button>',
+      template: '<md-button type="button" class="md-fab md-accent md-raised btn-remove" ng-click="remove(index)">x</md-button>',
       templateOptions: {
         direction: 'left',
         animationMode: 'md-scale'

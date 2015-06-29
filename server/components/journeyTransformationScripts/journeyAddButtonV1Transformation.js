@@ -55,17 +55,8 @@
     function link(scope){
 
       scope.addNew = function() {
-        $log.debug('on add new...');
         var model = scope.$parent.$parent.$parent.$parent.$parent.model.steps;
-        $log.debug('add model:', JSON.stringify(model));
-
-        $log.debug('on add new - model options: ', JSON.stringify(scope.options));
-
-        model[scope.options.key] = model[scope.options.key] || [];
-
         var newsection = {};
-        $log.debug('on add new - model options: ', JSON.stringify(scope.options.key));
-
         model.push(newsection);
       }
     }

@@ -51,13 +51,13 @@
     function link(scope){
       scope.remove = remove;
 
-      function remove($index){
+      function remove(index){
         var model = scope.$parent.$parent.$parent.$parent.$parent.model.steps;
-        model.splice($index, 1);
+        $log.debug('index:', index);
+        debugger;
+        model.splice(index, 1);
       }
     }
-
-
   }
 
 
