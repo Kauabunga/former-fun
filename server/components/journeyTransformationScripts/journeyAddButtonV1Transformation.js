@@ -54,10 +54,17 @@
      */
     function link(scope){
 
+
+      function getIndex(){
+        return scope.$parent.$parent.$parent.$parent.$index;
+      }
+
       scope.addNew = function() {
         var model = scope.$parent.$parent.$parent.$parent.$parent.model.steps;
         var newsection = {};
-        model.push(newsection);
+
+        model.splice(getIndex() + 1, 0, newsection);
+        //model.push(newsection);
       }
     }
 
