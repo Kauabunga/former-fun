@@ -8,7 +8,7 @@ md-content.journey-inline-view
   .journey-wrapper(ng-class='{"fade-in": fadeIn}')
 
     .journey-container
-      panzoom(config="config" model="model" style="{{panStyle}}")
+      panzoom(config="config" model="model" style="{{panStyle}}" id="zoomingContainer")
         former.former-container(form-controls='formControls', form-definition='formDefinition',
           form-model='journey', form-section-state-param='currentSection',
           form-id-state-param='currentId', form-submit='submitForm')
@@ -26,3 +26,7 @@ md-content.journey-inline-view
   a(href='/journeyedit/start/{{currentId}}')
     md-button.md-fab.edit-button-full(type='button', ng-click='gotoEditor()')
       md-icon(md-svg-icon='/assets/images/ic_list_24px.svg')
+
+  a
+    md-button.md-fab.zoom-button(type='button', ng-click='performZoom()')
+      md-icon(md-svg-icon='/assets/images/ic_person_24px.svg')

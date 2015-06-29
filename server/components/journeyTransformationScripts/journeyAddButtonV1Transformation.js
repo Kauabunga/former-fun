@@ -44,11 +44,8 @@
      * @param field
      */
     function transformJourneyAdd(field){
-
       field.link = link;
       field.templateOptions = field.templateOptions || {};
-
-
     }
 
     /**
@@ -58,12 +55,18 @@
     function link(scope){
 
       scope.addNew = function() {
-        scope.model[scope.options.key] = scope.model[scope.options.key] || [];
+        $log.debug('on add new...');
+        var model = scope.$parent.$parent.$parent.$parent.$parent.model.steps;
+        $log.debug('add model:', JSON.stringify(model));
+
+        $log.debug('on add new - model options: ', JSON.stringify(scope.options));
+
+        model[scope.options.key] = model[scope.options.key] || [];
 
         var newsection = {};
-        var repeatsection = scope.model[scope.options.key];
+        $log.debug('on add new - model options: ', JSON.stringify(scope.options.key));
 
-        repeatsection.push(newsection);
+        model.push(newsection);
       }
     }
 

@@ -13,36 +13,31 @@ angular.module('formerFunApp')
     $scope.currentId = $stateParams.currentId;
     $scope.fadeIn = false;
     $scope.journey = undefined;
+    $scope.isZooming = false;
 
     $scope.disableWatcher = undefined;
 
     $scope.gotoEditor = gotoEditor;
+    $scope.performZoom = performZoom;
     $scope.model = {};
 
     var initial = {
-      x:50,
-      y:50
-    };
-
-    $scope.config = {
-      zoomLevels: 1,
       neutralZoomLevel: 1,
       initialZoomLevel: 1,
       zoomOnDoubleClick: false,
       zoomOnMouseWheel: false
     };
 
-
+    $scope.config = {
+      neutralZoomLevel: 1,
+      initialZoomLevel: 1,
+      zoomOnDoubleClick: false,
+      zoomOnMouseWheel: false
+    };
 
     $timeout(function(){
       $scope.panStyle = 'height:' + $window.screen.height + 'px;width:' + $window.screen.width+'px';
-      PanZoomService.getAPI('PanZoom').then(function(api) {
-        api.zoomToFit(initial);
-      });
     });
-
-
-
 
     $scope.$on('$destroy', function(){
       socket.socket.removeListener('journey:updated', socketUpdate);
@@ -133,6 +128,19 @@ angular.module('formerFunApp')
       //  });
     }
 
+    function performZoom() {
+      if($scope.isZooming) {
+        $scope.isZooming = false;
+        PanZoomService.getAPI('zoomingContainer').then(function(api) {
+          api.changeZoomLevel(1);
+        });
+      } else {
+        $scope.isZooming = true;
+        PanZoomService.getAPI('zoomingContainer').then(function(api) {
+          api.changeZoomLevel(0);
+        });
+      }
+    }
 
     /**
      *
