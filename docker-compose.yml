@@ -1,5 +1,5 @@
 former:
-  build: .
+  image: kauabunga/formerfun
   ports:
    - "8080:80"
   volumes:

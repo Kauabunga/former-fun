@@ -21,12 +21,20 @@ CMD ["/sbin/my_init"]
 #######################
 
 
+ENV NODE_ENV production
+ENV PORT 9999
+ENV IP 127.0.0.1
+ENV MONGODB_URI mongodb://mongodb/formerfun
+
+
 # disable nginx disabler
 RUN rm -f /etc/service/nginx/down
 
 RUN rm /etc/nginx/sites-enabled/default
 ADD ./webapp.conf /etc/nginx/sites-enabled/webapp.conf
 RUN mkdir /home/app/webapp
+
+ADD mongodb-env.conf /etc/nginx/main.d/mongodb-env.conf
 
 
 
@@ -38,16 +46,6 @@ WORKDIR "/home/app/webapp"
 
 # Install app dependencies
 RUN npm install --production
-
-
-ENV NODE_ENV production
-ENV PORT 8080
-ENV IP 127.0.0.1
-ENV MONGOLAB_URI mongodb://mongodb/formerfun
-
-
-CMD ["node", "./server/app.js"]
-
 
 
 #######################
