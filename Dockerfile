@@ -20,20 +20,33 @@ CMD ["/sbin/my_init"]
 ######## START ########
 #######################
 
-# Bundle app source
-COPY ./dist /dist
-WORKDIR "/dist"
+# disable nginx disabler
+RUN rm -f /etc/service/nginx/down
+
+RUN rm /etc/nginx/sites-enabled/default
+ADD ./webapp.conf /etc/nginx/sites-enabled/webapp.conf
+RUN mkdir /home/app/webapp
+
+
+
+
+
+COPY ./dist /home/app/webapp
+WORKDIR "/home/app/webapp"
 
 # Install app dependencies
 RUN npm install --production
 
 ENV NODE_ENV production
-ENV PORT 8081
-
-# This mongodb will be entered in the hosts file by the compose links:
+ENV PORT 8080
+ENV IP 127.0.0.1
 ENV MONGOLAB_URI mongodb://mongodb/formerfun
 
-EXPOSE 80
+
+# Bundle app source
+#COPY ./dist /dist
+#WORKDIR "/dist"
+
 
 CMD ["node", "./server/app.js"]
 
