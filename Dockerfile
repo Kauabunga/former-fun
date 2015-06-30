@@ -20,6 +20,7 @@ CMD ["/sbin/my_init"]
 ######## START ########
 #######################
 
+
 # disable nginx disabler
 RUN rm -f /etc/service/nginx/down
 
@@ -30,12 +31,14 @@ RUN mkdir /home/app/webapp
 
 
 
-
+# Bundle app source
 COPY ./dist /home/app/webapp
 WORKDIR "/home/app/webapp"
 
+
 # Install app dependencies
 RUN npm install --production
+
 
 ENV NODE_ENV production
 ENV PORT 8080
@@ -43,12 +46,9 @@ ENV IP 127.0.0.1
 ENV MONGOLAB_URI mongodb://mongodb/formerfun
 
 
-# Bundle app source
-#COPY ./dist /dist
-#WORKDIR "/dist"
-
-
 CMD ["node", "./server/app.js"]
+
+
 
 #######################
 ########  END  ########
