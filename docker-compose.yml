@@ -1,13 +1,13 @@
 former:
   build: .
   ports:
-   - "5000:5000"
+   - "8081:80"
   volumes:
    - .:/code
   links:
-   - db
+   - mongodb
 
-db:
+mongodb:
   image: mongo
   ports:
    - "27017:27017"
